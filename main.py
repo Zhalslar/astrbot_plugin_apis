@@ -5,6 +5,7 @@ from pathlib import Path
 import random
 import re
 from typing import Any, List, Optional, Union
+from urllib.parse import urlparse
 import aiohttp
 from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, register
@@ -23,12 +24,7 @@ TEXT_DIR = DATA_PATH / "text"
 IMAGE_DIR = DATA_PATH / "image"
 VIDEO_DIR = DATA_PATH / "video"
 AUDIO_DIR = DATA_PATH / "audio"
-for path in [IMAGE_DIR, VIDEO_DIR, TEXT_DIR, AUDIO_DIR]:
-    path.mkdir(parents=True, exist_ok=True)
 
-TEXT_PATH = TEXT_DIR / "all_texts.json"
-if not TEXT_PATH.exists():
-    TEXT_PATH.write_text(json.dumps({}, ensure_ascii=False, indent=4), encoding="utf-8")
 
 api_file = (
     Path(__file__).parent / "api_data.json"
@@ -84,7 +80,7 @@ class APIManager:
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.1",
+    "1.0.2",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -268,7 +264,6 @@ class ArknightsPlugin(Star):
         msgs = event.get_message_str().split(" ")
         api_name = next((i for i in self.apis_names if i == msgs[0]), None)
         if not api_name:
-            logger.debug("未找到API")
             return
         # 检查api是否被禁用
         if api_name in self.disable_api:
@@ -286,28 +281,7 @@ class ArknightsPlugin(Star):
         args = msgs[1:]
 
         # 参数补充
-        if not args:
-            reply_seg = next(
-                (seg for seg in event.get_messages() if isinstance(seg, Comp.Reply)),
-                None,
-            )
-            if reply_seg and reply_seg.chain:
-                for seg in reply_seg.chain:
-                    if isinstance(seg, Comp.Plain):
-                        args = seg.text.strip().split(" ")
-        if not args:
-            extra_arg = event.get_sender_name()
-            params = {
-                key: extra_arg if not value else value for key, value in params.items()
-            }
-        if not args:
-            for seg in event.get_messages():
-                if isinstance(seg, Comp.At):
-                    seg_qq = str(seg.qq)
-                    if seg_qq != event.get_self_id:
-                        nickname = await self._get_extra(event, seg_qq)
-                        if nickname:
-                            args.append(nickname)
+        args, params = await self._supplement_args(event, args, params)
 
         # 生成update_params，保留params中的默认值
         update_params = {
@@ -324,68 +298,132 @@ class ArknightsPlugin(Star):
             )
 
         # 发送请求
-        result = await self._make_request(url=url, params=update_params)
-        if self.debug:
-            logger.debug(f"响应结果: \n{result}")
+        try:
+            result = await self._make_request(url=url, params=update_params)
+            if self.debug:
+                logger.debug(f"响应结果: \n{result}")
+            chain = await self._process_result(
+                result=result,
+                api_name=api_name,
+                data_type=type,
+                target=target,
+                auto_save_data=self.auto_save_data,
+            )
+            yield event.chain_result(chain)  # type: ignore
+            return
+        except Exception as e:
+            logger.error(f"请求并处理响应时发生错误: {e}")
+            pass
+        # 如果响应为空，尝试从本地数据库中获取数据
+        try:
+            data = await self._get_data(path_name=api_name, data_type=type)
+            if data:
+                chain = await self._process_result(
+                    result=data,
+                    api_name=api_name,
+                    data_type=type,
+                    target=target,
+                    auto_save_data=True,
+                )
+                yield event.chain_result(chain)  # type: ignore
+                return
+        except Exception as e:
+            logger.error(f"从本地数据库中获取数据时发生错误: {e}")
+            pass
 
-        # 处理响应
-        chain = await self._process_result(
-            result=result, api_name=api_name, data_type=type, target=target
-        )
+        # 如果响应仍然为空，返回错误消息
+        yield event.plain_result("API请求失败")
 
-        # 发送消息
-        yield event.chain_result(chain)  # type: ignore
+
+    async def _supplement_args(self, event: AstrMessageEvent, args: list, params: dict):
+        """
+        补充参数逻辑
+        :param event: 事件对象
+        :param args: 当前参数列表（可能为空）
+        :param params: 参数字典
+        :return: 更新后的 args 和 params
+        """
+        # 尝试从回复消息中提取参数
+        if not args:
+            reply_seg = next(
+                (seg for seg in event.get_messages() if isinstance(seg, Comp.Reply)),
+                None,
+            )
+            if reply_seg and reply_seg.chain:
+                for seg in reply_seg.chain:
+                    if isinstance(seg, Comp.Plain):
+                        args = seg.text.strip().split(" ")
+                        break
+
+        # 如果仍未获取到参数，尝试从 @ 消息中提取昵称
+        if not args:
+            for seg in event.get_messages():
+                if isinstance(seg, Comp.At):
+                    seg_qq = str(seg.qq)
+                    if seg_qq != event.get_self_id:
+                        nickname = await self._get_extra(event, seg_qq)
+                        if nickname:
+                            args.append(nickname)
+                            break
+        # 如果仍未获取到参数，尝试使用发送者名称作为额外参数
+        if not args:
+            extra_arg = event.get_sender_name()
+            params = {
+                key: extra_arg if not value else value for key, value in params.items()
+            }
+
+        return args, params
 
     async def _process_result(
-        self, api_name: str, result: Any, data_type: str, target: str = ""
+        self,
+        api_name: str,
+        result: Any,
+        data_type: str,
+        target: str = "",
+        auto_save_data: bool = True,
     ) -> List[BaseMessageComponent]:
         """处理响应"""
-        chain = [Comp.Plain("此API无响应")]
+        chain = []
 
+        # 预处理result
         if isinstance(result, dict) and target:
             result = self._get_nested_value(result, target)
 
+        if isinstance(result, str):
+            if url := self._extract_url(result):
+                result = url
+            elif auto_save_data:
+                await self._save_data(result, api_name, data_type)
+
+        if isinstance(result, bytes):
+            file_path = await self._save_data(result, api_name, data_type)
+
+        # 根据类型构造消息链
         if data_type == "text":
-            chain = [Comp.Plain(str(result))]
+            if isinstance(result, str):
+                chain = [Comp.Plain(str(result))]
 
         elif data_type == "image":
             if isinstance(result, str):
-                url = self._extract_url(result)
-                if url:
-                    chain = [Comp.Image.fromURL(url)]
-                    if self.auto_save_data:
-                        await self._save_data(result, api_name, data_type)
+                chain = [Comp.Image.fromURL(result)]
             elif isinstance(result, bytes):
-                chain = [Comp.Image.fromBytes(result)]
-                if self.auto_save_data:
-                    await self._save_data(result, api_name, data_type)
+                chain = [Comp.Image.fromFileSystem(file_path)]
 
         elif data_type == "video":
             if isinstance(result, str):
-                url = self._extract_url(result)
-                if url:
-                    chain = [Comp.Video.fromURL(url)]
-                    if self.auto_save_data:
-                        await self._save_data(result, api_name, data_type)
-
+                chain = [Comp.Video.fromURL(result)]
             elif isinstance(result, bytes):
-                file_path = await self._save_data(result, api_name, data_type)
                 chain = [Comp.Video.fromFileSystem(file_path)]
-                if not self.auto_save_data:
-                    os.remove(file_path)
 
         elif data_type == "audio":
             if isinstance(result, str):
-                url = self._extract_url(result)
-                if url:
-                    chain = [Comp.Record.fromURL(url)]
-                    if self.auto_save_data:
-                        await self._save_data(result, api_name, data_type)
+                chain = [Comp.Record.fromURL(result)]
             elif isinstance(result, bytes):
-                file_path = await self._save_data(result, api_name, data_type)
                 chain = [Comp.Record.fromFileSystem(file_path)]
-                if not self.auto_save_data:
-                    os.remove(file_path)
+
+        # 删除临时文件
+        if isinstance(result, bytes) and not auto_save_data:
+            os.remove(file_path)
 
         return chain  # type: ignore
 
@@ -394,10 +432,13 @@ class ArknightsPlugin(Star):
         """从字符串中提取第一个有效URL"""
         url_pattern = r"https?://[^\s]+"
         urls = re.findall(url_pattern, text)
-        if urls:
-            return urls[0]
-        else:
-            return ""
+        for url in urls:
+            # 解析URL
+            parsed_url = urlparse(url)
+            # 验证URL的有效性
+            if parsed_url.scheme in {"http", "https"} and parsed_url.netloc:
+                return url
+        return ""
 
     def _get_nested_value(self, result: dict, target: str) -> Any:
         """
@@ -443,43 +484,99 @@ class ArknightsPlugin(Star):
     async def _save_data(
         self, data: str | bytes, path_name: str, data_type: str
     ) -> str:
-        """保存bytes数据到本地"""
+        """将数据保存到本地"""
         if isinstance(data, str):
-            result = await self._make_request(data)
-            if isinstance(result, bytes):
-                data = result
-            else:
-                logger.error(f"保存数据失败: {result}")
-                return ""
+            if url := self._extract_url(data):
+                result = await self._make_request(url)
+                if isinstance(result, bytes):
+                    data = result
+                else:
+                    logger.error(f"保存数据失败: {result}")
+                    return ""
 
         # 保存目录
-        save_dir = {
+        TYPE_DIR = {
             "text": TEXT_DIR,
             "image": IMAGE_DIR,
             "video": VIDEO_DIR,
             "audio": AUDIO_DIR,
         }.get(data_type, Path("data/temp"))
-        save_dir.mkdir(parents=True, exist_ok=True)
+        TYPE_DIR.mkdir(parents=True, exist_ok=True)
 
-        # 后缀名
-        extension = {
-            "image": ".jpg",
-            "audio": ".mp3",
-            "video": ".mp4",
-        }.get(data_type, ".jpg")
+        # 保存文本
+        if data_type == "text":
+            json_path = TYPE_DIR / f"{path_name}.json"
+            if not json_path.exists():
+                json_path.write_text(
+                    json.dumps([], ensure_ascii=False, indent=4), encoding="utf-8"
+                )
+                logger.info(f"{path_name}.json 文件不存在, 已创建一个空的 JSON 文件")
+            try:
+                json_data = json.loads(json_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                json_data = []
+                logger.error(
+                    f"读取 {path_name}.json 文件失败, 已重置为一个空的 JSON 文件"
+                )
 
-        # 获取当前目录下同类型文件的数量
-        pattern = f"*{extension}"
-        index = len(list(save_dir.rglob(pattern)))
+            # 确保 json_data 是一个列表
+            if not isinstance(json_data, list):
+                json_data = []
 
-        # 构造保存路径
-        save_path = save_dir / f"{path_name}_{index}_api{extension}"
+            # 检查数据是否已存在，避免重复
+            if data not in json_data:
+                json_data.append(data)
+            # 写回更新后的 JSON 数据
+            json_path.write_text(
+                json.dumps(json_data, ensure_ascii=False, indent=4), encoding="utf-8"
+            )
 
-        # 保存文件
-        with open(save_path, "wb") as f:
-            f.write(data)
+            return str(json_path)
 
-        return str(save_path)
+        # 保存图片、视频、音频
+        else:
+            save_dir = TYPE_DIR / f"{path_name}"
+            save_dir.mkdir(parents=True, exist_ok=True)
+            extension = {
+                "image": ".jpg",
+                "audio": ".mp3",
+                "video": ".mp4",
+            }.get(data_type, ".jpg")
+            index = len(list(save_dir.rglob("*")))
+            save_path = save_dir / f"{path_name}_{index}_api{extension}"
+            with open(save_path, "wb") as f:
+                f.write(data)  # type: ignore
+            return str(save_path)
+
+    async def _get_data(self, path_name: str, data_type: str) -> str | None:
+        """从本地取出数据"""
+        # 保存目录
+        TYPE_DIR = {
+            "text": TEXT_DIR,
+            "image": IMAGE_DIR,
+            "video": VIDEO_DIR,
+            "audio": AUDIO_DIR,
+        }.get(data_type, Path("data/temp"))
+        TYPE_DIR.mkdir(parents=True, exist_ok=True)
+        # 随机取一条文本
+        if data_type == "text":
+            json_path = TYPE_DIR / f"{path_name}.json"
+            if not json_path.exists():
+                return ""
+            try:
+                json_data = json.loads(json_path.read_text(encoding="utf-8"))
+            except:  # noqa: E722
+                return ""
+            if isinstance(json_data, list):
+                return random.choice(json_data)
+        # 随机取一张图片、视频、音频的路径
+        else:
+            save_dir = TYPE_DIR / f"{path_name}"
+            if save_dir.exists():
+                files = list(save_dir.iterdir())
+                if files:  # 确保目录不为空
+                    selected_file = random.choice(files)
+                    return str(selected_file)
 
     @staticmethod
     async def _get_extra(event: AstrMessageEvent, target_id: str):

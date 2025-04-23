@@ -177,19 +177,6 @@
         "url": "https://api.yuafeng.cn/API/ly/sp.php",
         "type": "video"
     },
-    "逆天语音": {
-        "name": "逆天语音",
-        "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
-        "type": "audio"
-    },
-    "报时": {
-        "name": "报时",
-        "url": "https://api.yuafeng.cn/API/ly/baoshi.php",
-        "type": "audio",
-        "params": {
-            "mode": "msw"
-        }
-    },
     "电影票房": {
         "name": "电影票房",
         "url": "https://api.yuafeng.cn/API/dypf/api.php",
@@ -468,28 +455,6 @@
             "type": "json"
         },
         "target": "text"
-    },
-    "喘息": {
-        "name": "娇喘",
-        "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
-        "type": "audio",
-        "params": {
-            "msg": "",
-            "jue": "icxx-喘息语气",
-            "type": "mp3"
-        },
-        "target": "url"
-    },
-    "原神语音": {
-        "name": "娇喘",
-        "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
-        "type": "audio",
-        "params": {
-            "msg": "",
-            "id": "",
-            "type": "mp3"
-        },
-        "target": "url"
     },
     "热榜": {
         "name": "热榜",
@@ -820,15 +785,6 @@
         "url": "https://free.wqwlkj.cn/wqwlapi/ks_xjj.php?type=image",
         "type": "image"
     },
-    "王者语音": {
-        "name": "王者语音",
-        "url": "https://free.wqwlkj.cn/wqwlapi/wzheroyy.php",
-        "type": "audio",
-        "params": {
-            "hero": "孙悟空"
-        },
-        "target": "data[].voice"
-    },
     "bing图": {
         "name": "bing图",
         "url": "https://free.wqwlkj.cn/wqwlapi/bing.php",
@@ -842,11 +798,6 @@
         "params": {
             "msg": "非主流"
         }
-    },
-    "坤叫": {
-        "name": "坤叫",
-        "url": "https://free.wqwlkj.cn/wqwlapi/ikunyy.php",
-        "type": "audio"
     },
     "号码归属地": {
         "name": "号码归属地",
@@ -893,5 +844,54 @@
             "background": "FFFFFF"
         },
         "target": "imgurl"
+    },
+    "逆天语音": {
+        "name": "逆天语音",
+        "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
+        "type": "audio"
+    },
+    "坤叫": {
+        "name": "坤叫",
+        "url": "https://free.wqwlkj.cn/wqwlapi/ikunyy.php",
+        "type": "audio"
+    },
+    "报时": {
+        "name": "报时",
+        "url": "https://api.yuafeng.cn/API/ly/baoshi.php",
+        "type": "audio",
+        "params": {
+            "mode": "msw"
+        }
+    },
+    "王者语音": {
+        "name": "王者语音",
+        "url": "https://free.wqwlkj.cn/wqwlapi/wzheroyy.php",
+        "type": "audio",
+        "params": {
+            "hero": "孙悟空"
+        },
+        "target": "data[].voice"
+    },
+    "喘息": {
+        "name": "娇喘",
+        "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
+        "type": "audio",
+        "params": {
+            "msg": "",
+            "jue": "icxx-喘息语气",
+            "type": "mp3"
+        },
+        "target": "url"
+    },
+    "原神语音": {
+        "name": "娇喘",
+        "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
+        "type": "audio",
+        "params": {
+            "msg": "",
+            "id": "纳西妲",
+            "type": "mp3"
+        },
+        "target": "url"
     }
 }
