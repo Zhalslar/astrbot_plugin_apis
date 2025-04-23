@@ -88,6 +88,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - [x] 自动保存api返回的数据
 - [ ] api失效时采用本地数据
 - [x] api详情、api列表
+- [ ] 自动解析部分api返回的json格式数据
 
 
 ## 👥 贡献指南
