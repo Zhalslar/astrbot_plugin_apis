@@ -53,7 +53,7 @@
         },
         "target": "Msg"
     },
-    "讲讲古诗": {
+    "来句古诗": {
         "name": "讲讲古诗",
         "url": "https://api.yuafeng.cn/API/ly/gushi.php",
         "type": "text",
@@ -80,7 +80,7 @@
         },
         "target": "Msg"
     },
-    "讲讲情话": {
+    "来句情话": {
         "name": "讲讲情话",
         "url": "https://api.yuafeng.cn/API/ly/twqh.php",
         "type": "text",
@@ -134,7 +134,9 @@
     "看看女大": {
         "name": "看看女大",
         "url": "https://api.yuafeng.cn/API/ly/cqng.php",
-        "type": "video"
+        "type": "video",
+        "params": {},
+        "target": ""
     },
     "看看骚的": {
         "name": "看看骚的",
@@ -175,8 +177,8 @@
         "url": "https://api.yuafeng.cn/API/ly/sp.php",
         "type": "video"
     },
-    "听听语音": {
-        "name": "听听语音",
+    "逆天语音": {
+        "name": "逆天语音",
         "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
         "type": "audio"
     },
@@ -220,7 +222,7 @@
         "url": "http://api.xingchenfu.xyz/API/tu_lofter_cp.php",
         "type": "image",
         "params": {
-            "n1": "我",
+            "n1": "",
             "n2": "你"
         }
     },
@@ -382,7 +384,18 @@
         "url": "https://api.lolimi.cn/API/sho_u/api.php",
         "type": "text",
         "params": {
-            "msg": "笨蛋"
+            "msg": "",
+            "format": ""
+        },
+        "target": "data.Message"
+    },
+    "兽语解密": {
+        "name": "兽语加密",
+        "url": "https://api.lolimi.cn/API/sho_u/api.php",
+        "type": "text",
+        "params": {
+            "msg": "",
+            "format": "1"
         },
         "target": "data.Message"
     },
@@ -412,7 +425,7 @@
         "url": "https://api.lolimi.cn/API/Ser/api.php",
         "type": "text",
         "params": {
-            "name": "桑帛"
+            "name": ""
         },
         "target": "text"
     },
@@ -426,16 +439,6 @@
         "name": "奥运会",
         "url": "https://api.lolimi.cn/API/ayh/i.php",
         "type": "image"
-    },
-    "点阵字": {
-        "name": "点阵字",
-        "url": "https://api.lolimi.cn/API/dzz/api.php",
-        "type": "text",
-        "params": {
-            "msg": "示例",
-            "fill": "乐"
-        },
-        "target": "data"
     },
     "光遇日历": {
         "name": "光遇日历",
@@ -461,18 +464,30 @@
         "url": "https://api.lolimi.cn/API/Ren/api.php",
         "type": "text",
         "params": {
-            "name": "阿苗",
+            "name": "",
             "type": "json"
         },
         "target": "text"
     },
-    "娇喘": {
+    "喘息": {
         "name": "娇喘",
         "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
         "type": "audio",
         "params": {
             "msg": "",
-            "jue": "icxx-喘息语气"
+            "jue": "icxx-喘息语气",
+            "type": "mp3"
+        },
+        "target": "url"
+    },
+    "原神语音": {
+        "name": "娇喘",
+        "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
+        "type": "audio",
+        "params": {
+            "msg": "",
+            "id": "",
+            "type": "mp3"
         },
         "target": "url"
     },
@@ -795,7 +810,7 @@
         "url": "https://api.pearktrue.cn/api/stablediffusion/",
         "type": "image",
         "params": {
-            "prompt": "cat",
+            "prompt": "",
             "model": "normal"
         },
         "target": "imgurl"
@@ -847,7 +862,7 @@
         "url": "https://free.wqwlkj.cn/wqwlapi/tzgsc.php",
         "type": "text",
         "params": {
-            "msg": ""
+            "msg": "1"
         }
     },
     "随机上色": {
@@ -856,7 +871,7 @@
         "type": "image",
         "params": {
             "msg": "",
-            "font_size": "",
+            "font_size": "20",
             "type": "",
             "line": "/n"
         }
@@ -871,7 +886,7 @@
         "url": "https://free.wqwlkj.cn/wqwlapi/ysz.php",
         "type": "image",
         "params": {
-            "text": "饰乐",
+            "text": "",
             "id": "30",
             "color": "0000FF",
             "shadow": "FF0000",

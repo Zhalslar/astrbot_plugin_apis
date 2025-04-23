@@ -30,7 +30,9 @@ TEXT_PATH = TEXT_DIR / "all_texts.json"
 if not TEXT_PATH.exists():
     TEXT_PATH.write_text(json.dumps({}, ensure_ascii=False, indent=4), encoding="utf-8")
 
-api_file = Path(__file__).parent / "api_data.json" # api_data.json 文件路径，更新插件时会被覆盖
+api_file = (
+    Path(__file__).parent / "api_data.json"
+)  # api_data.json 文件路径，更新插件时会被覆盖
 
 
 class APIManager:
@@ -77,11 +79,12 @@ class APIManager:
         """检查是否有重复的API"""
         return api_name in self.apis
 
+
 @register(
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.0",
+    "1.0.1",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -269,7 +272,7 @@ class ArknightsPlugin(Star):
             return
         # 检查api是否被禁用
         if api_name in self.disable_api:
-            logger.debug("API已禁用")
+            logger.debug("此API已被禁用")
             return
 
         # 获取api_data
@@ -282,10 +285,29 @@ class ArknightsPlugin(Star):
         # 获取参数
         args = msgs[1:]
 
-        # 参数不足时获取发送者信息来补充
+        # 参数补充
         if not args:
-            sender_name = event.get_sender_name()
-            args.append(sender_name)
+            reply_seg = next(
+                (seg for seg in event.get_messages() if isinstance(seg, Comp.Reply)),
+                None,
+            )
+            if reply_seg and reply_seg.chain:
+                for seg in reply_seg.chain:
+                    if isinstance(seg, Comp.Plain):
+                        args = seg.text.strip().split(" ")
+        if not args:
+            extra_arg = event.get_sender_name()
+            params = {
+                key: extra_arg if not value else value for key, value in params.items()
+            }
+        if not args:
+            for seg in event.get_messages():
+                if isinstance(seg, Comp.At):
+                    seg_qq = str(seg.qq)
+                    if seg_qq != event.get_self_id:
+                        nickname = await self._get_extra(event, seg_qq)
+                        if nickname:
+                            args.append(nickname)
 
         # 生成update_params，保留params中的默认值
         update_params = {
@@ -418,7 +440,9 @@ class ArknightsPlugin(Star):
                 return ""
         return value
 
-    async def _save_data(self, data: str|bytes, path_name: str, data_type: str) -> str:
+    async def _save_data(
+        self, data: str | bytes, path_name: str, data_type: str
+    ) -> str:
         """保存bytes数据到本地"""
         if isinstance(data, str):
             result = await self._make_request(data)
@@ -429,7 +453,7 @@ class ArknightsPlugin(Star):
                 return ""
 
         # 保存目录
-        save_dir =  {
+        save_dir = {
             "text": TEXT_DIR,
             "image": IMAGE_DIR,
             "video": VIDEO_DIR,
@@ -457,6 +481,17 @@ class ArknightsPlugin(Star):
 
         return str(save_path)
 
+    @staticmethod
+    async def _get_extra(event: AstrMessageEvent, target_id: str):
+        """从消息平台获取参数"""
+        if event.get_platform_name() == "aiocqhttp":
+            from astrbot.core.platform.sources.aiocqhttp.aiocqhttp_message_event import (
+                AiocqhttpMessageEvent,
+            )
 
-
-
+            assert isinstance(event, AiocqhttpMessageEvent)
+            client = event.bot
+            user_info = await client.get_stranger_info(user_id=int(target_id))
+            nickname = user_info.get("nickname")
+            return nickname
+        # TODO 适配更多消息平台
