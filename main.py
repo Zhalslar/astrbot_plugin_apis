@@ -267,7 +267,7 @@ class ArknightsPlugin(Star):
         if not api_name:
             logger.debug("未找到API")
             return
-
+        # 检查api是否被禁用
         if api_name in self.disable_api:
             logger.debug("API已禁用")
             return
@@ -281,6 +281,11 @@ class ArknightsPlugin(Star):
 
         # 获取参数
         args = msgs[1:]
+
+        # 参数不足时获取发送者信息来补充
+        if not args:
+            sender_name = event.get_sender_name()
+            args.append(sender_name)
 
         # 生成update_params，保留params中的默认值
         update_params = {
@@ -329,10 +334,9 @@ class ArknightsPlugin(Star):
                     if self.auto_save_data:
                         await self._save_data(result, api_name, data_type)
             elif isinstance(result, bytes):
-                file_path = await self._save_data(result, api_name, data_type)
-                chain = [Comp.Image.fromFileSystem(file_path)]
-                if not self.auto_save_data:
-                    os.remove(file_path)
+                chain = [Comp.Image.fromBytes(result)]
+                if self.auto_save_data:
+                    await self._save_data(result, api_name, data_type)
 
         elif data_type == "video":
             if isinstance(result, str):
