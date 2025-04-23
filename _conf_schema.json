@@ -5,8 +5,8 @@
     "default": false,
     "hint": "如果添加api时报错，试着打开debug找问题"
   },
-  "save_data": {
-    "description": "是否保存数据",
+  "auto_save_data": {
+    "description": "是否自动保存数据",
     "type": "bool",
     "default": true,
     "hint": "建议保存，当api失效时可换用本地数据"

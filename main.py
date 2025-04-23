@@ -91,7 +91,7 @@ class ArknightsPlugin(Star):
         self.API = APIManager()
         self.apis_names = self.API.get_apis_names()
         self.debug = config.get("debug", False)  # 是否开启调试模式
-        self.save_data = config.get("save_data", False)  # 是否保存数据
+        self.auto_save_data = config.get("auto_save_data", False)  # 是否保存数据
         self.disable_api = config.get("disable_api", [])  # 禁用的api列表
 
     @filter.command("api列表")
@@ -325,12 +325,12 @@ class ArknightsPlugin(Star):
                 url = self._extract_url(result)
                 if url:
                     chain = [Comp.Image.fromURL(url)]
-                    if self.save_data:
-                        await self.save_data(result, api_name, data_type)
+                    if self.auto_save_data:
+                        await self._save_data(result, api_name, data_type)
             elif isinstance(result, bytes):
-                file_path = await self.save_data(result, api_name, data_type)
+                file_path = await self._save_data(result, api_name, data_type)
                 chain = [Comp.Image.fromFileSystem(file_path)]
-                if not self.save_data:
+                if not self.auto_save_data:
                     os.remove(file_path)
 
         elif data_type == "video":
@@ -338,13 +338,13 @@ class ArknightsPlugin(Star):
                 url = self._extract_url(result)
                 if url:
                     chain = [Comp.Video.fromURL(url)]
-                    if self.save_data:
-                        await self.save_data(result, api_name, data_type)
+                    if self.auto_save_data:
+                        await self._save_data(result, api_name, data_type)
 
             elif isinstance(result, bytes):
-                file_path = await self.save_data(result, api_name, data_type)
+                file_path = await self._save_data(result, api_name, data_type)
                 chain = [Comp.Video.fromFileSystem(file_path)]
-                if not self.save_data:
+                if not self.auto_save_data:
                     os.remove(file_path)
 
         elif data_type == "audio":
@@ -352,12 +352,12 @@ class ArknightsPlugin(Star):
                 url = self._extract_url(result)
                 if url:
                     chain = [Comp.Record.fromURL(url)]
-                    if self.save_data:
-                        await self.save_data(result, api_name, data_type)
+                    if self.auto_save_data:
+                        await self._save_data(result, api_name, data_type)
             elif isinstance(result, bytes):
-                file_path = await self.save_data(result, api_name, data_type)
+                file_path = await self._save_data(result, api_name, data_type)
                 chain = [Comp.Record.fromFileSystem(file_path)]
-                if not self.save_data:
+                if not self.auto_save_data:
                     os.remove(file_path)
 
         return chain  # type: ignore
@@ -413,7 +413,7 @@ class ArknightsPlugin(Star):
                 return ""
         return value
 
-    async def save_data(self, data: str|bytes, path_name: str, data_type: str) -> str:
+    async def _save_data(self, data: str|bytes, path_name: str, data_type: str) -> str:
         """保存bytes数据到本地"""
         if isinstance(data, str):
             result = await self._make_request(data)
