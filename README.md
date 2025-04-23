@@ -4,6 +4,7 @@
 
 # astrbot_plugin_apis
 
+
 _✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_ 
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
@@ -78,7 +79,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ### 示例图
 
-![7353cbbd300fa072ea77fa5643a37c0](https://github.com/user-attachments/assets/be87649e-4a5a-4152-9687-64a1fb02d4f8)
+![5123084b9e5a5f9371db19224575a43](https://github.com/user-attachments/assets/73c38cc2-49b8-4d67-b48e-77cd28b1fd81)
 
 ## 🤝 TODO
 
