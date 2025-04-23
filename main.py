@@ -416,7 +416,12 @@ class ArknightsPlugin(Star):
     async def save_data(self, data: str|bytes, path_name: str, data_type: str) -> str:
         """保存bytes数据到本地"""
         if isinstance(data, str):
-            data = await self._make_request(data)
+            result = await self._make_request(data)
+            if isinstance(result, bytes):
+                data = result
+            else:
+                logger.error(f"保存数据失败: {result}")
+                return ""
 
         # 保存目录
         save_dir =  {
