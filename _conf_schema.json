@@ -1,0 +1,20 @@
+{
+  "debug": {
+    "description": "调试模式",
+    "type": "bool",
+    "default": false,
+    "hint": "如果添加api时报错，试着打开debug找问题"
+  },
+  "save_data": {
+    "description": "是否保存数据",
+    "type": "bool",
+    "default": true,
+    "hint": "建议保存，当api失效时可换用本地数据"
+  },
+  "disable_api": {
+    "description": "禁用的api",
+    "type": "list",
+    "default": [],
+    "hint": "禁用列表内的关键词会被屏蔽，从而达到不能触发api的效果"
+  }
+}
