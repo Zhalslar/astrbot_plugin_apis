@@ -1,5 +1,7 @@
 <div align="center">
 
+![:name](https://count.getloli.com/@astrbot_plugin_apis?name=astrbot_plugin_apis&theme=minecraft&padding=6&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
+
 # astrbot_plugin_apis
 
 _✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_
