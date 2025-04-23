@@ -77,7 +77,6 @@ class APIManager:
         """检查是否有重复的API"""
         return api_name in self.apis
 
-
 @register(
     "astrbot_plugin_apis",
     "Zhalslar",
