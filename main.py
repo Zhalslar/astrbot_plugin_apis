@@ -156,6 +156,8 @@ class ArknightsPlugin(Star):
             if input_str:
                 parts = input_str.split("：", 1)  # 使用中文冒号分割
                 if len(parts) == 2:
+                    if parts[1].strip() == "无":
+                        return ""
                     return parts[1].strip()
             return ""
 
@@ -219,7 +221,7 @@ class ArknightsPlugin(Star):
     async def remove_api(self, event: AstrMessageEvent, api_name: str):
         """删除api"""
         self.API.remove_api(api_name)
-        yield event.plain_result("删除成功")
+        yield event.plain_result(f"已删除api：{api_name}")
 
     async def _make_request(
         self, url: str, params: Optional[dict] = None
