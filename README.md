@@ -4,13 +4,15 @@
 
 # astrbot_plugin_apis
 
-_✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_
+
+_✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_ 
+
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![AstrBot](https://img.shields.io/badge/AstrBot-3.4%2B-orange.svg)](https://github.com/Soulter/AstrBot)
 </div>
 
-## 📦 介绍
+## 💡 介绍
 
 API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...
 
@@ -77,7 +79,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ### 示例图
 
-![7353cbbd300fa072ea77fa5643a37c0](https://github.com/user-attachments/assets/be87649e-4a5a-4152-9687-64a1fb02d4f8)
+![5123084b9e5a5f9371db19224575a43](https://github.com/user-attachments/assets/73c38cc2-49b8-4d67-b48e-77cd28b1fd81)
 
 ## 🤝 TODO
 
@@ -86,10 +88,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - [x] 自动保存api返回的数据
 - [ ] api失效时采用本地数据
 - [x] api详情、api列表
-
-## 📌 注意事项
-
-- 如果想第一时间得到反，可以来作者的插件反馈群（QQ群）：460973561
+- [ ] 自动解析部分api返回的json格式数据
 
 
 ## 👥 贡献指南
@@ -98,3 +97,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 🐛 提交 Issue 报告问题
 - 💡 提出新功能建议
 - 🔧 提交 Pull Request 改进代码
+
+ ## 📌 注意事项
+
+- 如果想第一时间得到反，可以来作者的插件反馈群（QQ群）：460973561
