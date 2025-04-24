@@ -5,7 +5,7 @@ from pathlib import Path
 import random
 import re
 from typing import Any, List, Optional, Union
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 import aiohttp
 from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, register
@@ -15,15 +15,17 @@ from astrbot.core.message.components import BaseMessageComponent
 from astrbot.core.star.filter.event_message_type import EventMessageType
 
 
-# 定义基础缓存路径
+# 定义缓存路径
 DATA_PATH = Path("./data/plugins_data/astrbot_plugin_apis")
 DATA_PATH.mkdir(parents=True, exist_ok=True)
 
-# 单独定义各个子路径
-TEXT_DIR = DATA_PATH / "text"
-IMAGE_DIR = DATA_PATH / "image"
-VIDEO_DIR = DATA_PATH / "video"
-AUDIO_DIR = DATA_PATH / "audio"
+# 定义子路径
+TYPE_DIRS = {
+    "text": DATA_PATH / "text",
+    "image": DATA_PATH / "image",
+    "video": DATA_PATH / "video",
+    "audio": DATA_PATH / "audio",
+}
 
 
 api_file = (
@@ -80,7 +82,7 @@ class APIManager:
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.2",
+    "1.0.3",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -309,8 +311,11 @@ class ArknightsPlugin(Star):
                 target=target,
                 auto_save_data=self.auto_save_data,
             )
-            yield event.chain_result(chain)  # type: ignore
-            return
+            try:
+                yield event.chain_result(chain)  # type: ignore
+                return
+            except Exception as e:
+                logger.error(f"在发送消息时发生错误: {e}")
         except Exception as e:
             logger.error(f"请求并处理响应时发生错误: {e}")
             pass
@@ -333,7 +338,6 @@ class ArknightsPlugin(Star):
 
         # 如果响应仍然为空，返回错误消息
         yield event.plain_result("API请求失败")
-
 
     async def _supplement_args(self, event: AstrMessageEvent, args: list, params: dict):
         """
@@ -384,61 +388,45 @@ class ArknightsPlugin(Star):
     ) -> List[BaseMessageComponent]:
         """处理响应"""
         chain = []
+        text = None
+        file_path = None
 
-        # 预处理result
+        # result为字典时，解析字典
         if isinstance(result, dict) and target:
-            result = self._get_nested_value(result, target)
+            str_or_url: str = self._get_nested_value(result, target)
+            result = str_or_url
 
-        if isinstance(result, str):
-            if url := self._extract_url(result):
-                result = url
-            elif auto_save_data:
-                await self._save_data(result, api_name, data_type)
-
-        if isinstance(result, bytes):
-            file_path = await self._save_data(result, api_name, data_type)
+        # 保存数据
+        if isinstance(result, (str, bytes)):
+            save_result: str | Path | None = await self._save_data(
+                result, api_name, data_type
+            )
+            if not save_result:
+                text = "URL无效，无法保存数据"
+            elif isinstance(save_result, str):
+                text = save_result
+            elif isinstance(save_result, Path):
+                file_path = str(save_result)
 
         # 根据类型构造消息链
-        if data_type == "text":
-            if isinstance(result, str):
-                chain = [Comp.Plain(str(result))]
+        if data_type == "text" and text:
+            chain = [Comp.Plain(text)]
 
-        elif data_type == "image":
-            if isinstance(result, str):
-                chain = [Comp.Image.fromURL(result)]
-            elif isinstance(result, bytes):
-                chain = [Comp.Image.fromFileSystem(file_path)]
+        elif data_type == "image" and file_path:
+            chain = [Comp.Image.fromFileSystem(file_path)]
 
-        elif data_type == "video":
-            if isinstance(result, str):
-                chain = [Comp.Video.fromURL(result)]
-            elif isinstance(result, bytes):
-                chain = [Comp.Video.fromFileSystem(file_path)]
+        elif data_type == "video" and file_path:
+            chain = [Comp.Video.fromFileSystem(file_path)]
 
-        elif data_type == "audio":
-            if isinstance(result, str):
-                chain = [Comp.Record.fromURL(result)]
-            elif isinstance(result, bytes):
-                chain = [Comp.Record.fromFileSystem(file_path)]
+        elif data_type == "audio" and file_path:
+            print(file_path)
+            chain = [Comp.Record.fromFileSystem(file_path)]
 
         # 删除临时文件
-        if isinstance(result, bytes) and not auto_save_data:
+        if isinstance(result, bytes) and file_path and not auto_save_data:
             os.remove(file_path)
 
         return chain  # type: ignore
-
-    @staticmethod
-    def _extract_url(text: str) -> str:
-        """从字符串中提取第一个有效URL"""
-        url_pattern = r"https?://[^\s]+"
-        urls = re.findall(url_pattern, text)
-        for url in urls:
-            # 解析URL
-            parsed_url = urlparse(url)
-            # 验证URL的有效性
-            if parsed_url.scheme in {"http", "https"} and parsed_url.netloc:
-                return url
-        return ""
 
     def _get_nested_value(self, result: dict, target: str) -> Any:
         """
@@ -481,10 +469,37 @@ class ArknightsPlugin(Star):
                 return ""
         return value
 
+    @staticmethod
+    def _extract_url(text: str) -> str:
+        """从字符串中提取第一个有效URL"""
+        # 去掉转义字符
+        text = text.replace("\\", "")
+
+        # 定义URL匹配模式
+        url_pattern = r"https?://[^\s\"']+"
+        urls = re.findall(url_pattern, text)
+
+        for url in urls:
+            # 解码URL中的百分号编码
+            url = unquote(url)
+
+            # 去除URL头尾的多余双引号（如果存在）
+            url = url.strip('"')
+
+            # 解析URL
+            parsed_url = urlparse(url)
+
+            # 验证URL的有效性
+            if parsed_url.scheme in {"http", "https"} and parsed_url.netloc:
+                return url
+        return ""
+
     async def _save_data(
         self, data: str | bytes, path_name: str, data_type: str
-    ) -> str:
+    ) -> str | Path | None:
         """将数据保存到本地"""
+
+        # 如果数据是字符串，尝试从其中提取 URL 并下载数据
         if isinstance(data, str):
             if url := self._extract_url(data):
                 result = await self._make_request(url)
@@ -492,15 +507,10 @@ class ArknightsPlugin(Star):
                     data = result
                 else:
                     logger.error(f"保存数据失败: {result}")
-                    return ""
+                    return None
 
-        # 保存目录
-        TYPE_DIR = {
-            "text": TEXT_DIR,
-            "image": IMAGE_DIR,
-            "video": VIDEO_DIR,
-            "audio": AUDIO_DIR,
-        }.get(data_type, Path("data/temp"))
+        # 设定保存路径
+        TYPE_DIR = TYPE_DIRS.get(data_type, Path("data/temp"))
         TYPE_DIR.mkdir(parents=True, exist_ok=True)
 
         # 保存文本
@@ -523,15 +533,17 @@ class ArknightsPlugin(Star):
             if not isinstance(json_data, list):
                 json_data = []
 
+            str_data = str(data)
+
             # 检查数据是否已存在，避免重复
             if data not in json_data:
-                json_data.append(data)
+                json_data.append(str_data)
             # 写回更新后的 JSON 数据
             json_path.write_text(
                 json.dumps(json_data, ensure_ascii=False, indent=4), encoding="utf-8"
             )
 
-            return str(json_path)
+            return str_data
 
         # 保存图片、视频、音频
         else:
@@ -546,18 +558,12 @@ class ArknightsPlugin(Star):
             save_path = save_dir / f"{path_name}_{index}_api{extension}"
             with open(save_path, "wb") as f:
                 f.write(data)  # type: ignore
-            return str(save_path)
+            return save_path
 
     async def _get_data(self, path_name: str, data_type: str) -> str | None:
         """从本地取出数据"""
-        # 保存目录
-        TYPE_DIR = {
-            "text": TEXT_DIR,
-            "image": IMAGE_DIR,
-            "video": VIDEO_DIR,
-            "audio": AUDIO_DIR,
-        }.get(data_type, Path("data/temp"))
-        TYPE_DIR.mkdir(parents=True, exist_ok=True)
+        # 数据保存路径
+        TYPE_DIR = TYPE_DIRS.get(data_type, Path("data/temp"))
         # 随机取一条文本
         if data_type == "text":
             json_path = TYPE_DIR / f"{path_name}.json"

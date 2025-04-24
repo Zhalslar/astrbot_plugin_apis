@@ -845,6 +845,68 @@
         },
         "target": "imgurl"
     },
+    "搜图": {
+        "name": "搜图",
+        "url": "https://api.tangdouz.com/dtss.php",
+        "type": "image",
+        "params": {
+            "nr": ""
+        },
+        "target": ""
+    },
+    "显卡排行榜": {
+        "name": "显卡排行榜",
+        "url": "https://api.tangdouz.com/a/gpu.php",
+        "type": "text",
+        "params": {
+            "f": "desktop"
+        },
+        "target": ""
+    },
+    "垃圾分类": {
+        "name": "垃圾分类",
+        "url": "https://api.tangdouz.com/a/garbage.php",
+        "type": "text",
+        "params": {
+            "nr": ""
+        },
+        "target": ""
+    },
+    "每日日报": {
+        "name": "每日日报",
+        "url": "https://api.tangdouz.com/a/60/",
+        "type": "image"
+    },
+    "搜表情": {
+        "name": "搜表情",
+        "url": "https://api.tangdouz.com/a/biaoq.php",
+        "type": "image",
+        "params": {
+            "nr": "",
+            "return": "text"
+        },
+        "target": ""
+    },
+    "搜菜谱": {
+        "name": "搜菜谱",
+        "url": "https://api.tangdouz.com/dtss.php",
+        "type": "image",
+        "params": {
+            "nr": "",
+            "f": "1",
+            "return": "json"
+        },
+        "target": ""
+    },
+    "每日听力": {
+        "name": "每日听力",
+        "url": "https://api.tangdouz.com/a/perday.php",
+        "type": "audio",
+        "params": {
+            "return": "json"
+        },
+        "target": "tts"
+    },
     "逆天语音": {
         "name": "逆天语音",
         "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
