@@ -63,7 +63,7 @@ class APIManager:
             del self.apis[name]
             self.save_data()
         else:
-            print(f"API '{name}' 不存在。")
+            logger.warning(f"API '{name}' 不存在。")
 
     def get_api_info(self, name):
         """获取指定API的信息"""
@@ -82,16 +82,29 @@ class APIManager:
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.3",
+    "1.0.5",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
+        bot_config = self.context.get_config()
+        self.wake_prefix: list[str] = bot_config.get("wake_prefix", [])
+        self.prefix_mode = config.get("prefix_mode", False)  # 是否启用前缀模式
         self.API = APIManager()
         self.apis_names = self.API.get_apis_names()
         self.debug = config.get("debug", False)  # 是否开启调试模式
         self.auto_save_data = config.get("auto_save_data", False)  # 是否保存数据
+        self.enable_text = config.get("enable_text", True)  # 是否启用文本api
+        self.enable_image = config.get("enable_image", True)  # 是否启用图片api
+        self.enable_video = config.get("enable_video", True)  # 是否启用视频api
+        self.enable_audio = config.get("enable_audio", True)  # 是否启用音频api
+        self.disable_api_type = [
+            "text" if not self.enable_text else None,
+            "image" if not self.enable_image else None,
+            "video" if not self.enable_video else None,
+            "audio" if not self.enable_audio else None,
+        ]
         self.disable_api = config.get("disable_api", [])  # 禁用的api列表
 
     @filter.command("api列表")
@@ -262,11 +275,33 @@ class ArknightsPlugin(Star):
 
     @filter.event_message_type(EventMessageType.ALL)
     async def match_api(self, event: AstrMessageEvent):
+        """主函数"""
+
+        # 前缀模式
+        if self.prefix_mode:
+            chain = event.get_messages()
+            if not chain:
+                return
+            first_seg = chain[0]
+            # 前缀触发
+            if isinstance(first_seg, Comp.Plain):
+                if not any(first_seg.text.startswith(prefix) for prefix in self.wake_prefix):
+                    return
+            # @bot触发
+            elif isinstance(first_seg, Comp.At):
+                if str(first_seg.qq) != str(event.get_self_id()):
+                    return
+            else:
+                return
+
+
         # 匹配api
-        msgs = event.get_message_str().split(" ")
+        message_str = event.get_message_str()
+        msgs = message_str.split(" ")
         api_name = next((i for i in self.apis_names if i == msgs[0]), None)
         if not api_name:
             return
+
         # 检查api是否被禁用
         if api_name in self.disable_api:
             logger.debug("此API已被禁用")
@@ -278,6 +313,11 @@ class ArknightsPlugin(Star):
         type: str = api_data.get("type", "image")
         params: dict = api_data.get("params", {})
         target: str = api_data.get("target", "")
+
+        # 检查api类型是否启用
+        if type in self.disable_api_type:
+            logger.debug("此API类型已被禁用")
+            return
 
         # 获取参数
         args = msgs[1:]
@@ -364,7 +404,7 @@ class ArknightsPlugin(Star):
             for seg in event.get_messages():
                 if isinstance(seg, Comp.At):
                     seg_qq = str(seg.qq)
-                    if seg_qq != event.get_self_id:
+                    if seg_qq != event.get_self_id():
                         nickname = await self._get_extra(event, seg_qq)
                         if nickname:
                             args.append(nickname)
@@ -393,8 +433,11 @@ class ArknightsPlugin(Star):
 
         # result为字典时，解析字典
         if isinstance(result, dict) and target:
-            str_or_url: str = self._get_nested_value(result, target)
-            result = str_or_url
+            nested_value = self._get_nested_value(result, target)
+            if isinstance(nested_value, dict):
+                result = self._dict_to_string(nested_value)
+            else:
+                result = nested_value
 
         # 保存数据
         if isinstance(result, (str, bytes)):
@@ -402,7 +445,7 @@ class ArknightsPlugin(Star):
                 result, api_name, data_type
             )
             if not save_result:
-                text = "URL无效，无法保存数据"
+                text = "数据为空"
             elif isinstance(save_result, str):
                 text = save_result
             elif isinstance(save_result, Path):
@@ -419,7 +462,6 @@ class ArknightsPlugin(Star):
             chain = [Comp.Video.fromFileSystem(file_path)]
 
         elif data_type == "audio" and file_path:
-            print(file_path)
             chain = [Comp.Record.fromFileSystem(file_path)]
 
         # 删除临时文件
@@ -500,7 +542,7 @@ class ArknightsPlugin(Star):
         """将数据保存到本地"""
 
         # 如果数据是字符串，尝试从其中提取 URL 并下载数据
-        if isinstance(data, str):
+        if isinstance(data, str) and data_type != "text":
             if url := self._extract_url(data):
                 result = await self._make_request(url)
                 if isinstance(result, bytes):
@@ -533,17 +575,18 @@ class ArknightsPlugin(Star):
             if not isinstance(json_data, list):
                 json_data = []
 
-            str_data = str(data)
+            text = str(data)
+            clean_text = text.replace("\\r", "\n")
 
             # 检查数据是否已存在，避免重复
             if data not in json_data:
-                json_data.append(str_data)
+                json_data.append(clean_text)
             # 写回更新后的 JSON 数据
             json_path.write_text(
                 json.dumps(json_data, ensure_ascii=False, indent=4), encoding="utf-8"
             )
 
-            return str_data
+            return clean_text
 
         # 保存图片、视频、音频
         else:
@@ -598,3 +641,32 @@ class ArknightsPlugin(Star):
             nickname = user_info.get("nickname")
             return nickname
         # TODO 适配更多消息平台
+
+    @staticmethod
+    def _dict_to_string(input_dict):
+        """
+        将字典转换为指定格式的字符串，支持嵌套字典。
+        每一级缩进增加两个空格，直到解析到没有字典嵌套为止。
+
+        参数:
+            input_dict (dict): 输入的字典。
+
+        返回:
+            str: 格式化后的字符串。
+        """
+        def recursive_parse(d, level):
+            result = ""
+            indent = " " * (level * 2)  # 当前层级的缩进
+            for key, value in d.items():
+                if isinstance(value, dict):  # 如果值是字典，则递归处理
+                    result += f"{indent}{key}:\n"
+                    result += recursive_parse(value, level + 1)  # 增加缩进
+                elif isinstance(value, list):
+                    for item in value:
+                        result += "\n\n"
+                        result += recursive_parse(item, level)  # 增加缩进
+                else:
+                    result += f"{indent}{key}: {value}\n"
+            return result.strip()
+
+        return recursive_parse(input_dict, 0)

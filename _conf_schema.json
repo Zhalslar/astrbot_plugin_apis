@@ -11,6 +11,42 @@
     "default": true,
     "hint": "建议保存，当api失效时可换用本地数据"
   },
+  "prefix_mode": {
+    "description": "是否启用前缀模式",
+    "type": "bool",
+    "default": false,
+    "hint": "启用后，需要在触发词前加上前缀或者@bot才能触发api"
+  },
+  "type_switch": {
+    "description": "类型开关",
+    "type": "object",
+    "items": {
+      "enable_text":{
+        "description": "是否启用文本api",
+        "type": "bool",
+        "default": true,
+        "hint": ""
+      },
+      "enable_image":{
+        "description": "是否启用图片api",
+        "type": "bool",
+        "default": true,
+        "hint": ""
+      },
+      "enable_video":{
+        "description": "是否启用视频api",
+        "type": "bool",
+        "default": true,
+        "hint": ""
+      },
+      "enable_audio":{
+        "description": "是否启用音频api",
+        "type": "bool",
+        "default": true,
+        "hint": ""
+      }
+    }
+  },
   "disable_api": {
     "description": "禁用的api",
     "type": "list",

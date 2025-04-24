@@ -780,6 +780,81 @@
         },
         "target": "imgurl"
     },
+    "Linux命令": {
+        "name": "Linux命令",
+        "url": "https://api.pearktrue.cn/api/linux/",
+        "type": "text",
+        "params": {
+            "keyword": ""
+        },
+        "target": "data.content"
+    },
+    "身份证查询": {
+        "name": "身份证查询",
+        "url": "https://api.pearktrue.cn/api/sfz/query.php",
+        "type": "text",
+        "params": {
+            "idcard": ""
+        },
+        "target": "data"
+    },
+    "高校查询": {
+        "name": "高校查询",
+        "url": "https://api.pearktrue.cn/api/college/",
+        "type": "text",
+        "params": {
+            "keyword": "清华"
+        },
+        "target": "data"
+    },
+    "古诗文查询": {
+        "name": "古诗文查询",
+        "url": "https://api.pearktrue.cn/api/college/",
+        "type": "text",
+        "params": {
+            "keyword": "望庐山"
+        },
+        "target": "data[].content"
+    },
+    "今天吃什么": {
+        "name": "今天吃什么",
+        "url": "https://api.pearktrue.cn/api/today/food.php",
+        "type": "text",
+        "target": "food"
+    },
+    "黄金价格": {
+        "name": "黄金价格",
+        "url": "https://api.pearktrue.cn/api/goldprice/",
+        "type": "text",
+        "target": "data[]"
+    },
+    "人物年轮": {
+        "name": "人物年轮",
+        "url": "https://api.pearktrue.cn/api/yearsmap/",
+        "type": "text",
+        "params": {
+            "name": ""
+        },
+        "target": "data[].event[]"
+    },
+    "LOL查询": {
+        "name": "LOL查询",
+        "url": "https://api.pearktrue.cn/api/lolhero/",
+        "type": "image",
+        "params": {
+            "hero": ""
+        },
+        "target": "imgurl"
+    },
+    "车辆查询": {
+        "name": "车辆查询",
+        "url": "https://api.pearktrue.cn/api/car/",
+        "type": "text",
+        "params": {
+            "search": ""
+        },
+        "target": "data[]"
+    },
     "看看妞": {
         "name": "看看妞",
         "url": "https://free.wqwlkj.cn/wqwlapi/ks_xjj.php?type=image",
@@ -898,6 +973,72 @@
         },
         "target": ""
     },
+    "高清壁纸": {
+        "name": "高清壁纸",
+        "url": "https://api.tangdouz.com/abz/bz.php",
+        "type": "image"
+    },
+    "刑法": {
+        "name": "刑法",
+        "url": "https://api.tangdouz.com/xf.php",
+        "type": "text",
+        "params": {
+            "nr": ""
+        },
+        "target": "" 
+    },
+    "今日运势": {
+        "name": "今日运势",
+        "url": "https://api.tangdouz.com/wz/luck.php",
+        "type": "image"
+    },
+    "来碗鸡汤": {
+        "name": "来碗鸡汤",
+        "url": "https://api.tangdouz.com/a/jt.php",
+        "type": "text"
+    },
+    "日历": {
+        "name": "日历",
+        "url": "https://api.tangdouz.com/htmlimage/rl.php",
+        "type": "image",
+        "params": {
+            "theme": "原神"
+        }
+    },
+    "发病": {
+        "name": "发病",
+        "url": "https://api.tangdouz.com/beill.php",
+        "type": "text",
+        "params": {
+            "name": ""
+        }
+    },
+    "来句诗": {
+        "name": "来句诗",
+        "url": "https://api.tangdouz.com/a/poetrand.php",
+        "type": "text"
+    },
+    "文案": {
+        "name": "文案",
+        "url": "https://api.tangdouz.com/a/refuel.php",
+        "type": "text",
+        "params": {
+            "f": "哲理"
+        }  
+    },
+    "来篇文章": {
+        "name": "来篇文章",
+        "url": "https://api.tangdouz.com/a/jt.php",
+        "type": "text"
+    },
+    "中草药": {
+        "name": "中草药",
+        "url": "https://api.tangdouz.com/a/zcy.php",
+        "type": "text",
+        "params": {
+            "nr": "当归"
+        }
+    },
     "每日听力": {
         "name": "每日听力",
         "url": "https://api.tangdouz.com/a/perday.php",
@@ -955,5 +1096,11 @@
             "type": "mp3"
         },
         "target": "url"
+    },
+    "御姐撒娇": {
+        "name": "御姐撒娇",
+        "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
+        "type": "audio",
+        "target": "audiopath"
     }
 }
