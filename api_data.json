@@ -935,7 +935,7 @@
         "target": "data[].voice"
     },
     "喘息": {
-        "name": "娇喘",
+        "name": "喘息",
         "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
         "type": "audio",
         "params": {
@@ -946,7 +946,7 @@
         "target": "url"
     },
     "原神语音": {
-        "name": "娇喘",
+        "name": "原神语音",
         "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
         "type": "audio",
         "params": {
