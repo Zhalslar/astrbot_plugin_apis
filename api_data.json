@@ -335,7 +335,7 @@
     },
     "看看腿": {
         "name": "看看腿",
-        "url": "https://api.lolimi.cn/API/meizi/api.php",
+        "url": "http://api.xingchenfu.xyz/API/tu.php",
         "type": "image",
         "target": "text"
     },
