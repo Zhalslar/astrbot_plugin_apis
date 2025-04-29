@@ -11,6 +11,7 @@ from astrbot.api.event import filter, AstrMessageEvent
 from astrbot.api.star import Context, Star, register
 import astrbot.api.message_components as Comp
 from astrbot.api import logger
+from astrbot.core.config.astrbot_config import AstrBotConfig
 from astrbot.core.message.components import BaseMessageComponent
 from astrbot.core.star.filter.event_message_type import EventMessageType
 
@@ -77,7 +78,6 @@ class APIManager:
         """检查是否有重复的API"""
         return api_name in self.apis
 
-
 @register(
     "astrbot_plugin_apis",
     "Zhalslar",
@@ -86,10 +86,9 @@ class APIManager:
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
-    def __init__(self, context: Context, config: dict):
+    def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
-        bot_config = self.context.get_config()
-        self.wake_prefix: list[str] = bot_config.get("wake_prefix", [])
+        self.wake_prefix: list[str] = self.context.get_config().get("wake_prefix", [])
         self.prefix_mode = config.get("prefix_mode", False)  # 是否启用前缀模式
         self.API = APIManager()
         self.apis_names = self.API.get_apis_names()
