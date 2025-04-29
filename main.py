@@ -82,7 +82,7 @@ class APIManager:
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.5",
+    "1.0.6",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
