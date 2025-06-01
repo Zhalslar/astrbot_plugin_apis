@@ -82,7 +82,7 @@ class APIManager:
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.6",
+    "1.0.7",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -338,45 +338,45 @@ class ArknightsPlugin(Star):
                 f"target: {target}"
             )
 
+        data = None
+
         # 发送请求
-        try:
-            result = await self._make_request(url=url, params=update_params)
-            if self.debug:
-                logger.debug(f"响应结果: \n{result}")
-            chain = await self._process_result(
-                result=result,
+        data = await self._make_request(url=url, params=update_params)
+        if self.debug:
+            logger.debug(f"响应结果: {data}")
+        if data:
+            chain = await self._process_api_data(
+                data=data,
                 api_name=api_name,
                 data_type=type,
                 target=target,
-                auto_save_data=self.auto_save_data,
+                auto_save_data=self.auto_save_data
             )
             try:
                 yield event.chain_result(chain)  # type: ignore
                 return
             except Exception as e:
+                # TODO 等框架提供发送消息失败时提供反馈
                 logger.error(f"在发送消息时发生错误: {e}")
-        except Exception as e:
-            logger.error(f"请求并处理响应时发生错误: {e}")
-            pass
+
         # 如果响应为空，尝试从本地数据库中获取数据
-        try:
+        else:
+            logger.warning("API响应为空，尝试从本地数据库中获取数据")
             data = await self._get_data(path_name=api_name, data_type=type)
             if data:
-                chain = await self._process_result(
-                    result=data,
-                    api_name=api_name,
+                chain = await self._process_local_data(
+                    data=data,
                     data_type=type,
-                    target=target,
-                    auto_save_data=True,
                 )
                 yield event.chain_result(chain)  # type: ignore
-                return
-        except Exception as e:
-            logger.error(f"从本地数据库中获取数据时发生错误: {e}")
-            pass
+                logger.info( f"发送本地数据成功: {data}")
+            else:
+                logger.error(f"没有找到本地数据: {api_name}")
 
-        # 如果响应仍然为空，返回错误消息
-        yield event.plain_result("API请求失败")
+        # 停止事件传播
+        if data:
+            event.stop_event()
+
 
     async def _supplement_args(self, event: AstrMessageEvent, args: list, params: dict):
         """
@@ -417,10 +417,10 @@ class ArknightsPlugin(Star):
 
         return args, params
 
-    async def _process_result(
+    async def _process_api_data(
         self,
         api_name: str,
-        result: Any,
+        data: Any,
         data_type: str,
         target: str = "",
         auto_save_data: bool = True,
@@ -430,25 +430,25 @@ class ArknightsPlugin(Star):
         text = None
         file_path = None
 
-        # result为字典时，解析字典
-        if isinstance(result, dict) and target:
-            nested_value = self._get_nested_value(result, target)
+        # data为字典时，解析字典
+        if isinstance(data, dict) and target:
+            nested_value = self._get_nested_value(data, target)
             if isinstance(nested_value, dict):
-                result = self._dict_to_string(nested_value)
+                data = self._dict_to_string(nested_value)
             else:
-                result = nested_value
+                data = nested_value
 
         # 保存数据
-        if isinstance(result, (str, bytes)):
-            save_result: str | Path | None = await self._save_data(
-                result, api_name, data_type
+        if isinstance(data, (str, bytes)):
+            save_data: str | Path | None = await self._save_data(
+                data, api_name, data_type
             )
-            if not save_result:
+            if not save_data:
                 text = "数据为空"
-            elif isinstance(save_result, str):
-                text = save_result
-            elif isinstance(save_result, Path):
-                file_path = str(save_result)
+            elif isinstance(save_data, str):
+                text = save_data
+            elif isinstance(save_data, Path):
+                file_path = str(save_data)
 
         # 根据类型构造消息链
         if data_type == "text" and text:
@@ -464,8 +464,30 @@ class ArknightsPlugin(Star):
             chain = [Comp.Record.fromFileSystem(file_path)]
 
         # 删除临时文件
-        if isinstance(result, bytes) and file_path and not auto_save_data:
+        if isinstance(data, bytes) and file_path and not auto_save_data:
             os.remove(file_path)
+
+        return chain  # type: ignore
+
+    async def _process_local_data(
+        self,
+        data: Any,
+        data_type: str,
+    ) -> List[BaseMessageComponent]:
+        """
+        处理本地数据, 文本用str, 其他用路径
+        """
+        if data_type == "text":
+            chain = [Comp.Plain(data)]
+
+        elif data_type == "image":
+            chain = [Comp.Image.fromFileSystem(data)]
+
+        elif data_type == "video":
+            chain = [Comp.Video.fromFileSystem(data)]
+
+        elif data_type == "audio":
+            chain = [Comp.Record.fromFileSystem(data)]
 
         return chain  # type: ignore
 
@@ -602,29 +624,50 @@ class ArknightsPlugin(Star):
                 f.write(data)  # type: ignore
             return save_path
 
+
     async def _get_data(self, path_name: str, data_type: str) -> str | None:
-        """从本地取出数据"""
+        """
+        从本地取出数据
+        :param path_name: 数据的名称或路径
+        :param data_type: 数据类型（如"text"、"image"等）
+        :return: 数据内容或文件路径，如果失败返回None
+        """
         # 数据保存路径
         TYPE_DIR = TYPE_DIRS.get(data_type, Path("data/temp"))
+
         # 随机取一条文本
         if data_type == "text":
             json_path = TYPE_DIR / f"{path_name}.json"
             if not json_path.exists():
-                return ""
+                logger.error(f"文件不存在：{json_path}")
+                return None
+
             try:
                 json_data = json.loads(json_path.read_text(encoding="utf-8"))
-            except:  # noqa: E722
-                return ""
-            if isinstance(json_data, list):
+            except json.JSONDecodeError as e:
+                logger.error(f"解析JSON文件失败：{json_path}，错误：{e}")
+                return None
+
+            if isinstance(json_data, list) and json_data:
                 return random.choice(json_data)
+            else:
+                logger.error(f"JSON数据格式错误：{json_data}")
+                return None
+
         # 随机取一张图片、视频、音频的路径
         else:
             save_dir = TYPE_DIR / f"{path_name}"
             if save_dir.exists():
                 files = list(save_dir.iterdir())
-                if files:  # 确保目录不为空
+                if files:
                     selected_file = random.choice(files)
                     return str(selected_file)
+                else:
+                    logger.error(f"目录为空：{save_dir}")
+                    return None
+            else:
+                logger.error(f"目录不存在：{save_dir}")
+                return None
 
     @staticmethod
     async def _get_extra(event: AstrMessageEvent, target_id: str):
