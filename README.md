@@ -33,9 +33,11 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ## ⚙️ 配置
 
+### 插件配置
+
 请在astrbot面板配置，插件管理 -> astrbot_plugin_apis -> 操作 -> 插件配置
 
-### Docker 部署注意事项
+### Docker 部署配置
 
 如果您是 Docker 部署，请务必将消息平台容器和AstrBot挂载容器到同一个文件夹，否则消息平台将无法解析文件路径。
 
