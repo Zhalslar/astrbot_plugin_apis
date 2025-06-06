@@ -33,7 +33,18 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ## ⚙️ 配置
 
+### 插件配置
+
 请在astrbot面板配置，插件管理 -> astrbot_plugin_apis -> 操作 -> 插件配置
+
+### Docker 部署配置
+
+如果您是 Docker 部署，消息平台容器（如Napcat）、astrbot容器都要挂载宿主机中apis插件的数据目录（...data/plugins_data/astrbot_plugin_apis）
+
+示例挂载方式(NapCat)：
+
+- 对 **AstrBot**：`/vol3/1000/dockerSharedFolder -> /app/sharedFolder`
+- 对 **NapCat**：`/vol3/1000/dockerSharedFolder -> /app/sharedFolder`
 
 ## ⌨️ 使用说明
 
