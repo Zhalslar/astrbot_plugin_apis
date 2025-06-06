@@ -39,7 +39,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ### Docker 部署配置
 
-如果您是 Docker 部署，请务必将消息平台容器和AstrBot挂载容器到同一个文件夹，否则消息平台将无法解析文件路径。
+如果您是 Docker 部署，消息平台容器（如Napcat）、astrbot容器都要挂载宿主机中apis插件的数据目录（...data/plugins_data/astrbot_plugin_apis）
 
 示例挂载方式(NapCat)：
 
