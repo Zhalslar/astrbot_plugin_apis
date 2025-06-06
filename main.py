@@ -353,7 +353,7 @@ class ArknightsPlugin(Star):
                 auto_save_data=self.auto_save_data
             )
             try:
-                yield event.chain_result(chain)  # type: ignore
+                await event.send(event.chain_result(chain))
                 return
             except Exception as e:
                 # TODO 等框架提供发送消息失败时提供反馈
@@ -368,7 +368,7 @@ class ArknightsPlugin(Star):
                     data=data,
                     data_type=type,
                 )
-                yield event.chain_result(chain)  # type: ignore
+                await event.send(event.chain_result(chain))
                 logger.info( f"发送本地数据成功: {data}")
             else:
                 logger.error(f"没有找到本地数据: {api_name}")
