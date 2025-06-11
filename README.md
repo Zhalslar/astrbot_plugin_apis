@@ -46,6 +46,8 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 对 **AstrBot**：`/vol3/1000/dockerSharedFolder -> /app/sharedFolder`
 - 对 **NapCat**：`/vol3/1000/dockerSharedFolder -> /app/sharedFolder`
 
+同时也可以参考[1#issuecomment-2837167979](https://github.com/Zhalslar/astrbot_plugin_apis/issues/1#issuecomment-2837167979)
+
 ## ⌨️ 使用说明
 
 ### 指令表
