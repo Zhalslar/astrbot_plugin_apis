@@ -60,6 +60,38 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 | /删除api xxx  | 删除指定api        |
 |   {关键词}     |   触发api      |
 
+建议直接通过编辑"data\plugins\astrbot_plugin_apis\api_data.json"进行添加api、删除api，同时也方便修改更多参数。
+
+- "name"字段为列表，从而支持设置多个api触发词。
+- "url"字段为api的请求地址。
+- "type"字段为返回类型，目前支持text、image、video、audio。
+- "params"字段为api的参数，参数的key为参数名，value为参数值，可指定默认值。
+- "target"字段为返回数据的解析路径，例如"data.imgurl"表示返回数据中的data的imgurl字段。
+
+```plaintext
+"KFC": {
+    "name": ["KFC","kfc","疯狂星期四", "肯德基", "v我50"],
+    "url": "https://api.317ak.com/API/wz/KFC.php",
+    "type": "text",
+    "params": {
+        "type": "text"
+    }
+},
+"艺术字": {
+    "name": ["艺术字"],
+    "url": "https://free.wqwlkj.cn/wqwlapi/ysz.php",
+    "type": "image",
+    "params": {
+        "text": "",
+        "id": "30",
+        "color": "0000FF",
+        "shadow": "FF0000",
+        "background": "FFFFFF"
+    },
+    "target": "data.imgurl"
+}
+```
+
 ### 收录API
 
 ```plaintext
@@ -113,6 +145,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - [x] api失效时采用本地数据
 - [x] api详情、api列表
 - [x] 自动解析部分api返回的json格式数据
+- [x] 支持一个api对应多个触发词
 
 ## 👥 贡献指南
 

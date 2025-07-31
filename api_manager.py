@@ -23,7 +23,7 @@ class APIManager:
 
     def add_api(self, api_info: dict):
         """添加一个新的API"""
-        self.apis[api_info["name"]] = api_info
+        self.apis[api_info["name"][0]] = api_info
         self.save_data()
 
     def remove_api(self, name):
@@ -40,8 +40,30 @@ class APIManager:
 
     def get_apis_names(self):
         """获取所有API的名称"""
-        return list(self.apis.keys())
+        names = []
+        for api in self.apis.values():
+            name_field = api.get("name", [])
+            if isinstance(name_field, str):
+                names.append(name_field)
+            elif isinstance(name_field, list):
+                names.extend(name_field)
+        return names
+
+    def match_api_by_name(self, keyword: str) -> tuple[str, dict] | None:
+        """
+        通过触发词匹配API，返回对应的 key（原始键）和 API 数据。
+
+        :param keyword: 输入的触发词
+        :return: (key, api_dict) 或 None
+        """
+        for key, api in self.apis.items():
+            names = api.get("name", [])
+            if isinstance(names, str):
+                names = [names]
+            if keyword in names:
+                return key, api
+        return None
 
     def check_duplicate_api(self, api_name: str):
         """检查是否有重复的API"""
-        return api_name in self.apis
+        return any(api_name in api.get("name", []) for api in self.apis.values())

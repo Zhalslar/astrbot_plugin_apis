@@ -39,7 +39,7 @@ api_file = (
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.7",
+    "1.0.8",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -247,17 +247,16 @@ class ArknightsPlugin(Star):
         # 匹配api
         message_str = event.get_message_str()
         msgs = message_str.split(" ")
-        api_name = next((i for i in self.apis_names if i == msgs[0]), None)
-        if not api_name:
+        result = self.API.match_api_by_name(msgs[0])
+        if not result:
             return
+        api_name, api_data = result
 
         # 检查api是否被禁用
         if api_name in self.disable_api:
             logger.debug("此API已被禁用")
             return
 
-        # 获取api_data
-        api_data: dict = self.API.apis.get(api_name, {})
         url: str = api_data.get("url", "")
         type: str = api_data.get("type", "image")
         params: dict = api_data.get("params", {})

@@ -1,6 +1,6 @@
 {
     "讲讲社会": {
-        "name": "讲讲社会",
+        "name": ["讲讲社会"],
         "url": "https://api.yuafeng.cn/API/ly/shehui.php",
         "type": "text",
         "params": {
@@ -9,7 +9,7 @@
         "target": "Msg"
     },
     "讲讲人生": {
-        "name": "讲讲人生",
+        "name": ["讲讲人生"],
         "url": "https://api.yuafeng.cn/API/ly/rensheng.php",
         "type": "text",
         "params": {
@@ -18,7 +18,7 @@
         "target": "Msg"
     },
     "讲个笑话": {
-        "name": "讲个笑话",
+        "name": ["讲个笑话"],
         "url": "https://api.yuafeng.cn/API/ly/xiaohua.php",
         "type": "text",
         "params": {
@@ -27,7 +27,7 @@
         "target": "Msg"
     },
     "讲讲爱情": {
-        "name": "讲讲爱情",
+        "name": ["讲讲爱情"],
         "url": "https://api.yuafeng.cn/API/ly/aiqing.php",
         "type": "text",
         "params": {
@@ -36,7 +36,7 @@
         "target": "Msg"
     },
     "讲讲温柔": {
-        "name": "讲讲温柔",
+        "name": ["讲讲温柔"],
         "url": "https://api.yuafeng.cn/API/ly/wenrou.php",
         "type": "text",
         "params": {
@@ -45,7 +45,7 @@
         "target": "Msg"
     },
     "讲讲摆烂": {
-        "name": "讲讲摆烂",
+        "name": ["讲讲摆烂"],
         "url": "https://api.yuafeng.cn/API/ly/wzrjcs.php",
         "type": "text",
         "params": {
@@ -54,7 +54,7 @@
         "target": "Msg"
     },
     "来句古诗": {
-        "name": "讲讲古诗",
+        "name": ["讲讲古诗"],
         "url": "https://api.yuafeng.cn/API/ly/gushi.php",
         "type": "text",
         "params": {
@@ -63,7 +63,7 @@
         "target": "Msg"
     },
     "来碗毒鸡汤": {
-        "name": "来碗毒鸡汤",
+        "name": ["来碗毒鸡汤", "毒鸡汤"],
         "url": "https://api.yuafeng.cn/API/ly/djt.php",
         "type": "text",
         "params": {
@@ -72,7 +72,7 @@
         "target": "Msg"
     },
     "讲讲舔狗": {
-        "name": "讲讲舔狗",
+        "name": ["讲讲舔狗"],
         "url": "https://api.yuafeng.cn/API/ly/tiangou.php",
         "type": "text",
         "params": {
@@ -81,7 +81,7 @@
         "target": "Msg"
     },
     "来句情话": {
-        "name": "讲讲情话",
+        "name": ["讲讲情话", "来句情话"],
         "url": "https://api.yuafeng.cn/API/ly/twqh.php",
         "type": "text",
         "params": {
@@ -90,7 +90,7 @@
         "target": "Msg"
     },
     "讲讲伤感": {
-        "name": "讲讲伤感",
+        "name": ["讲讲伤感"],
         "url": "https://api.yuafeng.cn/API/ly/shanggan.php",
         "type": "text",
         "params": {
@@ -99,7 +99,7 @@
         "target": "Msg"
     },
     "来句骚话": {
-        "name": "来句骚话",
+        "name": ["来句骚话"],
         "url": "https://api.yuafeng.cn/API/ly/saohua.php",
         "type": "text",
         "params": {
@@ -108,7 +108,7 @@
         "target": "Msg"
     },
     "讲讲英汉": {
-        "name": "讲讲英汉",
+        "name": ["讲讲英汉"],
         "url": "https://api.yuafeng.cn/API/ly/yhyl.php",
         "type": "text",
         "params": {
@@ -117,68 +117,69 @@
         "target": "Msg"
     },
     "电脑壁纸": {
-        "name": "电脑壁纸",
+        "name": ["电脑壁纸"],
         "url": "https://api.yuafeng.cn/API/dnbz/api.php",
         "type": "image"
     },
     "来个头像": {
-        "name": "来个头像",
+        "name": ["来个头像"],
         "url": "https://api.yuafeng.cn/API/ecr/api.php",
         "type": "image"
     },
     "手机壁纸": {
-        "name": "手机壁纸",
+        "name": ["手机壁纸"],
         "url": "https://api.yuafeng.cn/API/bizhi.php",
         "type": "image"
     },
     "看看女大": {
-        "name": "看看女大",
+        "name": ["看看女大"],
         "url": "https://api.yuafeng.cn/API/ly/cqng.php",
         "type": "video",
         "params": {},
         "target": ""
     },
     "看看骚的": {
-        "name": "看看骚的",
+        "name": ["看看骚的"],
         "url": "https://api.yuafeng.cn/API/ly/sjxl.php",
         "type": "video"
     },
     "看看玉足": {
-        "name": "看看玉足",
+        "name": ["看看玉足"],
         "url": "https://api.yuafeng.cn/API/ly/yzxl.php",
         "type": "video"
     },
     "看看漫画": {
-        "name": "看看漫画",
+        "name": ["看看漫画"],
         "url": "https://api.yuafeng.cn/API/ly/mhy.php",
         "type": "video"
     },
     "看看emo": {
-        "name": "看看emo",
+        "name": ["看看emo"],
         "url": "https://api.yuafeng.cn/API/ly/emo.php",
         "type": "video"
     },
     "看看动漫": {
-        "name": "看看动漫",
+        "name": ["看看动漫"],
         "url": "https://api.yuafeng.cn/API/ly/dmxl.php",
         "type": "video"
     },
     "看看治愈": {
-        "name": "看看治愈",
+        "name": ["看看治愈"],
         "url": "https://api.yuafeng.cn/API/ly/zyxl.php",
         "type": "video"
     },
     "看看帅哥": {
-        "name": "看看帅哥",
+        "name": ["看看帅哥"],
         "url": "https://api.yuafeng.cn/API/ly/sgxl.php",
         "type": "video"
     },
     "来点色色": {
+        "name": ["看看色色"],
         "url": "https://api.yuafeng.cn/API/ly/sp.php",
         "type": "video"
     },
     "电影票房": {
-        "name": "电影票房",
+        "name": ["电影票房"],
         "url": "https://api.yuafeng.cn/API/dypf/api.php",
         "type": "text",
         "params": {
@@ -187,17 +188,17 @@
         "target": "data"
     },
     "读世界": {
-        "name": "读世界",
+        "name": ["读世界"],
         "url": "https://api.yuafeng.cn/API/60s/",
         "type": "image"
     },
     "来份早报": {
-        "name": "来份早报",
+        "name": ["来份早报"],
         "url": "https://api.yuafeng.cn/API/60sn/",
         "type": "image"
     },
     "生成二维码": {
-        "name": "生成二维码",
+        "name": ["生成二维码"],
         "url": "https://api.yuafeng.cn/API/ly/qrcode.php",
         "type": "image",
         "params": {
@@ -205,7 +206,7 @@
         }
     },
     "测CP": {
-        "name": "测CP",
+        "name": ["测CP"],
         "url": "http://api.xingchenfu.xyz/API/tu_lofter_cp.php",
         "type": "image",
         "params": {
@@ -214,138 +215,138 @@
         }
     },
     "看看风景": {
-        "name": "看看风景",
+        "name": ["看看风景"],
         "url": "http://api.xingchenfu.xyz/API/cgq4kjsdt.php",
         "type": "image"
     },
     "随便来点": {
-        "name": "随便来点",
+        "name": ["随便来点"],
         "url": "http://api.xingchenfu.xyz/API/tu.php",
         "type": "image"
     },
     "来点龙图": {
-        "name": "来点龙图",
+        "name": ["来点龙图"],
         "url": "http://api.xingchenfu.xyz/API/long.php",
         "type": "image"
     },
     "来点cos": {
-        "name": "来点cos",
+        "name": ["来点cos"],
         "url": "http://api.xingchenfu.xyz/API/cosplay.php",
         "type": "image"
     },
     "来点二次元": {
-        "name": "来点二次元",
+        "name": ["来点二次元"],
         "url": "http://api.xingchenfu.xyz/API/ecy.php",
         "type": "image"
     },
     "海贼王": {
-        "name": "海贼王",
+        "name": ["海贼王"],
         "url": "http://api.xingchenfu.xyz/API/haizeiwang.php",
         "type": "image"
     },
     "女高中生": {
-        "name": "女高中生",
+        "name": ["女高中生"],
         "url": "http://api.xingchenfu.xyz/API/nvgao.php",
         "type": "video"
     },
     "女大": {
-        "name": "女大",
+        "name": ["女大"],
         "url": "http://api.xingchenfu.xyz/API/nvda.php",
         "type": "video"
     },
     "欲梦": {
-        "name": "欲梦",
+        "name": ["欲梦"],
         "url": "http://api.xingchenfu.xyz/API/ndym.php",
         "type": "video"
     },
     "看看黑丝": {
-        "name": "看看黑丝",
+        "name": ["看看黑丝"],
         "url": "http://api.xingchenfu.xyz/API/hssp.php",
         "type": "video"
     },
     "看看白丝": {
-        "name": "看看白丝",
+        "name": ["看看白丝"],
         "url": "http://api.xingchenfu.xyz/API/bsxl.php",
         "type": "video"
     },
     "高质量小姐姐": {
-        "name": "高质量小姐姐",
+        "name": ["高质量小姐姐"],
         "url": "http://api.xingchenfu.xyz/API/gzlxjj.php",
         "type": "video"
     },
     "深刻推荐": {
-        "name": "深刻推荐",
+        "name": ["深刻推荐"],
         "url": "http://api.xingchenfu.xyz/API/sktj.php",
         "type": "video"
     },
     "看看小葫芦": {
-        "name": "看看小葫芦",
+        "name": ["看看小葫芦"],
         "url": "http://api.xingchenfu.xyz/API/xiaohulu.php",
         "type": "video"
     },
     "看看jk": {
-        "name": "看看jk",
+        "name": ["看看jk","看看JK"],
         "url": "http://api.xingchenfu.xyz/API/jk.php",
         "type": "video"
     },
     "看看猫猫": {
-        "name": "看看猫猫",
+        "name": ["看看猫猫"],
         "url": "http://api.xingchenfu.xyz/API/sjmm.php",
         "type": "image"
     },
     "脑筋急转弯": {
-        "name": "脑筋急转弯",
+        "name": ["脑筋急转弯"],
         "url": "http://api.xingchenfu.xyz/API/BrainTwister.php",
         "type": "text"
     },
     "随机谜语": {
-        "name": "随机谜语",
+        "name": ["随机谜语"],
         "url": "http://api.xingchenfu.xyz/API/shouji.php",
         "type": "text"
     },
     "随机姓名": {
-        "name": "随机姓名",
+        "name": ["随机姓名"],
         "url": "http://api.xingchenfu.xyz/API/xingming.php",
         "type": "text"
     },
     "doro结局": {
-        "name": "doro结局",
+        "name": ["doro结局", "Doro结局"],
         "url": "http://110.40.70.113:25514/API/sjdojieju",
         "type": "image"
     },
     "晚安": {
-        "name": "晚安",
+        "name": ["晚安"],
         "url": "https://api.317ak.com/API/tp/zawa.php",
         "type": "image"
     },
     "来点腹肌": {
-        "name": "来点腹肌",
+        "name": ["来点腹肌"],
         "url": "https://api.317ak.com/API/tp/fjtp.php",
         "type": "image"
     },
     "原神": {
-        "name": "原神",
+        "name": ["原神"],
         "url": "https://api.xingzhige.com/API/yshl/",
         "type": "image"
     },
     "来点坤图": {
-        "name": "来点坤图",
+        "name": ["来点坤图"],
         "url": "https://api.xingzhige.com/API/duan/",
         "type": "image"
     },
     "看看腿": {
-        "name": "看看腿",
+        "name": ["看看腿"],
         "url": "http://api.xingchenfu.xyz/API/tu.php",
         "type": "image",
         "target": "text"
     },
     "来点帅哥": {
-        "name": "来点帅哥",
+        "name": ["来点帅哥"],
         "url": "https://api.lolimi.cn/API/boy/api.php",
         "type": "image"
     },
     "B站更新": {
-        "name": "B站更新",
+        "name": ["B站更新"],
         "url": "https://api.lolimi.cn/API/B_Update_Days/api.php",
         "type": "text",
         "params": {
@@ -354,7 +355,7 @@
         "target": "data"
     },
     "光遇任务": {
-        "name": "光遇任务",
+        "name": ["光遇任务"],
         "url": "https://api.lolimi.cn/API/gy/",
         "type": "text",
         "params": {
@@ -362,12 +363,12 @@
         }
     },
     "来点段子": {
-        "name": "来点段子",
+        "name":["来点段子"],
         "url": "https://api.lolimi.cn/API/yiyan/dz.php",
         "type": "text"
     },
     "兽语加密": {
-        "name": "兽语加密",
+        "name": ["兽语加密"],
         "url": "https://api.lolimi.cn/API/sho_u/api.php",
         "type": "text",
         "params": {
@@ -377,7 +378,7 @@
         "target": "data.Message"
     },
     "兽语解密": {
-        "name": "兽语加密",
+        "name": ["兽语解密"],
         "url": "https://api.lolimi.cn/API/sho_u/api.php",
         "type": "text",
         "params": {
@@ -387,28 +388,28 @@
         "target": "data.Message"
     },
     "看看黄历": {
-        "name": "看看黄历",
+        "name": ["看看黄历"],
         "url": "https://api.lolimi.cn/API/huang/api.php",
         "type": "text",
         "target": "text"
     },
     "超甜辣妹": {
-        "name": "超甜辣妹",
+        "name": ["超甜辣妹"],
         "url": "https://api.lolimi.cn/API/xjj/lt.php",
         "type": "image"
     },
     "每日一签": {
-        "name": "每日一签",
+        "name": ["每日一签"],
         "url": "https://api.lolimi.cn/API/riq/",
         "type": "image"
     },
     "竖屏动漫壁纸": {
-        "name": "竖屏动漫壁纸",
+        "name": ["竖屏动漫壁纸"],
         "url": "https://api.lolimi.cn/API/dmtx/sp.php",
         "type": "image"
     },
     "二次元形象": {
-        "name": "二次元形象",
+        "name": ["二次元形象"],
         "url": "https://api.lolimi.cn/API/Ser/api.php",
         "type": "text",
         "params": {
@@ -417,23 +418,23 @@
         "target": "text"
     },
     "动漫一言": {
-        "name": "动漫一言",
+        "name": ["动漫一言"],
         "url": "https://api.lolimi.cn/API/dmyiyan/api.php",
         "type": "text",
         "target": "text"
     },
     "奥运会": {
-        "name": "奥运会",
+        "name": ["奥运会"],
         "url": "https://api.lolimi.cn/API/ayh/i.php",
         "type": "image"
     },
     "光遇日历": {
-        "name": "光遇日历",
+        "name": ["光遇日历"],
         "url": "https://api.lolimi.cn/API/gy/ril.php",
         "type": "image"
     },
     "香烟价格": {
-        "name": "香烟价格",
+        "name": ["香烟价格"],
         "url": "https://api.lolimi.cn/API/xyan/api.php",
         "type": "text",
         "params": {
@@ -441,13 +442,13 @@
         }
     },
     "斗图": {
-        "name": "斗图",
+        "name": ["斗图"],
         "url": "https://api.lolimi.cn/API/dou/api.php",
         "type": "image",
         "target": "data.image"
     },
     "人品运势": {
-        "name": "人品运势",
+        "name": ["人品运势"],
         "url": "https://api.lolimi.cn/API/Ren/api.php",
         "type": "text",
         "params": {
@@ -457,12 +458,12 @@
         "target": "text"
     },
     "热榜": {
-        "name": "热榜",
+        "name": ["热榜"],
         "url": "https://api.317ak.com/API/yljk/60s/60s.php",
         "type": "image"
     },
     "看看久喵": {
-        "name": "看看久喵",
+        "name": ["看看久喵"],
         "url": "https://api.317ak.com/API/sp/jmxl.php",
         "type": "video",
         "params": {
@@ -471,7 +472,7 @@
         "target": "data"
     },
     "仙桃猫": {
-        "name": "仙桃猫",
+        "name": ["仙桃猫"],
         "url": "https://api.317ak.com/API/sp/xtmx.php",
         "type": "video",
         "params": {
@@ -480,7 +481,7 @@
         "target": "data"
     },
     "看看公主": {
-        "name": "看看公主",
+        "name": ["看看公主"],
         "url": "https://api.317ak.com/API/sp/gzhy.php",
         "type": "video",
         "params": {
@@ -489,7 +490,7 @@
         "target": "data"
     },
     "看看心情": {
-        "name": "看看心情",
+        "name": ["看看心情"],
         "url": "https://api.317ak.com/API/sp/xqhh.php",
         "type": "video",
         "params": {
@@ -498,7 +499,7 @@
         "target": "data"
     },
     "看看小雪": {
-        "name": "看看小雪",
+        "name": ["看看小雪"],
         "url": "https://api.317ak.com/API/sp/xxmm.php",
         "type": "video",
         "params": {
@@ -507,7 +508,7 @@
         "target": "data"
     },
     "看看红鸾": {
-        "name": "看看红鸾",
+        "name": ["看看红鸾"],
         "url": "https://api.317ak.com/API/sp/hljj.php",
         "type": "video",
         "params": {
@@ -516,7 +517,7 @@
         "target": "data"
     },
     "看看狼宝": {
-        "name": "看看狼宝",
+        "name": ["看看狼宝"],
         "url": "https://api.317ak.com/API/sp/lbjj.php",
         "type": "video",
         "params": {
@@ -525,7 +526,7 @@
         "target": "data"
     },
     "看看雪梨": {
-        "name": "看看雪梨",
+        "name": ["看看雪梨"],
         "url": "https://api.317ak.com/API/sp/xlmn.php",
         "type": "video",
         "params": {
@@ -534,7 +535,7 @@
         "target": "data"
     },
     "看看兔兔": {
-        "name": "看看兔兔",
+        "name": ["看看兔兔"],
         "url": "https://api.317ak.com/API/sp/ttmn.php",
         "type": "video",
         "params": {
@@ -543,7 +544,7 @@
         "target": "data"
     },
     "星座运势": {
-        "name": "星座运势",
+        "name": ["星座运势"],
         "url": "https://api.317ak.com/API/qtapi/xzys/xzys.php",
         "type": "image",
         "params": {
@@ -551,7 +552,7 @@
         }
     },
     "KFC": {
-        "name": "KFC",
+        "name": ["KFC","kfc","疯狂星期四", "肯德基", "v我50"],
         "url": "https://api.317ak.com/API/wz/KFC.php",
         "type": "text",
         "params": {
@@ -559,7 +560,7 @@
         }
     },
     "QQ签名": {
-        "name": "QQ签名",
+        "name": ["QQ签名"],
         "url": "https://api.317ak.com/API/wz/QQqm.php",
         "type": "text",
         "params": {
@@ -567,7 +568,7 @@
         }
     },
     "嘲讽": {
-        "name": "嘲讽",
+        "name": ["嘲讽"],
         "url": "https://api.317ak.com/API/wz/cfyl.php",
         "type": "text",
         "params": {
@@ -575,7 +576,7 @@
         }
     },
     "安慰": {
-        "name": "安慰",
+        "name": ["安慰"],
         "url": "https://api.317ak.com/API/wz/awyl.php",
         "type": "text",
         "params": {
@@ -583,7 +584,7 @@
         }
     },
     "胡乱描述": {
-        "name": "胡乱描述",
+        "name": ["胡乱描述"],
         "url": "https://api.317ak.com/API/yljk/hlmsyl/hlmsyl.php",
         "type": "text",
         "params": {
@@ -591,187 +592,187 @@
         }
     },
     "拜托前辈": {
-        "name": "拜托前辈",
+        "name": ["拜托前辈"],
         "url": "https://api.317ak.com/API/sp/btqb.php",
         "type": "video"
     },
     "看看穿搭": {
-        "name": "看看穿搭",
+        "name": ["看看穿搭"],
         "url": "https://api.317ak.com/API/sp/cdxl.php",
         "type": "video"
     },
     "鞠婧祎": {
-        "name": "鞠婧祎",
+        "name": ["鞠婧祎"],
         "url": "https://api.317ak.com/API/sp/jjyx.php",
         "type": "video"
     },
     "音乐视频": {
-        "name": "音乐视频",
+        "name": ["音乐视频"],
         "url": "https://api.317ak.com/API/sp/yysp.php",
         "type": "video"
     },
     "周扬青": {
-        "name": "周扬青",
+        "name": ["周扬青"],
         "url": "https://api.317ak.com/API/sp/zyqx.php",
         "type": "video"
     },
     "周清欢": {
-        "name": "周清欢",
+        "name": ["周清欢"],
         "url": "https://api.317ak.com/API/sp/zqhx.php",
         "type": "video"
     },
     "潇潇": {
-        "name": "潇潇",
+        "name": ["潇潇"],
         "url": "https://api.317ak.com/API/sp/xxxl.php",
         "type": "video"
     },
     "看看甜妹": {
-        "name": "看看甜妹",
+        "name": ["看看甜妹"],
         "url": "https://api.317ak.com/API/sp/tmxl.php",
         "type": "video"
     },
     "看看清纯": {
-        "name": "看看清纯",
+        "name": ["看看清纯"],
         "url": "https://api.317ak.com/API/sp/qcxl.php",
         "type": "video"
     },
     "看看萌娃": {
-        "name": "看看萌娃",
+        "name": ["看看萌娃"],
         "url": "https://api.317ak.com/API/sp/mwxl.php",
         "type": "video"
     },
     "看看慢摇": {
-        "name": "看看慢摇",
+        "name": ["看看慢摇"],
         "url": "https://api.317ak.com/API/sp/myxl.php",
         "type": "video"
     },
     "看看COS": {
-        "name": "看看COS",
+        "name": ["看看COS"],
         "url": "https://api.317ak.com/API/sp/cosxl.php",
         "type": "video"
     },
     "看看余震": {
-        "name": "看看余震",
+        "name": ["看看余震"],
         "url": "https://api.317ak.com/API/sp/yzxl.php",
         "type": "video"
     },
     "看看欲梦": {
-        "name": "看看欲梦",
+        "name": ["看看欲梦"],
         "url": "https://api.317ak.com/API/sp/ndym.php",
         "type": "video"
     },
     "看看萝莉": {
-        "name": "看看萝莉",
+        "name": ["看看萝莉"],
         "url": "https://api.317ak.com/API/sp/llxl.php",
         "type": "video"
     },
     "看看晴天": {
-        "name": "看看晴天",
+        "name": ["看看晴天"],
         "url": "https://api.317ak.com/API/sp/qttj.php",
         "type": "video"
     },
     "光剑变装": {
-        "name": "光剑变装",
+        "name": ["光剑变装"],
         "url": "https://api.317ak.com/API/sp/gjbz.php",
         "type": "video"
     },
     "动漫变装": {
-        "name": "动漫变装",
+        "name": ["动漫变装"],
         "url": "https://api.317ak.com/API/sp/dmbz.php",
         "type": "video"
     },
     "完美身材": {
-        "name": "完美身材",
+        "name": ["完美身材"],
         "url": "https://api.317ak.com/API/sp/wmsc.php",
         "type": "video"
     },
     "火车摇": {
-        "name": "火车摇",
+        "name": ["火车摇"],
         "url": "https://api.317ak.com/API/sp/hcyx.php",
         "type": "video"
     },
     "蹲下变装": {
-        "name": "蹲下变装",
+        "name": ["蹲下变装"],
         "url": "https://api.317ak.com/API/sp/dxbz.php",
         "type": "video"
     },
     "看看吊带": {
-        "name": "看看吊带",
+        "name": ["看看吊带"],
         "url": "https://api.317ak.com/API/sp/ddxl.php",
         "type": "video"
     },
     "擦玻璃": {
-        "name": "擦玻璃",
+        "name": ["擦玻璃"],
         "url": "https://api.317ak.com/API/sp/cblx.php",
         "type": "video"
     },
     "背影变装": {
-        "name": "背影变装",
+        "name": ["背影变装"],
         "url": "https://api.317ak.com/API/sp/bybz.php",
         "type": "video"
     },
     "安慕希": {
-        "name": "安慕希",
+        "name": ["安慕希"],
         "url": "https://api.317ak.com/API/sp/amxx.php",
         "type": "video"
     },
     "看看微胖": {
-        "name": "看看微胖",
+        "name": ["看看微胖"],
         "url": "https://api.317ak.com/API/sp/wpxl.php",
         "type": "video"
     },
     "硬气卡点": {
-        "name": "硬气卡点",
+        "name": ["硬气卡点"],
         "url": "https://api.317ak.com/API/sp/yqkd.php",
         "type": "video"
     },
     "黑白双煞": {
-        "name": "黑白双煞",
+        "name": ["黑白双煞"],
         "url": "https://api.317ak.com/API/sp/hbss.php",
         "type": "video"
     },
     "猫系女友": {
-        "name": "猫系女友",
+        "name": ["猫系女友"],
         "url": "https://api.317ak.com/API/sp/mxny.php",
         "type": "video"
     },
     "看看女仆": {
-        "name": "看看女仆",
+        "name": ["看看女仆"],
         "url": "https://api.317ak.com/API/sp/npxl.php",
         "type": "video"
     },
     "又纯又欲": {
-        "name": "又纯又欲",
+        "name": ["又纯又欲"],
         "url": "https://api.317ak.com/API/sp/ycyy.php",
         "type": "video"
     },
     "看看甩裙": {
-        "name": "看看甩裙",
+        "name": ["看看甩裙"],
         "url": "https://api.317ak.com/API/sp/sqxl.php",
         "type": "video"
     },
     "看看腹肌": {
-        "name": "看看腹肌",
+        "name": ["看看腹肌"],
         "url": "https://api.317ak.com/API/sp/fjbz.php",
         "type": "video"
     },
     "看看原神": {
-        "name": "看看原神",
+        "name": ["看看原神"],
         "url": "https://api.317ak.com/API/sp/yssp.php",
         "type": "video"
     },
     "小动物": {
-        "name": "小动物",
+        "name": ["小动物"],
         "url": "https://api.pearktrue.cn/api/animal/?type=image&anime=dog",
         "type": "image"
     },
     "三坑少女": {
-        "name": "三坑少女",
+        "name": ["三坑少女"],
         "url": "https://api.pearktrue.cn/api/beautifulgirl/?type=image",
         "type": "image"
     },
     "画画": {
-        "name": "画画",
+        "name": ["画画"],
         "url": "https://api.pearktrue.cn/api/stablediffusion/",
         "type": "image",
         "params": {
@@ -781,7 +782,7 @@
         "target": "imgurl"
     },
     "Linux命令": {
-        "name": "Linux命令",
+        "name": ["Linux命令","linux命令"],
         "url": "https://api.pearktrue.cn/api/linux/",
         "type": "text",
         "params": {
@@ -790,7 +791,7 @@
         "target": "data.content"
     },
     "身份证查询": {
-        "name": "身份证查询",
+        "name": ["身份证查询"],
         "url": "https://api.pearktrue.cn/api/sfz/query.php",
         "type": "text",
         "params": {
@@ -799,7 +800,7 @@
         "target": "data"
     },
     "高校查询": {
-        "name": "高校查询",
+        "name": ["高校查询"],
         "url": "https://api.pearktrue.cn/api/college/",
         "type": "text",
         "params": {
@@ -808,7 +809,7 @@
         "target": "data"
     },
     "古诗文查询": {
-        "name": "古诗文查询",
+        "name": ["古诗文查询"],
         "url": "https://api.pearktrue.cn/api/college/",
         "type": "text",
         "params": {
@@ -817,19 +818,19 @@
         "target": "data[].content"
     },
     "今天吃什么": {
-        "name": "今天吃什么",
+        "name": ["今天吃什么"],
         "url": "https://api.pearktrue.cn/api/today/food.php",
         "type": "text",
         "target": "food"
     },
     "黄金价格": {
-        "name": "黄金价格",
+        "name": ["黄金价格"],
         "url": "https://api.pearktrue.cn/api/goldprice/",
         "type": "text",
         "target": "data[]"
     },
     "人物年轮": {
-        "name": "人物年轮",
+        "name": ["人物年轮"],
         "url": "https://api.pearktrue.cn/api/yearsmap/",
         "type": "text",
         "params": {
@@ -838,7 +839,7 @@
         "target": "data[].event[]"
     },
     "LOL查询": {
-        "name": "LOL查询",
+        "name": ["LOL查询", "lol查询"],
         "url": "https://api.pearktrue.cn/api/lolhero/",
         "type": "image",
         "params": {
@@ -847,7 +848,7 @@
         "target": "imgurl"
     },
     "车辆查询": {
-        "name": "车辆查询",
+        "name": ["车辆查询"],
         "url": "https://api.pearktrue.cn/api/car/",
         "type": "text",
         "params": {
@@ -856,18 +857,18 @@
         "target": "data[]"
     },
     "看看妞": {
-        "name": "看看妞",
+        "name": ["看看妞"],
         "url": "https://free.wqwlkj.cn/wqwlapi/ks_xjj.php?type=image",
         "type": "image"
     },
     "bing图": {
-        "name": "bing图",
+        "name": ["bing图"],
         "url": "https://free.wqwlkj.cn/wqwlapi/bing.php",
         "type": "image",
         "target": "img"
     },
     "起个网名": {
-        "name": "起个网名",
+        "name": ["起个网名"],
         "url": "https://free.wqwlkj.cn/wqwlapi/gxwm.php",
         "type": "text",
         "params": {
@@ -875,7 +876,7 @@
         }
     },
     "号码归属地": {
-        "name": "号码归属地",
+        "name": ["号码归属地"],
         "url": "https://free.wqwlkj.cn/wqwlapi/phone_area.php",
         "type": "text",
         "params": {
@@ -884,7 +885,7 @@
         "target": "data"
     },
     "挑战古诗词": {
-        "name": "挑战古诗词",
+        "name": ["挑战古诗词"],
         "url": "https://free.wqwlkj.cn/wqwlapi/tzgsc.php",
         "type": "text",
         "params": {
@@ -892,7 +893,7 @@
         }
     },
     "随机上色": {
-        "name": "随机上色",
+        "name": ["随机上色"],
         "url": "https://free.wqwlkj.cn/wqwlapi/zsytw.php",
         "type": "image",
         "params": {
@@ -903,12 +904,12 @@
         }
     },
     "原神黄历": {
-        "name": "原神黄历",
+        "name": ["原神黄历"],
         "url": "https://api.xingzhige.com/API/yshl/",
         "type": "image"
     },
     "艺术字": {
-        "name": "艺术字",
+        "name": ["艺术字"],
         "url": "https://free.wqwlkj.cn/wqwlapi/ysz.php",
         "type": "image",
         "params": {
@@ -921,7 +922,7 @@
         "target": "imgurl"
     },
     "搜图": {
-        "name": "搜图",
+        "name": ["搜图"],
         "url": "https://api.tangdouz.com/dtss.php",
         "type": "image",
         "params": {
@@ -930,7 +931,7 @@
         "target": ""
     },
     "显卡排行榜": {
-        "name": "显卡排行榜",
+        "name": ["显卡排行榜"],
         "url": "https://api.tangdouz.com/a/gpu.php",
         "type": "text",
         "params": {
@@ -939,7 +940,7 @@
         "target": ""
     },
     "垃圾分类": {
-        "name": "垃圾分类",
+        "name": ["垃圾分类"],
         "url": "https://api.tangdouz.com/a/garbage.php",
         "type": "text",
         "params": {
@@ -948,12 +949,12 @@
         "target": ""
     },
     "每日日报": {
-        "name": "每日日报",
+        "name": ["每日日报"],
         "url": "https://api.tangdouz.com/a/60/",
         "type": "image"
     },
     "搜表情": {
-        "name": "搜表情",
+        "name": ["搜表情"],
         "url": "https://api.tangdouz.com/a/biaoq.php",
         "type": "image",
         "params": {
@@ -963,7 +964,7 @@
         "target": ""
     },
     "搜菜谱": {
-        "name": "搜菜谱",
+        "name": ["搜菜谱"],
         "url": "https://api.tangdouz.com/dtss.php",
         "type": "image",
         "params": {
@@ -974,12 +975,12 @@
         "target": ""
     },
     "高清壁纸": {
-        "name": "高清壁纸",
+        "name": ["高清壁纸"],
         "url": "https://api.tangdouz.com/abz/bz.php",
         "type": "image"
     },
     "刑法": {
-        "name": "刑法",
+        "name": ["刑法"],
         "url": "https://api.tangdouz.com/xf.php",
         "type": "text",
         "params": {
@@ -988,17 +989,17 @@
         "target": "" 
     },
     "今日运势": {
-        "name": "今日运势",
+        "name": ["今日运势"],
         "url": "https://api.tangdouz.com/wz/luck.php",
         "type": "image"
     },
     "来碗鸡汤": {
-        "name": "来碗鸡汤",
+        "name": ["来碗鸡汤"],
         "url": "https://api.tangdouz.com/a/jt.php",
         "type": "text"
     },
     "日历": {
-        "name": "日历",
+        "name": ["日历"],
         "url": "https://api.tangdouz.com/htmlimage/rl.php",
         "type": "image",
         "params": {
@@ -1014,12 +1015,12 @@
         }
     },
     "来句诗": {
-        "name": "来句诗",
+        "name": ["来句诗"],
         "url": "https://api.tangdouz.com/a/poetrand.php",
         "type": "text"
     },
     "文案": {
-        "name": "文案",
+        "name": ["文案"],
         "url": "https://api.tangdouz.com/a/refuel.php",
         "type": "text",
         "params": {
@@ -1027,12 +1028,12 @@
         }  
     },
     "来篇文章": {
-        "name": "来篇文章",
+        "name": ["来篇文章"],
         "url": "https://api.tangdouz.com/a/jt.php",
         "type": "text"
     },
     "中草药": {
-        "name": "中草药",
+        "name": ["中草药"],
         "url": "https://api.tangdouz.com/a/zcy.php",
         "type": "text",
         "params": {
@@ -1040,7 +1041,7 @@
         }
     },
     "每日听力": {
-        "name": "每日听力",
+        "name": ["每日听力"],
         "url": "https://api.tangdouz.com/a/perday.php",
         "type": "audio",
         "params": {
@@ -1049,17 +1050,17 @@
         "target": "tts"
     },
     "逆天语音": {
-        "name": "逆天语音",
+        "name": ["逆天语音"],
         "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
         "type": "audio"
     },
     "坤叫": {
-        "name": "坤叫",
+        "name": ["坤叫", "小黑子"],
         "url": "https://free.wqwlkj.cn/wqwlapi/ikunyy.php",
         "type": "audio"
     },
     "报时": {
-        "name": "报时",
+        "name": ["报时"],
         "url": "https://api.yuafeng.cn/API/ly/baoshi.php",
         "type": "audio",
         "params": {
@@ -1067,7 +1068,7 @@
         }
     },
     "王者语音": {
-        "name": "王者语音",
+        "name": ["王者语音"],
         "url": "https://free.wqwlkj.cn/wqwlapi/wzheroyy.php",
         "type": "audio",
         "params": {
@@ -1076,7 +1077,7 @@
         "target": "data[].voice"
     },
     "喘息": {
-        "name": "喘息",
+        "name": ["喘息"],
         "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
         "type": "audio",
         "params": {
@@ -1087,7 +1088,7 @@
         "target": "url"
     },
     "原神语音": {
-        "name": "原神语音",
+        "name": ["原神语音"],
         "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
         "type": "audio",
         "params": {
