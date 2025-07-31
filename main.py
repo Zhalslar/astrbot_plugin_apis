@@ -51,15 +51,8 @@ class ArknightsPlugin(Star):
         self.apis_names = self.API.get_apis_names()
         self.debug = config.get("debug", False)  # 是否开启调试模式
         self.auto_save_data = config.get("auto_save_data", False)  # 是否保存数据
-        self.enable_text = config.get("enable_text", True)  # 是否启用文本api
-        self.enable_image = config.get("enable_image", True)  # 是否启用图片api
-        self.enable_video = config.get("enable_video", True)  # 是否启用视频api
-        self.enable_audio = config.get("enable_audio", True)  # 是否启用音频api
-        self.disable_api_type = [
-            "text" if not self.enable_text else None,
-            "image" if not self.enable_image else None,
-            "video" if not self.enable_video else None,
-            "audio" if not self.enable_audio else None,
+        self.enable_api_type = [
+            k[7:] for k, v in config.get("type_switch", {}).items() if v
         ]
         self.disable_api = config.get("disable_api", [])  # 禁用的api列表
 
@@ -271,7 +264,7 @@ class ArknightsPlugin(Star):
         target: str = api_data.get("target", "")
 
         # 检查api类型是否启用
-        if type in self.disable_api_type:
+        if type not in self.enable_api_type:
             logger.debug("此API类型已被禁用")
             return
 
