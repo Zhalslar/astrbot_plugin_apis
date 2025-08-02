@@ -56,7 +56,6 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 |:-------------:|:--------------------------:|
 | /api列表      | 查看所有能触发api的关键词  |
 | /api详情 xxx  | 具体查看某个api的参数 |
-| /添加api xxx  | 添加指定api        |
 | /删除api xxx  | 删除指定api        |
 |   {关键词}     |   触发api      |
 

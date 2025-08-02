@@ -1,4 +1,4 @@
-import asyncio
+
 import json
 import os
 from pathlib import Path
@@ -39,7 +39,7 @@ api_file = (
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "1.0.8",
+    "v1.0.9",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class ArknightsPlugin(Star):
@@ -103,83 +103,6 @@ class ArknightsPlugin(Star):
         )
         yield event.plain_result(api_str)
 
-    @filter.command("添加api")
-    async def add_api(
-        self,
-        event: AstrMessageEvent,
-        input_name: str | None = None,
-        input_url: str | None = None,
-        input_type: str | None = None,
-        input_params: str | None = None,
-        input_target: str | None = None,
-    ):
-        """添加api"""
-
-        def _extract_value(input_str: str | None) -> str:
-            if input_str:
-                parts = input_str.split("：", 1)  # 使用中文冒号分割
-                if len(parts) == 2:
-                    if parts[1].strip() == "无":
-                        return ""
-                    return parts[1].strip()
-            return ""
-
-        # 解析参数字符串为字典
-        def _parse_params(params_str: str) -> dict:
-            params = {}
-            if params_str:
-                pairs = params_str.split(",")
-                for pair in pairs:
-                    key_value = pair.split("=", 1)
-                    if len(key_value) == 2:
-                        key, value = key_value
-                        params[key.strip()] = value.strip() if value.strip() else ""
-                    else:
-                        params[pair.strip()] = None
-            return params
-
-        # 预处理输入参数
-        if self.debug:
-            logger.debug(
-                f"原始输入：\n{input_name}\n{input_url}\n{input_type}\n{input_params}\n{input_target}\n\n"
-            )
-
-        name = _extract_value(input_name)
-        url = _extract_value(input_url)
-        type_ = _extract_value(input_type)
-        params_str = _extract_value(input_params)
-        target = _extract_value(input_target)
-
-        params = _parse_params(params_str)
-
-        if self.debug:
-            logger.debug(
-                f"处理后的参数：\n{name}\n{url}\n{type_}\n{params}\n{target}\n"
-            )
-
-        if name in self.disable_api:
-            yield event.plain_result("该API已被禁用")
-            return
-
-        # API是否重复
-        if self.API.check_duplicate_api(name):
-            yield event.plain_result("API已存在，将自动覆盖")
-
-        # 构造 api_info
-        api_info = {
-            "name": name,
-            "url": url,
-            "type": type_,
-            "params": params,
-            "target": target,
-        }
-
-        # 将 api_info 添加到 API 管理器中
-        self.API.add_api(api_info)
-
-        # 返回确认消息
-        yield event.plain_result(f"【{api_info['name']}】API添加成功: \n{api_info}")
-
     @filter.command("删除api")
     async def remove_api(self, event: AstrMessageEvent, api_name: str):
         """删除api"""
@@ -187,40 +110,35 @@ class ArknightsPlugin(Star):
         yield event.plain_result(f"已删除api：{api_name}")
 
     async def _make_request(
-        self, url: str, params: Optional[dict] = None
+        self, url: str | list, params: Optional[dict] = None
     ) -> Union[bytes, str, dict, None]:
         """
-        发送GET请求（异步版本）
-
+        发送GET请求
         :param url: 请求的URL地址
         :param params: 请求参数，默认为None
         :return: 响应对象或None
         """
-        try:
+        if isinstance(url, str):
+            url_list = [url]
+        else:
+            url_list = url
+        for u in url_list:
             async with aiohttp.ClientSession() as session:
-                async with session.get(url=url, params=params, timeout=30) as response:
-                    response.raise_for_status()
-                    content_type = response.headers.get("Content-Type", "").lower()
-                    if "application/json" in content_type:
-                        if self.debug:
-                            logger.debug("类型：json")
-                        return await response.json()
-                    elif "text/html" in content_type or "text/plain" in content_type:
-                        if self.debug:
-                            logger.debug("类型：text")
-                        return (await response.text()).strip()
-                    else:
-                        if self.debug:
-                            logger.debug("类型：bytes")
-                        return await response.read()
-        except aiohttp.ClientResponseError as http_err:
-            logger.error(f"HTTP请求出错: {http_err}")
-        except aiohttp.ClientConnectionError as conn_err:
-            logger.error(f"连接错误: {conn_err}")
-        except asyncio.TimeoutError as timeout_err:
-            logger.error(f"请求超时: {timeout_err}")
-        except Exception as e:
-            logger.error(f"请求异常: {e}")
+                for u in url_list:
+                    try:
+                        async with session.get(url=u, params=params, timeout=30) as response:
+                            response.raise_for_status()
+                            content_type = response.headers.get("Content-Type", "").lower()
+                            if "application/json" in content_type:
+                                return await response.json()
+                            elif "text/html" in content_type or "text/plain" in content_type:
+                                return (await response.text()).strip()
+                            else:
+                                return await response.read()
+                    except Exception as e:
+                        logger.warning(f"请求 URL 失败: {u}, 错误: {e}")
+                        continue  # 尝试下一个 URL
+        logger.error("所有URL请求均失败")
 
     @filter.event_message_type(EventMessageType.ALL)
     async def match_api(self, event: AstrMessageEvent):
@@ -257,7 +175,7 @@ class ArknightsPlugin(Star):
             logger.debug("此API已被禁用")
             return
 
-        url: str = api_data.get("url", "")
+        url: str|list = api_data.get("url", "")
         type: str = api_data.get("type", "image")
         params: dict = api_data.get("params", {})
         target: str = api_data.get("target", "")
