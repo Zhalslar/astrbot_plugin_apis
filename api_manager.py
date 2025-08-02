@@ -2,6 +2,7 @@ import json
 import os
 from astrbot.api import logger
 
+
 class APIManager:
     def __init__(self, api_file):
         self.api_file = api_file
@@ -14,9 +15,9 @@ class APIManager:
             with open(self.api_file, "r", encoding="utf-8") as file:
                 self.apis = json.load(file)
         else:
-            self.save_data()
+            self._save_data()
 
-    def save_data(self):
+    def _save_data(self):
         """将数据保存到JSON文件"""
         with open(self.api_file, "w", encoding="utf-8") as file:
             json.dump(self.apis, file, ensure_ascii=False, indent=4)
@@ -24,13 +25,13 @@ class APIManager:
     def add_api(self, api_info: dict):
         """添加一个新的API"""
         self.apis[api_info["name"][0]] = api_info
-        self.save_data()
+        self._save_data()
 
     def remove_api(self, name):
         """移除一个API"""
         if name in self.apis:
             del self.apis[name]
-            self.save_data()
+            self._save_data()
         else:
             logger.warning(f"API '{name}' 不存在。")
 
@@ -49,19 +50,25 @@ class APIManager:
                 names.extend(name_field)
         return names
 
-    def match_api_by_name(self, keyword: str) -> tuple[str, dict] | None:
+    def match_api_by_name(self, msg: str) -> tuple[str, dict] | None:
         """
         通过触发词匹配API，返回对应的 key（原始键）和 API 数据。
 
-        :param keyword: 输入的触发词
+        :param msg: 输入的消息
+        :param fuzzy: 是否模糊匹配
         :return: (key, api_dict) 或 None
         """
-        for key, api in self.apis.items():
-            names = api.get("name", [])
-            if isinstance(names, str):
-                names = [names]
-            if keyword in names:
-                return key, api
+        for key, api_data in self.apis.items():
+            keywords = api_data.get("keyword", [])
+            if isinstance(keywords, str):
+                keywords = [keywords]
+            # 精准匹配
+            if msg in keywords:
+                return key, api_data
+            # 模糊匹配
+            if api_data.get("fuzzy", False):
+                if any(k in msg or msg in k for k in keywords):
+                    return key, api_data
         return None
 
     def check_duplicate_api(self, api_name: str):

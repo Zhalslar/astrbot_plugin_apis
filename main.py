@@ -95,7 +95,7 @@ class ArknightsPlugin(Star):
         params_str = ",".join(params_list) if params_list else "无"
 
         api_str = (
-            f"api名称：{api_info.get('name') or '无'}\n"
+            f"api匹配词：{api_info.get('keyword') or '无'}\n"
             f"api地址：{api_info.get('url') or '无'}\n"
             f"api类型：{api_info.get('type') or '无'}\n"
             f"所需参数：{params_str}\n"
@@ -176,6 +176,7 @@ class ArknightsPlugin(Star):
             return
 
         url: str|list = api_data.get("url", "")
+        fuzzy: bool = api_data.get("fuzzy", False)
         type: str = api_data.get("type", "image")
         params: dict = api_data.get("params", {})
         target: str = api_data.get("target", "")
@@ -200,6 +201,7 @@ class ArknightsPlugin(Star):
             logger.debug(
                 "向API发送请求所用的参数:\n"
                 f"url: {url}\n"
+                f"fuzzy: {fuzzy}\n"
                 f"update_params: {update_params}\n"
                 f"type: {type}\n"
                 f"target: {target}"

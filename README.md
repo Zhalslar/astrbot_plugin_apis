@@ -61,15 +61,17 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 建议直接通过编辑"data\plugins\astrbot_plugin_apis\api_data.json"进行添加api、删除api，同时也方便修改更多参数。
 
-- "name"字段为列表，从而支持设置多个api触发词。
-- "url"字段为api的请求地址。
-- "type"字段为返回类型，目前支持text、image、video、audio。
-- "params"字段为api的参数，参数的key为参数名，value为参数值，可指定默认值。
-- "target"字段为返回数据的解析路径，例如"data.imgurl"表示返回数据中的data的imgurl字段。
+- "keyword": api触发词，支持设置多个。
+- "fuzzy": 默认为false，设置为true时可模糊匹配触发词，从而提高触发率, 谨慎设置，容易误触,
+- "url"：api的请求地址，支持设置多个，一个URL请求失败时自动轮询下一个。
+- "type"：api返回数据的类型，目前支持text、image、video、audio。
+- "params"：api请求时输入的参数，参数的key为参数名，value为参数值，可指定默认值。
+- "target"：返回数据的解析路径，例如"data.imgurl"表示返回数据中的data的imgurl字段。
 
 ```plaintext
 "KFC": {
-    "name": ["KFC","kfc","疯狂星期四", "肯德基", "v我50"],
+    "keyword": ["KFC","kfc","疯狂星期四", "肯德基", "v我50"],
+    "fuzzy": true,
     "url": "https://api.317ak.com/API/wz/KFC.php",
     "type": "text",
     "params": {
@@ -77,7 +79,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
     }
 },
 "艺术字": {
-    "name": ["艺术字"],
+    "keyword": ["艺术字"],
     "url": "https://free.wqwlkj.cn/wqwlapi/ysz.php",
     "type": "image",
     "params": {
