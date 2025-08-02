@@ -67,7 +67,7 @@ class APIManager:
                 return key, api_data
             # 模糊匹配
             if api_data.get("fuzzy", False):
-                if any(k in msg or msg in k for k in keywords):
+                if any(k in msg for k in keywords):
                     return key, api_data
         return None
 
