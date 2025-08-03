@@ -138,7 +138,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 ![5123084b9e5a5f9371db19224575a43](https://github.com/user-attachments/assets/73c38cc2-49b8-4d67-b48e-77cd28b1fd81)
 ![b7b4db32611ce8c665cd70584d4e35c](https://github.com/user-attachments/assets/37087717-1ef3-46aa-b012-96efb7e780d4)
 
-## 🤝 TODO
+## 📌 TODO
 
 - [x] 实现api统一存储、调用
 - [x] 支持动态添加、删除api
@@ -162,3 +162,14 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 海外服务器可能无法直接访问大部分API，网络问题自行解决。
 - 收录的某些API可能并不稳定，存在失效的情况，属于正常现象。
 - 如果想第一时间得到反馈，可以来作者的插件反馈群（QQ群）：460973561（不点star不给进）
+
+## 🤝 鸣谢
+本插件收录的免费api大多来自下面的站点，希望有能力的使用者可以赞助一下。
+- 枫林API：https://api.yuafeng.cn
+- 稳定API：https://api.xingchenfu.xyz
+- 倾梦API：https://api.317ak.com
+- 星之阁API：https://api.xingzhige.com
+- 桑帛云API：https://api.lolimi.cn
+- 糖豆子API：https://api.tangdouz.com
+- PearAPI：https://api.pearktrue.cn
+- 问情免费API：https://free.wqwlkj.cn
