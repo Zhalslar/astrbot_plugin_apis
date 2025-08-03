@@ -164,7 +164,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 如果想第一时间得到反馈，可以来作者的插件反馈群（QQ群）：460973561（不点star不给进）
 
 ## 🤝 鸣谢
-本插件收录的免费api大多来自下面的站点，希望有能力的使用者可以赞助一下。
+本插件收录的免费api大多来自下面的站点，希望有能力的使用者可以赞助一下。另外如有某个api失效，可在各站点间找平替。
 - 枫林API：https://api.yuafeng.cn
 - 稳定API：https://api.xingchenfu.xyz
 - 倾梦API：https://api.317ak.com
