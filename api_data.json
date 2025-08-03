@@ -473,11 +473,12 @@
         "url": "https://api.xingzhige.com/API/yshl/",
         "type": "image"
     },
-    "来点坤图": {
+    "坤": {
         "keyword": [
-            "来点坤图"
+            "坤"
         ],
-        "url": "https://api.xingzhige.com/API/duan/",
+        "fuzzy": true,
+        "url": "https://free.wqwlkj.cn/wqwlapi/ikun.php",
         "type": "image"
     },
     "猫猫虫": {
@@ -1433,9 +1434,9 @@
         "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
         "type": "audio"
     },
-    "坤叫": {
+    "鸡叫": {
         "keyword": [
-            "坤叫",
+            "鸡叫",
             "小黑子"
         ],
         "fuzzy": true,
@@ -1498,5 +1499,12 @@
         "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
         "type": "audio",
         "target": "audiopath"
+    },
+    "搜短剧":{
+        "keyword": "搜短剧",
+        "url": "https://api.xingzhige.com//API/playlet/",
+        "type": "text",
+        "params": {"keyword":"热门短剧"},
+        "target": "data[]"
     }
 }
