@@ -6,13 +6,13 @@
     "hint": "如果添加api时报错，试着打开debug找问题"
   },
   "auto_save_data": {
-    "description": "是否自动保存数据",
+    "description": "保存API响应数据",
     "type": "bool",
     "default": true,
     "hint": "建议保存，当api失效时可换用本地数据"
   },
   "prefix_mode": {
-    "description": "是否启用前缀模式",
+    "description": "前缀模式",
     "type": "bool",
     "default": false,
     "hint": "启用后，需要在触发词前加上前缀或者@bot才能触发api"
