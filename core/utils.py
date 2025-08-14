@@ -10,12 +10,10 @@ async def get_nickname(event: AstrMessageEvent, target_id: str):
         from astrbot.core.platform.sources.aiocqhttp.aiocqhttp_message_event import (
             AiocqhttpMessageEvent,
         )
-
         assert isinstance(event, AiocqhttpMessageEvent)
         client = event.bot
         user_info = await client.get_stranger_info(user_id=int(target_id))
-        nickname = user_info.get("nickname")
-        return nickname
+        return user_info.get("nickname")
     # TODO 适配更多消息平台
 
 

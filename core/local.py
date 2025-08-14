@@ -97,10 +97,12 @@ class LocalDataManager:
                 logger.error(f"解析 JSON 失败: {e}")
                 return None, None
 
-            if isinstance(items, list) and items:
-                text = random.choice(items)
-            logger.error(f"文本数据集为空或格式错误: {json_file}")
-            return None, None
+            if not isinstance(items, list) or not items:
+                logger.error(f"文本数据集为空或格式错误: {json_file}")
+                return None, None
+
+            text = random.choice(items)
+            return text, None
 
         # 图片、视频、音频
         else:
@@ -116,4 +118,4 @@ class LocalDataManager:
 
             path = random.choice(files)
 
-        return text, path
+            return None, path

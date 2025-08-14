@@ -1,6 +1,3 @@
-
-
-from pathlib import Path
 from typing import Optional, Union
 import aiohttp
 from astrbot.api import logger
@@ -8,12 +5,14 @@ from .utils import dict_to_string, extract_url, get_nested_value
 
 class RequestManager:
     def __init__(self) -> None:
-        self.session = aiohttp.ClientSession()
+        self.session = None
 
     async def _request(self,
         url: str | list[str], params: Optional[dict] = None
     ) -> Union[bytes, str, dict, None]:
         urls = [url] if isinstance(url, str) else url
+        if not self.session:
+            self.session = aiohttp.ClientSession()
         for u in urls:
             try:
                 async with self.session.get(u, params=params, timeout=30) as resp:

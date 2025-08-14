@@ -256,6 +256,6 @@ class ArknightsPlugin(Star):
 
     async def terminate(self):
         """关闭会话，断开连接"""
-        if self.web:
+        if self.web.session:
             await self.web.terminate()
             logger.info("已关闭astrbot_plugin_image_apis的网络连接")
