@@ -139,6 +139,8 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 ### 示例图
 
 ![5123084b9e5a5f9371db19224575a43](https://github.com/user-attachments/assets/73c38cc2-49b8-4d67-b48e-77cd28b1fd81)
+![c37bb35479df19aa2da40d6a13eea564](https://github.com/user-attachments/assets/b8e6682a-1c0b-4743-86eb-b7ed39344a17)
+
 
 ## 📌 TODO
 
