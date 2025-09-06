@@ -79,7 +79,7 @@ class APIManager:
             api_type = self.default_api_type
 
         normalized = {
-            "keyword": name,
+            "name": name,
             "urls": urls,
             "type": api_type,
             "params": raw_api.get("params", {}) or {},
