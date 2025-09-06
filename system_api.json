@@ -1,15 +1,4 @@
 {
-    "讲讲社会": {
-        "keyword": [
-            "讲讲社会"
-        ],
-        "url": "https://api.yuafeng.cn/API/ly/shehui.php",
-        "type": "text",
-        "params": {
-            "type": "json"
-        },
-        "target": "Msg"
-    },
     "讲讲人生": {
         "keyword": [
             "讲讲人生"

@@ -1,7 +1,9 @@
-from collections import defaultdict
+
+import ast
 import copy
 import json
 import os
+from typing import Any
 from urllib.parse import urlparse
 from astrbot.api import logger
 
@@ -9,26 +11,80 @@ from astrbot.api import logger
 class APIManager:
     """API管理器"""
 
-    ALLOWED_TYPES = {"text", "image", "video", "audio"}  # 支持的 API 类型常量
+    ALLOWED_TYPES = ["text", "image", "video", "audio"]  # 支持的 API 类型常量
 
-    def __init__(self, api_file):
-        self.api_file = api_file
-        self.apis = {}
+    def __init__(self, system_api_file, user_api_file):
+        self.system_api_file = system_api_file
+        self.user_api_file = user_api_file
+        self.system_apis = {}
+        self.user_apis = {}
         self.load_data()
         self.default_api_type = "image"
 
     def load_data(self):
-        """从JSON文件加载数据"""
-        if os.path.exists(self.api_file):
-            with open(self.api_file, "r", encoding="utf-8") as file:
-                self.apis = json.load(file)
-        else:
-            self._save_data()
+        """从 JSON 文件加载数据 (系统 + 用户)"""
+        self.apis = {}
+        self.system_apis = {}
 
-    def _save_data(self):
-        """将数据保存到JSON文件"""
-        with open(self.api_file, "w", encoding="utf-8") as file:
-            json.dump(self.apis, file, ensure_ascii=False, indent=4)
+        # 系统 API
+        if os.path.exists(self.system_api_file):
+            with open(self.system_api_file, "r", encoding="utf-8") as file:
+                try:
+                    self.system_apis.update(json.load(file))
+                    self.apis.update(self.system_apis)
+                    logger.info(f"已加载{len(self.system_apis.keys())}个系统 API")
+                except json.JSONDecodeError:
+                    logger.warning(f"{self.system_api_file} 格式错误，已跳过。")
+        else:
+            self._save_data(target="system")
+
+        # 用户 API
+        if os.path.exists(self.user_api_file):
+            with open(self.user_api_file, "r", encoding="utf-8") as file:
+                try:
+                    user_data = json.load(file)              # 只 load 一次
+                    self.user_apis.update(user_data)
+                    self.apis.update(user_data)
+                    logger.info(f"已加载{len(self.user_apis)}个用户 API")
+                except json.JSONDecodeError:
+                    logger.warning(f"{self.user_api_file} 格式错误，已跳过。")
+        else:
+            self._save_data(target = "user")
+
+    def _save_data(self, target: str = "user"):
+        """保存 API 数据"""
+        if target == "system":
+            with open(self.system_api_file, "w", encoding="utf-8") as file:
+                json.dump(self.system_apis, file, ensure_ascii=False, indent=4)
+        elif target == "user":
+            with open(self.user_api_file, "w", encoding="utf-8") as file:
+                json.dump(self.user_apis, file, ensure_ascii=False, indent=4)
+
+    def add_api(self, api_info: dict):
+        """添加一个新的API（只写入 user_file）"""
+        name = api_info["keyword"][0]
+        self.apis[name] = api_info
+        self.user_apis[name] = api_info
+        self._save_data()
+
+    def remove_api(self, name: str):
+        """移除一个API"""
+        if name in self.user_apis:
+            del self.user_apis[name]
+            if name in self.apis:
+                del self.apis[name]
+            self._save_data("user")
+            logger.info(f"已删除用户 API '{name}'。")
+
+        elif name in self.system_apis:
+            del self.system_apis[name]
+            if name in self.apis:
+                del self.apis[name]
+            self._save_data("system")
+            logger.info(f"已删除系统 API '{name}'。")
+
+        else:
+            logger.warning(f"API '{name}' 不存在。")
 
     @staticmethod
     def extract_base_url(full_url: str) -> str:
@@ -44,19 +100,6 @@ class APIManager:
             else full_url
         )
 
-    def add_api(self, api_info: dict):
-        """添加一个新的API"""
-        self.apis[api_info["name"][0]] = api_info
-        self._save_data()
-
-    def remove_api(self, name):
-        """移除一个API"""
-        if name in self.apis:
-            del self.apis[name]
-            self._save_data()
-        else:
-            logger.warning(f"API '{name}' 不存在。")
-
     def get_apis_names(self):
         """获取所有API的名称"""
         names = []
@@ -68,7 +111,7 @@ class APIManager:
                 names.extend(name_field)
         return names
 
-    def normalize_api_data(self, name: dict) -> dict:
+    def normalize_api_data(self, name: str) -> dict:
         """标准化 API 配置，返回深拷贝，避免被外部修改"""
         raw_api = self.apis.get(name, {})
         url = raw_api.get("url", "")
@@ -155,20 +198,60 @@ class APIManager:
             f"解析路径：{api_info.get('target') or '无'}"
         )
 
-    def get_urls_by_site(self) -> dict:
+
+    @staticmethod
+    def from_detail_str(detail: str) -> dict:
         """
-        返回按站点分类的 URL 列表
-        输出格式: {
-            "https://api.pearktrue.cn": ["https://api.pearktrue.cn/api/stablediffusion/", ...],
-            ...
-        }
+        将 get_detail 的字符串逆向解析为 API 配置字典
         """
-        site_dict = defaultdict(list)
-        for api in self.apis.values():
-            urls = api.get("url", [])
-            if isinstance(urls, str):
-                urls = [urls]
-            for u in urls:
-                site = self.extract_base_url(u)
-                site_dict[site].append(u)
-        return dict(site_dict)
+        api_info = {}
+
+        lines = detail.splitlines()
+        for line in lines:
+            if line.startswith("api匹配词："):
+                kw = line.replace("api匹配词：", "").strip()
+                if kw == "无":
+                    api_info["keyword"] = []
+                else:
+                    # 如果 kw 是形如 "['xxx']" 的字符串，先转回 list
+                    if (kw.startswith("[") and kw.endswith("]")):
+                        try:
+                            parsed = ast.literal_eval(kw)
+                            if isinstance(parsed, list):
+                                api_info["keyword"] = parsed
+                            else:
+                                api_info["keyword"] = [kw]
+                        except Exception:
+                            api_info["keyword"] = [kw]
+                    else:
+                        # 普通逗号分隔
+                        api_info["keyword"] = [k.strip() for k in kw.split(",")]
+
+            elif line.startswith("api地址："):
+                url = line.replace("api地址：", "").strip()
+                api_info["url"] = "" if url == "无" else url
+
+            elif line.startswith("api类型："):
+                api_type = line.replace("api类型：", "").strip()
+                api_info["type"] = "" if api_type == "无" else api_type
+
+            elif line.startswith("所需参数："):
+                params_str = line.replace("所需参数：", "").strip()
+                if params_str == "无":
+                    api_info["params"] = {}
+                else:
+                    params = {}
+                    for kv in params_str.split(","):
+                        if "=" in kv:
+                            k, v = kv.split("=", 1)
+                            params[k.strip()] = v.strip()
+                        else:
+                            params[kv.strip()] = ""
+                    api_info["params"] = params
+
+            elif line.startswith("解析路径："):
+                target = line.replace("解析路径：", "").strip()
+                api_info["target"] = "" if target == "无" else target
+
+        return api_info
+

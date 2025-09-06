@@ -23,7 +23,7 @@ from .core.request import RequestManager
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "v2.0.1",
+    "v2.0.2",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class APIsPlugin(Star):
@@ -34,15 +34,15 @@ class APIsPlugin(Star):
         self.enable_api_type = [
             k[7:] for k, v in config.get("type_switch", {}).items() if v
         ]
-
         # 本地数据存储路径
         self.local_data_dir = StarTools.get_data_dir("astrbot_plugin_apis")
         # api数据文件
-        self.api_file = Path(__file__).parent / "api_data.json"
+        self.system_api_file = Path(__file__).parent / "system_api.json"
+        self.user_api_file = self.local_data_dir / "user_api.json"
 
     async def initialize(self):
         self.local = LocalDataManager(self.local_data_dir)
-        self.api = APIManager(self.api_file)
+        self.api = APIManager(self.system_api_file, self.user_api_file)
         self.apis_names = self.api.get_apis_names()
         self.web = RequestManager(self.conf, self.api)
 
@@ -105,15 +105,32 @@ class APIsPlugin(Star):
 
         return args, params
 
-    @filter.command("api详情", alias={"api列表"})
-    async def api_help(self, event: AstrMessageEvent, api_name: str | None = None):
+    @filter.command("api列表")
+    async def api_list(self, event: AstrMessageEvent, api_name: str | None = None):
+        """api详情 <api名称> 不填名称则返回所有api信息"""
+        api_info = self.api.list_api()
+        yield event.plain_result(api_info)
+
+    @filter.command("api详情")
+    async def api_detail(self, event: AstrMessageEvent, api_name: str | None = None):
         """api详情 <api名称> 不填名称则返回所有api信息"""
         if not api_name:
-            api_info = self.api.list_api()
-            yield event.plain_result(api_info)
+            yield event.plain_result("未指定api名称")
             return
         api_detail = self.api.get_detail(api_name)
         yield event.plain_result(api_detail)
+
+    @filter.command("添加api")
+    async def api_add(self, event: AstrMessageEvent):
+        api_detail = event.message_str.removeprefix("添加api").strip()
+        try:
+            data = self.api.from_detail_str(api_detail)
+            self.api.add_api(data)
+            yield event.plain_result(f"添加api成功:\n{data}")
+        except Exception as e:
+            logger.error(e)
+            yield event.plain_result("添加api失败, 请检查格式，务必与 api详情 的输出数据格式一致")
+
 
     @filter.command("删除api")
     async def remove_api(self, event: AstrMessageEvent, api_name: str):
