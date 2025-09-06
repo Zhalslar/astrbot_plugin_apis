@@ -104,3 +104,24 @@ def get_nested_value(result: dict, target: str):
         else:
             return ""
     return value
+
+
+def parse_api_keys(api_keys: list[str]) -> dict[str, str]:
+    """
+    将 api_keys 列表解析为 {域名: api_key} 的映射字典
+    格式: https://域名:api_key
+    - 只切第二个冒号，防止 key 中包含冒号
+    - 不会修改传入的 api_keys
+    """
+    result: dict[str, str] = {}
+    for key_str in api_keys:
+        if not key_str:
+            continue
+        key_str = key_str.strip().replace("：", ":")
+        parts = key_str.split(":", 2)
+        if len(parts) < 3:
+            continue
+        domain = parts[0] + ":" + parts[1]
+        api_key = parts[2]  # 剩余部分作为 key
+        result[domain] = api_key
+    return  result

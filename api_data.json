@@ -158,20 +158,12 @@
         "url": "https://api.yuafeng.cn/API/ecr/api.php",
         "type": "image"
     },
-    "手机壁纸": {
-        "keyword": [
-            "手机壁纸"
-        ],
-        "url": "https://api.yuafeng.cn/API/bizhi.php",
-        "type": "image"
-    },
     "看看女大": {
         "keyword": [
             "看看女大"
         ],
         "url": [
-            "https://api.yuafeng.cn/API/ly/cqng.php",
-            "http://api.xingchenfu.xyz/API/nvda.php"
+            "https://api.yuafeng.cn/API/ly/cqng.php"
         ],
         "type": "video",
         "params": {},
@@ -351,20 +343,6 @@
         "url": "http://api.xingchenfu.xyz/API/bsxl.php",
         "type": "video"
     },
-    "高质量小姐姐": {
-        "keyword": [
-            "高质量小姐姐"
-        ],
-        "url": "http://api.xingchenfu.xyz/API/gzlxjj.php",
-        "type": "video"
-    },
-    "深刻推荐": {
-        "keyword": [
-            "深刻推荐"
-        ],
-        "url": "http://api.xingchenfu.xyz/API/sktj.php",
-        "type": "video"
-    },
     "看看小葫芦": {
         "keyword": [
             "看看小葫芦"
@@ -437,26 +415,18 @@
             "lat": "44.43195"
         }
     },
-    "doro结局": {
-        "keyword": [
-            "doro结局",
-            "Doro结局"
-        ],
-        "url": "http://110.40.70.113:25514/API/sjdojieju",
-        "type": "image"
-    },
     "晚安": {
         "keyword": [
             "晚安"
         ],
-        "url": "https://api.317ak.com/API/tp/zawa.php",
+        "url": "http://api.317ak.cn/api/tp/zawa",
         "type": "image"
     },
     "来点腹肌": {
         "keyword": [
             "来点腹肌"
         ],
-        "url": "https://api.317ak.com/API/tp/fjtp.php",
+        "url": "http://api.317ak.cn/api/tp/fjtp",
         "type": "image"
     },
     "猫猫": {
@@ -658,14 +628,14 @@
         "keyword": [
             "热榜"
         ],
-        "url": "https://api.317ak.com/API/yljk/60s/60s.php",
+        "url": "http://api.317ak.cn/api/yljk/60s/60s",
         "type": "image"
     },
     "看看久喵": {
         "keyword": [
             "看看久喵"
         ],
-        "url": "https://api.317ak.com/API/sp/jmxl.php",
+        "url": "http://api.317ak.cn/api/sp/jmxl",
         "type": "video",
         "params": {
             "type": "json"
@@ -676,7 +646,7 @@
         "keyword": [
             "仙桃猫"
         ],
-        "url": "https://api.317ak.com/API/sp/xtmx.php",
+        "url": "http://api.317ak.cn/api/sp/xtmx",
         "type": "video",
         "params": {
             "type": "json"
@@ -687,7 +657,7 @@
         "keyword": [
             "看看公主"
         ],
-        "url": "https://api.317ak.com/API/sp/gzhy.php",
+        "url": "http://api.317ak.cn/api/sp/gzhy",
         "type": "video",
         "params": {
             "type": "json"
@@ -698,7 +668,7 @@
         "keyword": [
             "看看心情"
         ],
-        "url": "https://api.317ak.com/API/sp/xqhh.php",
+        "url": "http://api.317ak.cn/api/sp/xqhh",
         "type": "video",
         "params": {
             "type": "json"
@@ -709,7 +679,7 @@
         "keyword": [
             "看看小雪"
         ],
-        "url": "https://api.317ak.com/API/sp/xxmm.php",
+        "url": "http://api.317ak.cn/api/sp/xxmm",
         "type": "video",
         "params": {
             "type": "json"
@@ -720,7 +690,7 @@
         "keyword": [
             "看看红鸾"
         ],
-        "url": "https://api.317ak.com/API/sp/hljj.php",
+        "url": "http://api.317ak.cn/api/sp/hljj",
         "type": "video",
         "params": {
             "type": "json"
@@ -731,7 +701,7 @@
         "keyword": [
             "看看狼宝"
         ],
-        "url": "https://api.317ak.com/API/sp/lbjj.php",
+        "url": "http://api.317ak.cn/api/sp/lbjj",
         "type": "video",
         "params": {
             "type": "json"
@@ -742,7 +712,7 @@
         "keyword": [
             "看看雪梨"
         ],
-        "url": "https://api.317ak.com/API/sp/xlmn.php",
+        "url": "http://api.317ak.cn/api/sp/xlmn",
         "type": "video",
         "params": {
             "type": "json"
@@ -753,7 +723,7 @@
         "keyword": [
             "看看兔兔"
         ],
-        "url": "https://api.317ak.com/API/sp/ttmn.php",
+        "url": "http://api.317ak.cn/api/sp/ttmn",
         "type": "video",
         "params": {
             "type": "json"
@@ -764,7 +734,7 @@
         "keyword": [
             "星座运势"
         ],
-        "url": "https://api.317ak.com/API/qtapi/xzys/xzys.php",
+        "url": "http://api.317ak.cn/api/qtapi/xzys/xzys",
         "type": "image",
         "params": {
             "msg": ""
@@ -778,7 +748,7 @@
             "肯德基",
             "v我50"
         ],
-        "url": "https://api.317ak.com/API/wz/KFC.php",
+        "url": "http://api.317ak.cn/api/wz/KFC",
         "type": "text",
         "params": {
             "type": "text"
@@ -788,7 +758,7 @@
         "keyword": [
             "QQ签名"
         ],
-        "url": "https://api.317ak.com/API/wz/QQqm.php",
+        "url": "http://api.317ak.cn/api/wz/QQqm",
         "type": "text",
         "params": {
             "type": "text"
@@ -798,7 +768,7 @@
         "keyword": [
             "嘲讽"
         ],
-        "url": "https://api.317ak.com/API/wz/cfyl.php",
+        "url": "http://api.317ak.cn/api/wz/cfyl",
         "type": "text",
         "params": {
             "type": "text"
@@ -808,7 +778,7 @@
         "keyword": [
             "安慰"
         ],
-        "url": "https://api.317ak.com/API/wz/awyl.php",
+        "url": "http://api.317ak.cn/api/wz/awyl",
         "type": "text",
         "params": {
             "type": "text"
@@ -818,7 +788,7 @@
         "keyword": [
             "胡乱描述"
         ],
-        "url": "https://api.317ak.com/API/yljk/hlmsyl/hlmsyl.php",
+        "url": "http://api.317ak.cn/api/yljk/hlmsyl/hlmsyl",
         "type": "text",
         "params": {
             "keyword": ""
@@ -828,91 +798,91 @@
         "keyword": [
             "拜托前辈"
         ],
-        "url": "https://api.317ak.com/API/sp/btqb.php",
+        "url": "http://api.317ak.cn/api/sp/btqb",
         "type": "video"
     },
     "看看穿搭": {
         "keyword": [
             "看看穿搭"
         ],
-        "url": "https://api.317ak.com/API/sp/cdxl.php",
+        "url": "http://api.317ak.cn/api/sp/cdxl",
         "type": "video"
     },
     "鞠婧祎": {
         "keyword": [
             "鞠婧祎"
         ],
-        "url": "https://api.317ak.com/API/sp/jjyx.php",
+        "url": "http://api.317ak.cn/api/sp/jjyx",
         "type": "video"
     },
     "音乐视频": {
         "keyword": [
             "音乐视频"
         ],
-        "url": "https://api.317ak.com/API/sp/yysp.php",
+        "url": "http://api.317ak.cn/api/sp/yysp",
         "type": "video"
     },
     "周扬青": {
         "keyword": [
             "周扬青"
         ],
-        "url": "https://api.317ak.com/API/sp/zyqx.php",
+        "url": "http://api.317ak.cn/api/sp/zyqx",
         "type": "video"
     },
     "周清欢": {
         "keyword": [
             "周清欢"
         ],
-        "url": "https://api.317ak.com/API/sp/zqhx.php",
+        "url": "http://api.317ak.cn/api/sp/zqhx",
         "type": "video"
     },
     "潇潇": {
         "keyword": [
             "潇潇"
         ],
-        "url": "https://api.317ak.com/API/sp/xxxl.php",
+        "url": "http://api.317ak.cn/api/sp/xxxl",
         "type": "video"
     },
     "看看甜妹": {
         "keyword": [
             "看看甜妹"
         ],
-        "url": "https://api.317ak.com/API/sp/tmxl.php",
+        "url": "http://api.317ak.cn/api/sp/tmxl",
         "type": "video"
     },
     "看看清纯": {
         "keyword": [
             "看看清纯"
         ],
-        "url": "https://api.317ak.com/API/sp/qcxl.php",
+        "url": "http://api.317ak.cn/api/sp/qcxl",
         "type": "video"
     },
     "看看萌娃": {
         "keyword": [
             "看看萌娃"
         ],
-        "url": "https://api.317ak.com/API/sp/mwxl.php",
+        "url": "http://api.317ak.cn/api/sp/mwxl",
         "type": "video"
     },
     "看看慢摇": {
         "keyword": [
             "看看慢摇"
         ],
-        "url": "https://api.317ak.com/API/sp/myxl.php",
+        "url": "http://api.317ak.cn/api/sp/myxl",
         "type": "video"
     },
     "看看COS": {
         "keyword": [
             "看看COS"
         ],
-        "url": "https://api.317ak.com/API/sp/cosxl.php",
+        "url": "http://api.317ak.cn/api/sp/cosxl",
         "type": "video"
     },
     "看看余震": {
         "keyword": [
             "看看余震"
         ],
-        "url": "https://api.317ak.com/API/sp/yzxl.php",
+        "url": "http://api.317ak.cn/api/sp/yzxl",
         "type": "video"
     },
     "看看欲梦": {
@@ -921,7 +891,7 @@
         ],
         "url": [
             "http://api.xingchenfu.xyz/API/ndym.php",
-            "https://api.317ak.com/API/sp/ndym.php"
+            "http://api.317ak.cn/api/sp/ndym"
         ],
         "type": "video"
     },
@@ -929,147 +899,149 @@
         "keyword": [
             "看看萝莉"
         ],
-        "url": "https://api.317ak.com/API/sp/llxl.php",
+        "url": "http://api.317ak.cn/api/sp/llxl",
         "type": "video"
     },
     "看看晴天": {
         "keyword": [
             "看看晴天"
         ],
-        "url": "https://api.317ak.com/API/sp/qttj.php",
+        "url": "http://api.317ak.cn/api/sp/qttj",
         "type": "video"
     },
     "光剑变装": {
         "keyword": [
             "光剑变装"
         ],
-        "url": "https://api.317ak.com/API/sp/gjbz.php",
+        "url": "http://api.317ak.cn/api/sp/gjbz",
         "type": "video"
     },
     "动漫变装": {
         "keyword": [
             "动漫变装"
         ],
-        "url": "https://api.317ak.com/API/sp/dmbz.php",
+        "url": "http://api.317ak.cn/api/sp/dmbz",
         "type": "video"
     },
     "完美身材": {
         "keyword": [
             "完美身材"
         ],
-        "url": "https://api.317ak.com/API/sp/wmsc.php",
+        "url": "http://api.317ak.cn/api/sp/wmsc",
         "type": "video"
     },
     "火车摇": {
         "keyword": [
             "火车摇"
         ],
-        "url": "https://api.317ak.com/API/sp/hcyx.php",
+        "url": "http://api.317ak.cn/api/sp/hcyx",
         "type": "video"
     },
     "蹲下变装": {
         "keyword": [
             "蹲下变装"
         ],
-        "url": "https://api.317ak.com/API/sp/dxbz.php",
+        "url": "http://api.317ak.cn/api/sp/dxbz",
         "type": "video"
     },
     "看看吊带": {
         "keyword": [
             "看看吊带"
         ],
-        "url": "https://api.317ak.com/API/sp/ddxl.php",
+        "url": "http://api.317ak.cn/api/sp/ddxl",
         "type": "video"
     },
     "擦玻璃": {
         "keyword": [
             "擦玻璃"
         ],
-        "url": "https://api.317ak.com/API/sp/cblx.php",
+        "url": "http://api.317ak.cn/api/sp/cblx",
         "type": "video"
     },
     "背影变装": {
         "keyword": [
             "背影变装"
         ],
-        "url": "https://api.317ak.com/API/sp/bybz.php",
+        "url": "http://api.317ak.cn/api/sp/bybz",
         "type": "video"
     },
     "安慕希": {
         "keyword": [
             "安慕希"
         ],
-        "url": "https://api.317ak.com/API/sp/amxx.php",
+        "url": "http://api.317ak.cn/api/sp/amxx",
         "type": "video"
     },
     "看看微胖": {
         "keyword": [
             "看看微胖"
         ],
-        "url": "https://api.317ak.com/API/sp/wpxl.php",
+        "url": "http://api.317ak.cn/api/sp/wpxl",
         "type": "video"
     },
     "硬气卡点": {
         "keyword": [
             "硬气卡点"
         ],
-        "url": "https://api.317ak.com/API/sp/yqkd.php",
+        "url": "http://api.317ak.cn/api/sp/yqkd",
         "type": "video"
     },
     "黑白双煞": {
         "keyword": [
             "黑白双煞"
         ],
-        "url": "https://api.317ak.com/API/sp/hbss.php",
+        "url": "http://api.317ak.cn/api/sp/hbss",
         "type": "video"
     },
     "猫系女友": {
         "keyword": [
             "猫系女友"
         ],
-        "url": "https://api.317ak.com/API/sp/mxny.php",
+        "url": "http://api.317ak.cn/api/sp/mxny",
         "type": "video"
     },
     "看看女仆": {
         "keyword": [
             "看看女仆"
         ],
-        "url": "https://api.317ak.com/API/sp/npxl.php",
+        "url": "http://api.317ak.cn/api/sp/npxl",
         "type": "video"
     },
     "又纯又欲": {
         "keyword": [
             "又纯又欲"
         ],
-        "url": "https://api.317ak.com/API/sp/ycyy.php",
+        "url": "http://api.317ak.cn/api/sp/ycyy",
         "type": "video"
     },
     "看看甩裙": {
         "keyword": [
             "看看甩裙"
         ],
-        "url": "https://api.317ak.com/API/sp/sqxl.php",
+        "url": "http://api.317ak.cn/api/sp/sqxl",
         "type": "video"
     },
     "看看腹肌": {
         "keyword": [
             "看看腹肌"
         ],
-        "url": "https://api.317ak.com/API/sp/fjbz.php",
+        "url": "http://api.317ak.cn/api/sp/fjbz",
         "type": "video"
     },
     "看看原神": {
         "keyword": [
             "看看原神"
         ],
-        "url": "https://api.317ak.com/API/sp/yssp.php",
+        "url": "http://api.317ak.cn/api/sp/yssp",
         "type": "video"
     },
     "小动物": {
         "keyword": [
             "小动物"
         ],
-        "url": "https://api.pearktrue.cn/api/animal/?type=image&anime=dog",
+        "url": [
+            "http://api.317ak.cn/api/sp/animaldog"
+        ],
         "type": "image"
     },
     "三坑少女": {
@@ -1078,18 +1050,6 @@
         ],
         "url": "https://api.pearktrue.cn/api/beautifulgirl/?type=image",
         "type": "image"
-    },
-    "画画": {
-        "keyword": [
-            "画画"
-        ],
-        "url": "https://api.pearktrue.cn/api/stablediffusion/",
-        "type": "image",
-        "params": {
-            "prompt": "",
-            "model": "normal"
-        },
-        "target": "imgurl"
     },
     "Linux命令": {
         "keyword": [
@@ -1102,17 +1062,6 @@
             "keyword": ""
         },
         "target": "data.content"
-    },
-    "身份证查询": {
-        "keyword": [
-            "身份证查询"
-        ],
-        "url": "https://api.pearktrue.cn/api/sfz/query.php",
-        "type": "text",
-        "params": {
-            "idcard": ""
-        },
-        "target": "data"
     },
     "高校查询": {
         "keyword": [
@@ -1162,18 +1111,6 @@
             "keyword": ""
         },
         "target": "data[].event[]"
-    },
-    "LOL查询": {
-        "keyword": [
-            "LOL查询",
-            "lol查询"
-        ],
-        "url": "https://api.pearktrue.cn/api/lolhero/",
-        "type": "image",
-        "params": {
-            "hero": ""
-        },
-        "target": "imgurl"
     },
     "车辆查询": {
         "keyword": [
@@ -1468,43 +1405,19 @@
         },
         "target": "data[].voice"
     },
-    "喘息": {
-        "keyword": [
-            "喘息"
-        ],
-        "url": "https://api.317ak.com/API/AI/yyhc2.0/hcyy2.0.php",
-        "type": "audio",
-        "params": {
-            "msg": "",
-            "jue": "icxx-喘息语气",
-            "type": "mp3"
-        },
-        "target": "url"
-    },
-    "原神语音": {
-        "keyword": [
-            "原神语音"
-        ],
-        "url": "https://api.317ak.com/API/AI/hcyy/hcyy.php",
-        "type": "audio",
-        "params": {
-            "msg": "",
-            "id": "纳西妲",
-            "type": "mp3"
-        },
-        "target": "url"
-    },
     "御姐撒娇": {
         "keyword": "御姐撒娇",
         "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
         "type": "audio",
         "target": "audiopath"
     },
-    "搜短剧":{
+    "搜短剧": {
         "keyword": "搜短剧",
         "url": "https://api.xingzhige.com//API/playlet/",
         "type": "text",
-        "params": {"keyword":"热门短剧"},
+        "params": {
+            "keyword": "热门短剧"
+        },
         "target": "data[]"
     }
 }
