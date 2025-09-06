@@ -105,7 +105,7 @@ class APIsPlugin(Star):
 
         return args, params
 
-    @filter.command("api详情")
+    @filter.command("api详情", alias={"api列表"})
     async def api_help(self, event: AstrMessageEvent, api_name: str | None = None):
         """api详情 <api名称> 不填名称则返回所有api信息"""
         if not api_name:
