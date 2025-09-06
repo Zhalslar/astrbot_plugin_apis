@@ -3,54 +3,66 @@
     "description": "调试模式",
     "type": "bool",
     "default": false,
-    "hint": "如果添加api时报错，试着打开debug找问题"
+    "hint": "如果添加api时报错，试着打开debug找问题, 报错信息将上报消息平台"
   },
   "auto_save_data": {
     "description": "保存API响应数据",
+    "hint": "建议保存，当api失效时可换用本地数据。如果你存储空间紧张则建议不保存",
     "type": "bool",
-    "default": true,
-    "hint": "建议保存，当api失效时可换用本地数据"
+    "default": true
   },
   "prefix_mode": {
     "description": "前缀模式",
+    "hint": "启用后，需要在触发词前加上前缀或者@bot才能触发api",
     "type": "bool",
-    "default": false,
-    "hint": "启用后，需要在触发词前加上前缀或者@bot才能触发api"
+    "default": false
   },
   "type_switch": {
     "description": "类型开关",
     "type": "object",
     "items": {
-      "enable_text":{
+      "enable_text": {
         "description": "是否启用文本api",
         "type": "bool",
-        "default": true,
-        "hint": ""
+        "default": true
       },
-      "enable_image":{
+      "enable_image": {
         "description": "是否启用图片api",
         "type": "bool",
-        "default": true,
-        "hint": ""
+        "default": true
       },
-      "enable_video":{
+      "enable_video": {
         "description": "是否启用视频api",
         "type": "bool",
-        "default": true,
-        "hint": ""
+        "default": true
       },
-      "enable_audio":{
+      "enable_audio": {
         "description": "是否启用音频api",
         "type": "bool",
-        "default": true,
-        "hint": ""
+        "default": true
       }
     }
   },
-  "disable_api": {
-    "description": "禁用的api",
+  "api_keys": {
+    "description": "api密钥",
+    "hint": "部分api站点需要密钥访问，请在对应网站注册账号拿到密钥后填在此配置项中, 格式为 https://your.api.com:your_api_key (即站点域名:密钥)",
     "type": "list",
-    "default": [],
-    "hint": "禁用列表内的关键词会被屏蔽，从而达到不能触发api的效果"
+    "default": [
+      "http://api.317ak.cn:api_key"
+    ]
+  },
+  "disable_sites": {
+    "description": "禁用的api站点",
+    "hint": "禁用列表内的api站点会被屏蔽，从而禁止访问",
+    "type": "list",
+    "default": [
+      "https://your.api.com"
+    ]
+  },
+  "disable_apis": {
+    "description": "禁用的api",
+    "hint": "禁用列表内的关键词会被屏蔽，从而达到不能触发api的效果",
+    "type": "list",
+    "default": []
   }
 }

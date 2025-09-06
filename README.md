@@ -54,9 +54,8 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 |     命令      |        说明        |
 |:-------------:|:--------------------------:|
-| /api列表      | 查看所有能触发api的关键词  |
-| /api详情 xxx  | 具体查看某个api的参数 |
-| /删除api xxx  | 删除指定api        |
+| api详情 xxx  | 具体查看某个api的参数，不提供参数时查看所有能触发api的关键词 |
+| 删除api xxx  | 删除指定api        |
 |   {关键词}     |   触发api      |
 
 建议直接通过编辑"data\plugins\astrbot_plugin_apis\api_data.json"进行添加api、删除api，同时也方便修改更多参数。
@@ -96,7 +95,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 ### 收录API
 
 ```plaintext
- ----共收录了166个API----
+ ----共收录了160+个API（请用 api详情 查看）----
 
 
 【text】52个：
@@ -164,12 +163,14 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 如果想第一时间得到反馈，可以来作者的插件反馈群（QQ群）：460973561（不点star不给进）
 
 ## 🤝 鸣谢
+
 本插件收录的免费api大多来自下面的站点，希望有能力的使用者可以赞助一下。另外如有某个api失效，可在各站点间找平替。
-- 枫林API：https://api.yuafeng.cn
-- 稳定API：https://api.xingchenfu.xyz
-- 倾梦API：https://api.317ak.com
-- 星之阁API：https://api.xingzhige.com
-- 桑帛云API：https://api.lolimi.cn
-- 糖豆子API：https://api.tangdouz.com
-- PearAPI：https://api.pearktrue.cn
-- 问情免费API：https://free.wqwlkj.cn
+
+- 枫林API：<https://api.yuafeng.cn>
+- 稳定API：<https://api.xingchenfu.xyz>
+- 倾梦API：<https://api.317ak.com>
+- 星之阁API：<https://api.xingzhige.com>
+- 桑帛云API：<https://api.lolimi.cn>
+- 糖豆子API：<https://api.tangdouz.com>
+- PearAPI：<https://api.pearktrue.cn>
+- 问情免费API：<https://free.wqwlkj.cn>
