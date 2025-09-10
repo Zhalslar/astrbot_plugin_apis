@@ -13,8 +13,6 @@ _✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_
 
 </div>
 
-## 📌重要提醒：更新前务必备份[api_data.json](https://github.com/Zhalslar/astrbot_plugin_apis/blob/main/api_data.json)
-
 ## 💡 介绍
 
 API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...
