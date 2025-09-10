@@ -166,7 +166,6 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 海外服务器可能无法直接访问大部分API，网络问题自行解决。
 - 收录的某些API可能并不稳定，存在失效的情况，属于正常现象。
 - 如果想第一时间得到反馈，可以来作者的插件反馈群（QQ群）：460973561（不点star不给进）
-- api数据存在[api_data.json](https://github.com/Zhalslar/astrbot_plugin_apis/blob/main/api_data.json)中，考虑到api经常变动，所有版本更新时会一起更新这个文件，如果api_data.json中有自己添加的api， 请提前备份，更新好后再将你的api复制进去！
 
 ## 🤝 鸣谢
 
