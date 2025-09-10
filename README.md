@@ -52,7 +52,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ## ⌨️ 使用说明
 
-部分api站点需要密钥，如 倾梦API：<https://api.317ak.com>， 此站点需前往网页，注册账号，获取ckey密钥，填入插件配置中的“api密钥 (api_keys)”
+部分api站点需要密钥，如 倾梦API：<https://api.317ak.cn>， 此站点需前往网页，注册账号，获取ckey密钥，填入插件配置中的“api密钥 (api_keys)”
 
 ### 指令表
 
@@ -173,7 +173,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 - 枫林API：<https://api.yuafeng.cn>
 - 稳定API：<https://api.xingchenfu.xyz>
-- 倾梦API：<https://api.317ak.com>， 此站点需注册账号获取ckey密钥！！
+- 倾梦API：<https://api.317ak.cn>， 此站点需注册账号获取ckey密钥！！
 - 星之阁API：<https://api.xingzhige.com>
 - 桑帛云API：<https://api.lolimi.cn>
 - 糖豆子API：<https://api.tangdouz.com>
