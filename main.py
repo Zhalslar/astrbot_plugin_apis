@@ -23,7 +23,7 @@ from .core.request import RequestManager
     "astrbot_plugin_apis",
     "Zhalslar",
     "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "v2.0.2",
+    "v2.0.3",
     "https://github.com/Zhalslar/astrbot_plugin_apis",
 )
 class APIsPlugin(Star):
@@ -158,24 +158,24 @@ class APIsPlugin(Star):
 
         # 匹配api
         msgs = event.message_str.split(" ")
-        data = self.api.match_api_by_name(msgs[0])
-        if not data:
+        api_data = self.api.match_api_by_name(msgs[0])
+        if not api_data:
             return
 
         # 检查api是否被禁用
-        if data["name"] in self.conf["disable_apis"]:
+        if api_data["name"] in self.conf["disable_apis"]:
             logger.debug("此API已被禁用")
             return
 
         # 检查该站点是否被禁用
-        for url in data["urls"]:
+        for url in api_data["urls"]:
             for site in self.conf["disable_sites"]:
                 if url.startswith(site):
                     logger.debug(f"此站点已被禁用：{url}")
                     return
 
         # 检查api类型是否被禁用
-        if data["type"] not in self.enable_api_type:
+        if api_data["type"] not in self.enable_api_type:
             logger.debug("此API类型已被禁用")
             return
 
@@ -183,62 +183,91 @@ class APIsPlugin(Star):
         args = msgs[1:]
 
         # 参数补充
-        args, params = await self._supplement_args(event, args, data["params"])
+        args, params = await self._supplement_args(event, args, api_data["params"])
 
         # 生成update_params，保留params中的默认值
         update_params = {
             key: args[i] if i < len(args) else params[key]
             for i, key in enumerate(params.keys())
         }
+        # 获取数据
+        try:
+            text, path, source = await self.call_api(api_data, update_params)
+        except Exception as e:
+            logger.error(f"获取数据失败: {e}")
+            if self.conf.get("debug"):
+                await event.send(
+                    event.plain_result(f"获取数据失败 [{api_data['name']}] : {e}")
+                )
+            return
 
+        # 发送消息
+        chain = await self.data_to_chain(
+            api_type=api_data["type"], text=text, path=path
+        )
+        await event.send(event.chain_result(chain))
+        event.stop_event()
+
+        # 清理临时文件
+        if source=="api" and path and not self.conf["auto_save_data"]:
+            os.remove(path)
+
+    async def call_api_by_name(
+        self, name: str, params: dict | None = None
+    ) -> tuple[str | None, Path | None, str]:
+        """
+        暴露给外部的API调用函数
+        :param name: API名称
+        :param params: API参数
+        :return: (text, path, source)
+                 source = "api" 表示来自网络
+                 source = "local" 表示来自本地兜底
+        """
+        api_data = self.api.match_api_by_name(name)
+        logger.debug(api_data)
+        if not api_data:
+            return None, None, "error"
+
+        return await self.call_api(api_data, params)
+
+    async def call_api(
+        self, api_data: dict, params: dict | None = None
+    ) -> tuple[str | None, Path | None, str]:
+        """
+        调用API并返回数据
+        :return: (text, path, source)
+                 source = "api" 表示来自网络
+                 source = "local" 表示来自本地兜底
+        """
         try:
             # === 外部接口调用 ===
             api_text, api_byte = await self.web.get_data(
-                urls=data["urls"],
-                params=update_params,
-                api_type=data["type"],
-                target=data["target"],
+                urls=api_data["urls"],
+                params=params or api_data["params"],
+                api_type=api_data["type"],
+                target=api_data["target"],
             )
             if api_text or api_byte:
                 saved_text, saved_path = await self.local.save_data(
-                    api_type=data["type"],
-                    path_name=data["name"],
+                    api_type=api_data["type"],
+                    path_name=api_data["name"],
                     text=api_text,
                     byte=api_byte,
                 )
-                chain = await self.data_to_chain(
-                    api_type=data["type"], text=saved_text, path=saved_path
-                )
-                await event.send(event.chain_result(chain))
-                event.stop_event()
-                if saved_path and not self.conf["auto_save_data"]:
-                    os.remove(saved_path)
-                return
+                return saved_text, saved_path, "api"
 
         except Exception as e:
-            logger.error(f"调用 API {data['name']} 失败: {e}")
-            if self.conf.get("debug"):
-                await event.send(
-                    event.plain_result(f"调用API [{data['name']}] 失败: {e}")
-                )
+            logger.warning(f"API调用失败 [{api_data['name']}]，尝试本地兜底: {e}")
 
         # === 本地兜底 ===
-        logger.debug("API响应为空，尝试从本地数据库中获取数据")
         try:
             local_text, local_path = await self.local.get_data(
-                api_type=data["type"], path_name=data["name"]
+                api_type=api_data["type"], path_name=api_data["name"]
             )
-            chain = await self.data_to_chain(
-                api_type=data["type"], text=local_text, path=local_path
-            )
-            await event.send(event.chain_result(chain))
-            event.stop_event()
+            return local_text, local_path, "local"
         except Exception as e:
-            logger.error(f"本地兜底失败: {e}")
-            if self.conf.get("debug"):
-                await event.send(
-                    event.plain_result(f"本地兜底 [{data['name']}] 失败: {e}")
-                )
+            logger.error(f"本地兜底失败 [{api_data['name']}] : {e}")
+            return None, None, "error"
 
     async def terminate(self):
         """关闭会话，断开连接"""

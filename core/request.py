@@ -1,4 +1,4 @@
-
+from bs4 import BeautifulSoup
 import asyncio
 from collections import defaultdict
 from typing import Optional, Union
@@ -66,6 +66,12 @@ class RequestManager:
             else:
                 data = nested_value
 
+        # data为HTML字符串时，解析HTML
+        if isinstance(data, str) and data.strip().startswith("<!DOCTYPE html>"):
+            soup = BeautifulSoup(data, "html.parser")
+            # 提取HTML中的文本内容
+            data = soup.get_text(strip=True)
+
         text = data if isinstance(data, str) else None
         byte = data if isinstance(data, bytes) else None
 
@@ -124,3 +130,6 @@ class RequestManager:
     async def terminate(self):
         """关闭会话，断开连接"""
         await self.session.close()
+
+
+

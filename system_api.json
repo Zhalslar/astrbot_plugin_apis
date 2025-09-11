@@ -729,20 +729,6 @@
             "msg": ""
         }
     },
-    "KFC": {
-        "keyword": [
-            "KFC",
-            "kfc",
-            "疯狂星期四",
-            "肯德基",
-            "v我50"
-        ],
-        "url": "http://api.317ak.cn/api/wz/KFC",
-        "type": "text",
-        "params": {
-            "type": "text"
-        }
-    },
     "QQ签名": {
         "keyword": [
             "QQ签名"
@@ -1408,5 +1394,19 @@
             "keyword": "热门短剧"
         },
         "target": "data[]"
+    },
+    "KFC": {
+        "keyword": [
+            "KFC",
+            "kfc",
+            "疯狂星期四",
+            "肯德基",
+            "v我50"
+        ],
+        "url": "http://api.317ak.cn/api/wz/KFC",
+        "type": "text",
+        "params": {
+            "type": "text"
+        }
     }
 }
