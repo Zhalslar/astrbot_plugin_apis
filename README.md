@@ -13,8 +13,6 @@ _✨ [astrbot](https://github.com/Soulter/AstrBot) API聚合插件 ✨_
 
 </div>
 
-## 📌重要提醒：更新前务必备份[api_data.json](https://github.com/Zhalslar/astrbot_plugin_apis/blob/main/api_data.json)
-
 ## 💡 介绍
 
 API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...
@@ -52,7 +50,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 ## ⌨️ 使用说明
 
-部分api站点需要密钥，如 倾梦API：<https://api.317ak.com>， 此站点需前往网页，注册账号，获取ckey密钥，填入插件配置中的“api密钥 (api_keys)”
+部分api站点需要密钥，如 倾梦API：<https://api.317ak.cn>， 此站点需前往网页，注册账号，获取ckey密钥，填入插件配置中的“api密钥 (api_keys)”
 
 ### 指令表
 
@@ -139,6 +137,8 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 ### 示例图
 
 ![5123084b9e5a5f9371db19224575a43](https://github.com/user-attachments/assets/73c38cc2-49b8-4d67-b48e-77cd28b1fd81)
+![c37bb35479df19aa2da40d6a13eea564](https://github.com/user-attachments/assets/b8e6682a-1c0b-4743-86eb-b7ed39344a17)
+
 
 ## 📌 TODO
 
@@ -164,7 +164,6 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 海外服务器可能无法直接访问大部分API，网络问题自行解决。
 - 收录的某些API可能并不稳定，存在失效的情况，属于正常现象。
 - 如果想第一时间得到反馈，可以来作者的插件反馈群（QQ群）：460973561（不点star不给进）
-- api数据存在[api_data.json](https://github.com/Zhalslar/astrbot_plugin_apis/blob/main/api_data.json)中，考虑到api经常变动，所有版本更新时会一起更新这个文件，如果api_data.json中有自己添加的api， 请提前备份，更新好后再将你的api复制进去！
 
 ## 🤝 鸣谢
 
@@ -172,7 +171,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 
 - 枫林API：<https://api.yuafeng.cn>
 - 稳定API：<https://api.xingchenfu.xyz>
-- 倾梦API：<https://api.317ak.com>， 此站点需注册账号获取ckey密钥！！
+- 倾梦API：<https://api.317ak.cn>， 此站点需注册账号获取ckey密钥！！
 - 星之阁API：<https://api.xingzhige.com>
 - 桑帛云API：<https://api.lolimi.cn>
 - 糖豆子API：<https://api.tangdouz.com>
