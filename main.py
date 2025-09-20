@@ -19,13 +19,7 @@ from .core.utils import get_nickname
 from .core.request import RequestManager
 
 
-@register(
-    "astrbot_plugin_apis",
-    "Zhalslar",
-    "API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌...",
-    "v2.0.3",
-    "https://github.com/Zhalslar/astrbot_plugin_apis",
-)
+@register("astrbot_plugin_apis", "Zhalslar", "API聚合插件", "...", "...")
 class APIsPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
@@ -120,6 +114,7 @@ class APIsPlugin(Star):
         api_detail = self.api.get_detail(api_name)
         yield event.plain_result(api_detail)
 
+    @filter.permission_type(filter.PermissionType.ADMIN)
     @filter.command("添加api")
     async def api_add(self, event: AstrMessageEvent):
         api_detail = event.message_str.removeprefix("添加api").strip()
@@ -129,9 +124,11 @@ class APIsPlugin(Star):
             yield event.plain_result(f"添加api成功:\n{data}")
         except Exception as e:
             logger.error(e)
-            yield event.plain_result("添加api失败, 请检查格式，务必与 api详情 的输出数据格式一致")
+            yield event.plain_result(
+                "添加api失败, 请检查格式，务必与 api详情 的输出数据格式一致"
+            )
 
-
+    @filter.permission_type(filter.PermissionType.ADMIN)
     @filter.command("删除api")
     async def remove_api(self, event: AstrMessageEvent, api_name: str):
         """删除api"""
@@ -209,7 +206,7 @@ class APIsPlugin(Star):
         event.stop_event()
 
         # 清理临时文件
-        if source=="api" and path and not self.conf["auto_save_data"]:
+        if source == "api" and path and not self.conf["auto_save_data"]:
             os.remove(path)
 
     async def call_api_by_name(
