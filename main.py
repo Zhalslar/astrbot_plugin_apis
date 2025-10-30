@@ -29,7 +29,10 @@ class APIsPlugin(Star):
             k[7:] for k, v in config.get("type_switch", {}).items() if v
         ]
         # 本地数据存储路径
-        self.local_data_dir = StarTools.get_data_dir("astrbot_plugin_apis")
+        # self.local_data_dir = StarTools.get_data_dir("astrbot_plugin_apis")
+        # 在docker中会错误的在开头添加/，解决路径拼写错误和斜杠重复导致的文件找不到问题
+        from pathlib import Path
+        self.local_data_dir = Path(str(StarTools.get_data_dir("astrbot_plugin_apis")).replace("plugin_data", "plugins_data"))
         # api数据文件
         self.system_api_file = Path(__file__).parent / "system_api.json"
         self.user_api_file = self.local_data_dir / "user_api.json"
