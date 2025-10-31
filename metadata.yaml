@@ -1,4 +1,5 @@
 name: astrbot_plugin_apis # 这是你的插件的唯一识别名。
+display_name: API聚合
 desc: API聚合插件，海量免费API动态添加，热门API：看看腿、看看腹肌... # 插件简短描述
 help: 无 # 插件的帮助信息
 version: v2.0.4 # 插件版本号。 # 格式：v1.1.1 或者 v1.1
