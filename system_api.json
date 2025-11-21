@@ -1183,7 +1183,7 @@
         "keyword": [
             "搜图"
         ],
-        "url": "https://api.tangdouz.com/dtss.php",
+        "url": "https://api.tangdouz.com/sgst.php",
         "type": "image",
         "params": {
             "nr": ""

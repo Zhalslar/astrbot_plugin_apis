@@ -1,11 +1,11 @@
 import os
 from pathlib import Path
-from astrbot.api.event import filter, AstrMessageEvent
-from astrbot.api.star import Context, Star, register, StarTools
+
 import astrbot.api.message_components as Comp
 from astrbot.api import logger
+from astrbot.api.event import AstrMessageEvent, filter
+from astrbot.api.star import Context, Star, StarTools, register
 from astrbot.core.config.astrbot_config import AstrBotConfig
-from astrbot.core.star.filter.event_message_type import EventMessageType
 from astrbot.core.message.components import (
     BaseMessageComponent,
     Image,
@@ -13,10 +13,12 @@ from astrbot.core.message.components import (
     Record,
     Video,
 )
-from .core.local import LocalDataManager
+from astrbot.core.star.filter.event_message_type import EventMessageType
+
 from .core.api_manager import APIManager
-from .core.utils import get_nickname
+from .core.local import LocalDataManager
 from .core.request import RequestManager
+from .core.utils import get_nickname
 
 
 @register("astrbot_plugin_apis", "Zhalslar", "API聚合插件", "...", "...")

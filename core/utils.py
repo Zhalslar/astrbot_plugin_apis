@@ -1,8 +1,9 @@
 import random
 import re
+from urllib.parse import unquote, urlparse
+
 from astrbot.core.platform.astr_message_event import AstrMessageEvent
 
-from urllib.parse import unquote, urlparse
 
 async def get_nickname(event: AstrMessageEvent, target_id: str):
     """从消息平台获取昵称"""
@@ -45,30 +46,28 @@ def dict_to_string(input_dict):
 
     return recursive_parse(input_dict, 0)
 
-def extract_url(text: str) -> str:
-    """从字符串中提取第一个有效URL"""
-    # 去掉转义字符
-    text = text.replace("\\", "")
+def extract_urls(text: str, *, unique: bool = True) -> list[str]:
+    """
+    搜索式提取所有 http/https URL，不受前后干扰字符影响。
+    """
+    # 1. 搜索式正则：只要出现 http(s):// 就开始捕获，向后扩展到非法字符为止
+    #    用捕获组把 URL 部分单独拿出来
+    regex = re.compile(r'(https?://[^\s<>"{}|\\^`\[\]\')(),;]+\b)', re.IGNORECASE)
+    candidates = regex.findall(text)
 
-    # 定义URL匹配模式
-    url_pattern = r"https?://[^\s\"']+"
-    urls = re.findall(url_pattern, text)
-
-    for url in urls:
-        # 解码URL中的百分号编码
-        url = unquote(url)
-
-        # 去除URL头尾的多余双引号（如果存在）
-        url = url.strip('"')
-
-        # 解析URL
-        parsed_url = urlparse(url)
-
-        # 验证URL的有效性
-        if parsed_url.scheme in {"http", "https"} and parsed_url.netloc:
-            return url
-    return ""
-
+    # 2. 后处理
+    valid, seen = [], set()
+    for raw in candidates:
+        raw = raw.strip("\"'")  # 去掉首尾引号
+        raw = unquote(raw)  # 解码 %xx
+        parsed = urlparse(raw)
+        if parsed.scheme in {"http", "https"} and parsed.netloc:
+            if unique and raw in seen:
+                continue
+            if unique:
+                seen.add(raw)
+            valid.append(raw)
+    return valid
 
 def get_nested_value(result: dict, target: str):
     """

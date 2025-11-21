@@ -3,8 +3,8 @@ import ast
 import copy
 import json
 import os
-from typing import Any
 from urllib.parse import urlparse
+
 from astrbot.api import logger
 
 
@@ -28,7 +28,7 @@ class APIManager:
 
         # 系统 API
         if os.path.exists(self.system_api_file):
-            with open(self.system_api_file, "r", encoding="utf-8") as file:
+            with open(self.system_api_file, encoding="utf-8") as file:
                 try:
                     self.system_apis.update(json.load(file))
                     self.apis.update(self.system_apis)
@@ -40,7 +40,7 @@ class APIManager:
 
         # 用户 API
         if os.path.exists(self.user_api_file):
-            with open(self.user_api_file, "r", encoding="utf-8") as file:
+            with open(self.user_api_file, encoding="utf-8") as file:
                 try:
                     user_data = json.load(file)              # 只 load 一次
                     self.user_apis.update(user_data)
