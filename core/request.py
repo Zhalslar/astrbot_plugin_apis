@@ -21,6 +21,12 @@ class RequestManager:
     ) -> Union[bytes, str, dict, None]:
         last_exc = None
         for u in urls:
+            # 判断基础路径是否配置的key
+            part = u.split("/")
+            base_url = u[:len(part[0]) + len(part[2]) + 2]
+            if self.api_key_dict.get(base_url):
+                params["ckey"] = self.api_key_dict.get(base_url)
+
             try:
                 async with self.session.get(u, params=params, timeout=30) as resp:
                     resp.raise_for_status()
@@ -65,6 +71,15 @@ class RequestManager:
                 data = dict_to_string(nested_value)
             else:
                 data = nested_value
+
+            # 如果字典里面的data是URL时，下载数据
+            if isinstance(data, str) and api_type != "text":
+                if url := extract_url(data):
+                    downloaded = await self.request([data])
+                    if isinstance(downloaded, bytes):
+                        data = downloaded
+                    else:
+                        raise RuntimeError(f"下载数据失败: {url}")  # 抛异常给外部
 
         # data为HTML字符串时，解析HTML
         if isinstance(data, str) and data.strip().startswith("<!DOCTYPE html>"):

@@ -408,8 +408,11 @@
         "keyword": [
             "晚安"
         ],
-        "url": "http://api.317ak.cn/api/tp/zawa",
-        "type": "image"
+        "url": "http://api.317ak.cn/api/wz/waxy",
+        "type": "text",
+        "params": {
+          "type": "text"
+        }
     },
     "来点腹肌": {
         "keyword": [
@@ -723,7 +726,7 @@
         "keyword": [
             "星座运势"
         ],
-        "url": "http://api.317ak.cn/api/qtapi/xzys/xzys",
+        "url": "http://api.317ak.cn/api/qtapi/xzys",
         "type": "image",
         "params": {
             "msg": ""
