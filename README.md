@@ -170,6 +170,7 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 本插件收录的免费api大多来自下面的站点，希望有能力的使用者可以赞助一下。另外如有某个api失效，可在各站点间找平替。
 
 - 枫林API：<https://api.yuafeng.cn>
+- 枫林API二代: <https://api-v2.yuafeng.cn>
 - 稳定API：<https://api.xingchenfu.xyz>
 - 倾梦API：<https://api.317ak.cn>， 此站点需注册账号获取ckey密钥！！
 - 星之阁API：<https://api.xingzhige.com>
