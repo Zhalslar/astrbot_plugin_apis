@@ -178,3 +178,4 @@ git clone https://github.com/Zhalslar/astrbot_plugin_apis
 - 糖豆子API：<https://api.tangdouz.com>
 - PearAPI：<https://api.pearktrue.cn>
 - 问情免费API：<https://free.wqwlkj.cn>
+- 龙珠API: <https://sdkapi.hhlqilongzhu.cn>
