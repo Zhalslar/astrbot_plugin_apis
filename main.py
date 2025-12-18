@@ -4,7 +4,7 @@ from pathlib import Path
 import astrbot.api.message_components as Comp
 from astrbot.api import logger
 from astrbot.api.event import AstrMessageEvent, filter
-from astrbot.api.star import Context, Star, StarTools, register
+from astrbot.api.star import Context, Star, StarTools
 from astrbot.core.config.astrbot_config import AstrBotConfig
 from astrbot.core.message.components import (
     BaseMessageComponent,
@@ -21,8 +21,7 @@ from .core.request import RequestManager
 from .core.utils import get_nickname
 
 
-@register("astrbot_plugin_apis", "Zhalslar", "API聚合插件", "...", "...")
-class APIsPlugin(Star):
+class APIPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         self.conf = config
