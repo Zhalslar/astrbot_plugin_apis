@@ -1,4 +1,5 @@
 import os
+import json
 from pathlib import Path
 
 import astrbot.api.message_components as Comp
@@ -199,9 +200,18 @@ class APIPlugin(Star):
                 )
             return
 
-        # 发送消息
+        if self.conf.get("debug"):
+            logger.info(
+                f"API调用结果 name={api_data['name']}, type={api_data['type']}, "
+                f"has_text={bool(text)}, has_path={bool(path)}, source={source}"
+            )
+
+        final_type = api_data["type"]
+        if text and not path:
+            final_type = "text"
+
         chain = await self.data_to_chain(
-            api_type=api_data["type"], text=text, path=path
+            api_type=final_type, text=text, path=path
         )
         await event.send(event.chain_result(chain))
         event.stop_event()
@@ -245,6 +255,39 @@ class APIPlugin(Star):
                 api_type=api_data["type"],
                 target=api_data["target"],
             )
+
+            if self.conf.get("debug"):
+                byte_len = len(api_byte) if isinstance(api_byte, (bytes, bytearray)) else 0
+                logger.info(
+                    f"API原始返回 name={api_data['name']}, type={api_data['type']}, "
+                    f"text_type={type(api_text).__name__}, byte_len={byte_len}"
+                )
+
+            is_abnormal = False
+            if api_byte is None and api_text is None:
+                is_abnormal = True
+            elif isinstance(api_text, dict):
+                code = api_text.get("code")
+                if isinstance(code, int) and code not in (0, 200):
+                    is_abnormal = True
+            elif isinstance(api_text, str):
+                stripped = api_text.strip()
+                if stripped.startswith("{") and stripped.endswith("}"):
+                    try:
+                        parsed = json.loads(stripped)
+                    except Exception:
+                        parsed = None
+                    if isinstance(parsed, dict):
+                        code = parsed.get("code")
+                        if isinstance(code, int) and code not in (0, 200):
+                            is_abnormal = True
+
+            error_reply = (self.conf.get("error_reply") or "").strip()
+            if is_abnormal:
+                if error_reply:
+                    return error_reply, None, "error"
+                raise RuntimeError(f"API异常返回 [{api_data['name']}]")
+
             if api_text or api_byte:
                 saved_text, saved_path = await self.local.save_data(
                     api_type=api_data["type"],
@@ -255,6 +298,12 @@ class APIPlugin(Star):
                 return saved_text, saved_path, "api"
 
         except Exception as e:
+            error_reply = (self.conf.get("error_reply") or "").strip()
+            if error_reply:
+                logger.warning(
+                    f"API调用失败 [{api_data['name']}]，使用error_reply: {e}"
+                )
+                return error_reply, None, "error"
             logger.warning(f"API调用失败 [{api_data['name']}]，尝试本地兜底: {e}")
 
         # === 本地兜底 ===

@@ -1,4 +1,6 @@
 import asyncio
+import json
+import traceback
 from collections import defaultdict
 
 import aiohttp
@@ -13,38 +15,20 @@ from .utils import dict_to_string, extract_urls, get_nested_value, parse_api_key
 
 class RequestManager:
     headers = {
-        # 核心防盗链
-        "Referer": "https://www.meilishuo.com",
-        # 浏览器 UA（Chrome 122 Win10 64bit）
         "User-Agent": (
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
             "AppleWebKit/537.36 (KHTML, like Gecko) "
             "Chrome/122.0.0.0 Safari/537.36"
         ),
-        # 接受类型（图片/网页通吃）
-        "Accept": ("image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"),
-        # 接受编码（节省流量）
-        "Accept-Encoding": "gzip, deflate, br",
-        # 接受语言
-        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        # 缓存控制
-        "Cache-Control": "no-cache",
-        # 长连接
-        "Connection": "keep-alive",
-        # 可选：模拟浏览器自动升级不安全请求
-        "Upgrade-Insecure-Requests": "1",
-        # 可选：防追踪头，部分 CDN 会参考
-        "Sec-Fetch-Dest": "image",
-        "Sec-Fetch-Mode": "no-cors",
-        "Sec-Fetch-Site": "same-site",
+        "Accept": "*/*",
     }
 
     def __init__(self, config: AstrBotConfig, api_manager: APIManager) -> None:
         self.session = aiohttp.ClientSession()
-        # api密钥字典
         self.api_key_dict = parse_api_keys(config.get("api_keys", []).copy())
         self.api_sites = list(self.api_key_dict.keys())
         self.api = api_manager
+        self.debug = config.get("debug", False)
 
     async def request(
         self, urls: list[str], params: dict | None = None, test_mode: bool = False
@@ -52,21 +36,65 @@ class RequestManager:
         last_exc = None
         for url in urls:
             try:
+                request_headers = self.headers.copy()
+                request_params = dict(params) if params is not None else {}
+
+                base_url = self.api.extract_base_url(url)
+                if base_url in self.api_key_dict:
+                    api_key = self.api_key_dict[base_url]
+                    if "ckey" not in request_headers:
+                        request_headers["ckey"] = api_key
+                    if "ckey" not in request_params:
+                        request_params["ckey"] = api_key
+
+                if self.debug:
+                    redacted_params = dict(request_params)
+                    if "ckey" in redacted_params:
+                        redacted_params["ckey"] = "***"
+                    logger.info(
+                        f"准备请求 url={url}, base_url={base_url}, "
+                        f"params_keys={list(request_params.keys())}, "
+                        f"params_preview={redacted_params}"
+                    )
+
                 async with self.session.get(
-                    url=url, headers=self.headers, params=params, timeout=30
+                    url=url, headers=request_headers, params=request_params or None, timeout=30
                 ) as resp:
                     resp.raise_for_status()
+                    if self.debug:
+                        ct = resp.headers.get("Content-Type", "").lower()
+                        logger.info(
+                            f"请求完成 url={url}, status={resp.status}, content_type={ct}"
+                        )
                     if test_mode:
                         return
                     ct = resp.headers.get("Content-Type", "").lower()
                     if "application/json" in ct:
-                        return await resp.json()
+                        text = await resp.text()
+                        if self.debug:
+                            logger.info(
+                                f"响应内容预览(url={url}, json_raw={text})"
+                            )
+                        try:
+                            return json.loads(text)
+                        except Exception:
+                            return text
                     if "text/" in ct:
-                        return (await resp.text()).strip()
-                    return await resp.read()
+                        text = (await resp.text()).strip()
+                        if self.debug:
+                            logger.info(
+                                f"响应内容预览(url={url}, text={text})"
+                            )
+                        return text
+                    content = await resp.read()
+                    if self.debug:
+                        logger.info(
+                            f"响应内容为二进制(url={url}, length={len(content)})"
+                        )
+                    return content
             except Exception as e:
                 last_exc = e
-                logger.error(f"请求失败 {url}:{e}")
+                logger.error(f"请求失败 {url}: {e}\n{traceback.format_exc()}")
         if last_exc:
             raise last_exc
 
@@ -81,7 +109,13 @@ class RequestManager:
 
         data = await self.request(urls, params)
 
-        # data为URL时，下载数据
+        if isinstance(data, dict) and target:
+            nested_value = get_nested_value(data, target)
+            if isinstance(nested_value, dict):
+                data = dict_to_string(nested_value)
+            else:
+                data = nested_value
+
         if isinstance(data, str) and api_type != "text":
             if new_urls := extract_urls(data):
                 downloaded = await self.request(new_urls)
@@ -89,14 +123,6 @@ class RequestManager:
                     data = downloaded
                 else:
                     raise RuntimeError(f"下载数据失败: {new_urls}")  # 抛异常给外部
-
-        # data为字典时，解析字典
-        if isinstance(data, dict) and target:
-            nested_value = get_nested_value(data, target)
-            if isinstance(nested_value, dict):
-                data = dict_to_string(nested_value)
-            else:
-                data = nested_value
 
         # data为HTML字符串时，解析HTML
         if isinstance(data, str) and data.strip().startswith("<!DOCTYPE html>"):
