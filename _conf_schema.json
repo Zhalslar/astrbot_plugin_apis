@@ -51,6 +51,12 @@
       "http://api.317ak.cn:api_key"
     ]
   },
+  "error_reply": {
+    "description": "API异常时回复内容",
+    "hint": "当接口返回错误或异常数据且此项不为空时，将直接回复该内容，而不使用本地兜底；留空则使用本地兜底",
+    "type": "string",
+    "default": ""
+  },
   "disable_sites": {
     "description": "禁用的api站点",
     "hint": "禁用列表内的api站点会被屏蔽，从而禁止访问",

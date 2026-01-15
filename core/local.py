@@ -2,6 +2,8 @@ import json
 import random
 from pathlib import Path
 
+from astrbot.api import logger
+
 
 class LocalDataManagerError(Exception):
     """本地数据管理器异常"""
@@ -73,6 +75,9 @@ class LocalDataManager:
             idx = len(list(save_dir.iterdir()))
             saved_path = save_dir / f"{path_name}_{idx}_api{ext}"
             saved_path.write_bytes(byte)  # type: ignore[arg-type]
+            logger.debug(
+                f"本地保存数据成功 api_type={api_type}, path={saved_path}, size={len(byte)}"
+            )
 
         return saved_text, saved_path
 
@@ -117,5 +122,6 @@ class LocalDataManager:
                 raise LocalDataManagerError(f"目录为空: {folder}")
 
             path = random.choice(files)
+            logger.debug(f"本地读取数据 api_type={api_type}, path={path}")
 
             return None, path
