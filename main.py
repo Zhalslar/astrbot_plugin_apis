@@ -41,14 +41,20 @@ class APIPlugin(Star):
 
     async def initialize(self):
         await self.core.start()
-        if self.config["load_presets"]:
-            self.core.load_api_pool_from_file(self.api_pool_file)
-            self.core.load_site_pool_from_file(self.site_pool_file)
-            self.config["load_presets"] = False
-            self.config.save_config()
+        self._load_presets()
 
     async def terminate(self):
         await self.core.stop()
+
+    def _load_presets(self):
+        if self.config["load_presets"]:
+            try:
+                self.core.load_api_pool_from_file(self.api_pool_file)
+                self.core.load_site_pool_from_file(self.site_pool_file)
+                self.config["load_presets"] = False
+                self.config.save_config()
+            except Exception as e:
+                logger.error(f"加载预设失败: {e}")
 
     @staticmethod
     async def data_to_comp(data: DataResource) -> Comp.BaseMessageComponent:
