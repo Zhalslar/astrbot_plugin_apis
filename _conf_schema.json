@@ -21,6 +21,6 @@
     "description": "加载预设",
     "hint": "加载v站点池和API池的预设文件, 预设文件存放在 data/plugins/astrbot_plugin_apis/presets 目录下。建议加载一次后就可以了",
     "type": "bool",
-    "default": false
+    "default": true
   }
 }
