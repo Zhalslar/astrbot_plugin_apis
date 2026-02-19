@@ -16,5 +16,11 @@
     "hint": "当接口返回错误或异常数据且此项不为空时, 若存在本地数据则使用本地数据兜底",
     "type": "bool",
     "default": true
+  },
+  "load_presets": {
+    "description": "加载预设",
+    "hint": "加载v站点池和API池的预设文件, 预设文件存放在 data/plugins/astrbot_plugin_apis/presets 目录下。建议加载一次后就可以了",
+    "type": "bool",
+    "default": false
   }
 }

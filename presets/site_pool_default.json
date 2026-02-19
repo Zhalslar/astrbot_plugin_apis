@@ -1,0 +1,60 @@
+[
+  {
+    "name": "星之阁API",
+    "url": "https://api.xingzhige.com",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 2
+  },
+  {
+    "name": "纯净API",
+    "url": "https://api.pearktrue.cn",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 6
+  },
+  {
+    "name": "问情免费API",
+    "url": "https://free.wqwlkj.cn",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 8
+  },
+  {
+    "name": "FAPI",
+    "url": "https://api.lolimi.cn",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 14
+  },
+  {
+    "name": "糖豆子API",
+    "url": "https://api.tangdouz.com",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 17
+  },
+  {
+    "name": "枫林API",
+    "url": "https://api.yuafeng.cn",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 30
+  },
+  {
+    "name": "倾梦API",
+    "url": "http://api.317ak.cn",
+    "headers": {},
+    "keys": {
+      "ckey": ""
+    },
+    "timeout": 60,
+    "api_count": 45
+  }
+]

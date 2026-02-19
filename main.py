@@ -1,4 +1,5 @@
 import base64
+from pathlib import Path
 from typing import Any
 
 from api_aggregator import APICoreApp, APIEntry, DataResource
@@ -10,22 +11,41 @@ from astrbot.api.star import Context, Star
 from astrbot.core.config.astrbot_config import AstrBotConfig
 from astrbot.core.message.message_event_result import MessageChain
 from astrbot.core.star.filter.event_message_type import EventMessageType
-from astrbot.core.star.star_tools import StarTools
+from astrbot.core.utils.astrbot_path import (
+    get_astrbot_plugin_data_path,
+    get_astrbot_plugin_path,
+)
 
 from .utils import get_nickname, get_reply_text, resolve_cron_target_sessions
 
 
 class APIPlugin(Star):
+    """
+    API插件
+    """
+
+    _plugin_name = "astrbot_plugin_apis"
+
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         self.config = config
         self.admin_ids = self.context.get_config().get("admins_id", [])
-        self.data_dir = StarTools.get_data_dir("astrbot_plugin_apis")
+        self.data_dir = Path(get_astrbot_plugin_data_path()) / self._plugin_name
+        self.plugin_dir = Path(get_astrbot_plugin_path()) / self._plugin_name
+        self.presets_dir = self.plugin_dir / "presets"
+        self.api_pool_file = self.presets_dir / "api_pool_default.json"
+        self.site_pool_file = self.presets_dir / "site_pool_default.json"
+
         self.core = APICoreApp(data_dir=self.data_dir)
         self.core.set_cron_entry_handler(self.on_entry_cron_trigger)
 
     async def initialize(self):
         await self.core.start()
+        if self.config["load_presets"]:
+            self.core.load_api_pool_from_file(self.api_pool_file)
+            self.core.load_site_pool_from_file(self.site_pool_file)
+            self.config["load_presets"] = False
+            self.config.save_config()
 
     async def terminate(self):
         await self.core.stop()

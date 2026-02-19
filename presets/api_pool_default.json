@@ -1,0 +1,1579 @@
+[
+  {
+    "name": "安慕希",
+    "url": "http://api.317ak.cn/api/sp/amxx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "安慕希"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "安慰",
+    "url": "http://api.317ak.cn/api/wz/awyl",
+    "type": "text",
+    "params": {
+      "type": "text"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "安慰"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "奥运会",
+    "url": "https://api.lolimi.cn/API/ayh/i.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "奥运会"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "拜托前辈",
+    "url": "http://api.317ak.cn/api/sp/btqb",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "拜托前辈"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "报时",
+    "url": "https://api.yuafeng.cn/API/ly/baoshi.php",
+    "type": "audio",
+    "params": {
+      "mode": "msw"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "报时",
+      "整点报时"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "背影变装",
+    "url": "http://api.317ak.cn/api/sp/bybz",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "背影变装"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "擦玻璃",
+    "url": "http://api.317ak.cn/api/sp/cblx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "擦玻璃"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "超甜辣妹",
+    "url": "https://api.lolimi.cn/API/xjj/lt.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "超甜辣妹"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "嘲讽",
+    "url": "http://api.317ak.cn/api/wz/cfyl",
+    "type": "text",
+    "params": {
+      "type": "text"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "嘲讽"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "电脑壁纸",
+    "url": "https://api.yuafeng.cn/API/dnbz/api.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "电脑壁纸"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "电影票房",
+    "url": "https://api.yuafeng.cn/API/dypf/api.php",
+    "type": "text",
+    "params": {
+      "mod": "电影详细数据"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "电影票房"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "动漫变装",
+    "url": "http://api.317ak.cn/api/sp/dmbz",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "动漫变装"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "动漫一言",
+    "url": "https://api.lolimi.cn/API/dmyiyan/api.php",
+    "type": "text",
+    "params": {},
+    "parse": "text",
+    "scope": [],
+    "keywords": [
+      "动漫一言"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "斗图",
+    "url": "https://api.lolimi.cn/API/dou/api.php",
+    "type": "image",
+    "params": {},
+    "parse": "data.image",
+    "scope": [],
+    "keywords": [
+      "斗图"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "毒鸡汤",
+    "url": "https://api.yuafeng.cn/API/ly/djt.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "毒鸡汤"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "读世界",
+    "url": "https://api.yuafeng.cn/API/60s/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "读世界"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "蹲下变装",
+    "url": "http://api.317ak.cn/api/sp/dxbz",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "蹲下变装"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "二次元形象",
+    "url": "https://api.lolimi.cn/API/Ser/api.php",
+    "type": "text",
+    "params": {
+      "name": ""
+    },
+    "parse": "text",
+    "scope": [],
+    "keywords": [
+      "二次元形象"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "发病",
+    "url": "https://api.tangdouz.com/beill.php",
+    "type": "text",
+    "params": {
+      "keywords": ""
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "发病"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "高清壁纸",
+    "url": "https://api.tangdouz.com/abz/bz.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "高清壁纸"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "高校查询",
+    "url": "https://api.pearktrue.cn/api/college/",
+    "type": "text",
+    "params": {
+      "keyword": "清华"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "高校查询"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "光遇日历",
+    "url": "https://api.lolimi.cn/API/gy/ril.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "光遇日历"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "号码归属地",
+    "url": "https://free.wqwlkj.cn/wqwlapi/phone_area.php",
+    "type": "text",
+    "params": {
+      "phone": ""
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "号码归属地"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "黑白双煞",
+    "url": "http://api.317ak.cn/api/sp/hbss",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "黑白双煞"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "黄金价格",
+    "url": "https://api.pearktrue.cn/api/goldprice/",
+    "type": "text",
+    "params": {},
+    "parse": "data[]",
+    "scope": [],
+    "keywords": [
+      "黄金价格"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "火车摇",
+    "url": "http://api.317ak.cn/api/sp/hcyx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "火车摇"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "鸡叫",
+    "url": "https://api.yuafeng.cn/API/ly/kun.php",
+    "type": "audio",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "鸡叫",
+      "小黑子"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲个笑话",
+    "url": "https://api.yuafeng.cn/API/ly/xiaohua.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲个笑话"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲爱情",
+    "url": "https://api.yuafeng.cn/API/ly/aiqing.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲爱情"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲摆烂",
+    "url": "https://api.yuafeng.cn/API/ly/wzrjcs.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲摆烂"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲古诗",
+    "url": "https://api.yuafeng.cn/API/ly/gushi.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲古诗"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲人生",
+    "url": "https://api.yuafeng.cn/API/ly/rensheng.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲人生"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲伤感",
+    "url": "https://api.yuafeng.cn/API/ly/shanggan.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲伤感"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲舔狗",
+    "url": "https://api.yuafeng.cn/API/ly/tiangou.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲舔狗"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲温柔",
+    "url": "https://api.yuafeng.cn/API/ly/wenrou.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲温柔"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "讲讲英汉",
+    "url": "https://api.yuafeng.cn/API/ly/yhyl.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "讲讲英汉"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "今日运势",
+    "url": "https://api.tangdouz.com/wz/luck.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "今日运势"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "今天吃什么",
+    "url": "https://api.pearktrue.cn/api/today/food.php",
+    "type": "text",
+    "params": {},
+    "parse": "food",
+    "scope": [],
+    "keywords": [
+      "今天吃什么"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "鞠婧祎",
+    "url": "http://api.317ak.cn/api/sp/jjyx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "鞠婧祎"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看穿搭",
+    "url": "http://api.317ak.cn/api/sp/cdxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看穿搭"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看吊带",
+    "url": "http://api.317ak.cn/api/sp/ddxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看吊带"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看动漫",
+    "url": "https://api.yuafeng.cn/API/ly/dmxl.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看动漫"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看腹肌",
+    "url": "http://api.317ak.cn/api/sp/fjbz",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看腹肌"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看公主",
+    "url": "http://api.317ak.cn/api/sp/gzhy",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看公主"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看光剑",
+    "url": "http://api.317ak.cn/api/sp/gjbz",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看光剑"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看红鸾",
+    "url": "http://api.317ak.cn/api/sp/hljj",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看红鸾"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看黄历",
+    "url": "https://api.lolimi.cn/API/huang/api.php",
+    "type": "text",
+    "params": {},
+    "parse": "text",
+    "scope": [],
+    "keywords": [
+      "看看黄历"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看久喵",
+    "url": "http://api.317ak.cn/api/sp/jmxl",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看久喵"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看狼宝",
+    "url": "http://api.317ak.cn/api/sp/lbjj",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看狼宝"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看萝莉",
+    "url": "http://api.317ak.cn/api/sp/llxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看萝莉"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看慢摇",
+    "url": "http://api.317ak.cn/api/sp/myxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看慢摇"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看漫画",
+    "url": "https://api.yuafeng.cn/API/ly/mhy.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看漫画"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看萌娃",
+    "url": "http://api.317ak.cn/api/sp/mwxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看萌娃"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看妞",
+    "url": "https://free.wqwlkj.cn/wqwlapi/ks_xjj.php?type=image",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看妞"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看女大",
+    "url": "https://api.yuafeng.cn/API/ly/cqng.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看女大"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看女仆",
+    "url": "http://api.317ak.cn/api/sp/npxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看女仆"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看清纯",
+    "url": "http://api.317ak.cn/api/sp/qcxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看清纯"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看晴天",
+    "url": "http://api.317ak.cn/api/sp/qttj",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看晴天"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看骚的",
+    "url": "https://api.yuafeng.cn/API/ly/sjxl.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看骚的"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看色色",
+    "url": "https://api.yuafeng.cn/API/ly/sp.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看色色"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看甩裙",
+    "url": "http://api.317ak.cn/api/sp/sqxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看甩裙"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看帅哥",
+    "url": "https://api.yuafeng.cn/API/ly/sgxl.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看帅哥"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看兔子",
+    "url": "http://api.317ak.cn/api/sp/ttmn",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看兔子"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看微胖",
+    "url": "http://api.317ak.cn/api/sp/wpxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看微胖"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看仙桃猫",
+    "url": "http://api.317ak.cn/api/sp/xtmx",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看仙桃猫"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看小雪",
+    "url": "http://api.317ak.cn/api/sp/xxmm",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看小雪"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看心情",
+    "url": "http://api.317ak.cn/api/sp/xqhh",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看心情"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看雪梨",
+    "url": "http://api.317ak.cn/api/sp/xlmn",
+    "type": "video",
+    "params": {
+      "type": "json"
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "看看雪梨"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看余震",
+    "url": "http://api.317ak.cn/api/sp/yzxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看余震"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看玉足",
+    "url": "https://api.yuafeng.cn/API/ly/yzxl.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看玉足"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看欲梦",
+    "url": "http://api.317ak.cn/api/sp/ndym",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看欲梦"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看原神",
+    "url": "http://api.317ak.cn/api/sp/yssp",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看原神"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看治愈",
+    "url": "https://api.yuafeng.cn/API/ly/zyxl.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看治愈"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看COS",
+    "url": "http://api.317ak.cn/api/sp/cosxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看COS"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "看看emo",
+    "url": "https://api.yuafeng.cn/API/ly/emo.php",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看emo"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "坤",
+    "url": "https://free.wqwlkj.cn/wqwlapi/ikun.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "坤"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "垃圾分类",
+    "url": "https://api.tangdouz.com/a/garbage.php",
+    "type": "text",
+    "params": {
+      "nr": ""
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "垃圾分类"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来点段子",
+    "url": "https://api.lolimi.cn/API/yiyan/dz.php",
+    "type": "text",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来点段子"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来点腹肌",
+    "url": "http://api.317ak.cn/api/tp/fjtp",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来点腹肌"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来点帅哥",
+    "url": "https://api.lolimi.cn/API/boy/api.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来点帅哥"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来点文案",
+    "url": "https://api.tangdouz.com/a/refuel.php",
+    "type": "text",
+    "params": {
+      "f": "哲理"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来点文案"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来份早报",
+    "url": "https://api.yuafeng.cn/API/60sn/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来份早报"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来个头像",
+    "url": "https://api.yuafeng.cn/API/ecr/api.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来个头像"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来句情话",
+    "url": "https://api.yuafeng.cn/API/ly/twqh.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "来句情话"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来句骚话",
+    "url": "https://api.yuafeng.cn/API/ly/saohua.php",
+    "type": "text",
+    "params": {
+      "type": "json"
+    },
+    "parse": "Msg",
+    "scope": [],
+    "keywords": [
+      "来句骚话"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来句诗",
+    "url": "https://api.tangdouz.com/a/poetrand.php",
+    "type": "text",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来句诗"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来篇文章",
+    "url": "https://api.tangdouz.com/a/jt.php",
+    "type": "text",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来篇文章"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "来碗鸡汤",
+    "url": "https://api.tangdouz.com/a/jt.php",
+    "type": "text",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "来碗鸡汤"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "猫系女友",
+    "url": "http://api.317ak.cn/api/sp/mxny",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "猫系女友"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "每日日报",
+    "url": "https://api.tangdouz.com/a/60/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "每日日报"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "每日听力",
+    "url": "https://api.tangdouz.com/a/perday.php",
+    "type": "audio",
+    "params": {
+      "return": "json"
+    },
+    "parse": "tts",
+    "scope": [],
+    "keywords": [
+      "每日听力"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "每日一签",
+    "url": "https://api.lolimi.cn/API/riq/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "每日一签"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "逆天语音",
+    "url": "https://api.yuafeng.cn/API/ly/sjyy.php",
+    "type": "audio",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "逆天语音"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "起个网名",
+    "url": "https://free.wqwlkj.cn/wqwlapi/gxwm.php",
+    "type": "text",
+    "params": {
+      "msg": "非主流"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "起个网名"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "人品运势",
+    "url": "https://api.lolimi.cn/API/Ren/api.php",
+    "type": "text",
+    "params": {
+      "name": "",
+      "type": "json"
+    },
+    "parse": "text",
+    "scope": [],
+    "keywords": [
+      "人品运势"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "日历",
+    "url": "https://api.tangdouz.com/htmlimage/rl.php",
+    "type": "image",
+    "params": {
+      "theme": "原神"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "日历"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "三坑少女",
+    "url": "https://api.pearktrue.cn/api/beautifulgirl/?type=image",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "三坑少女"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "生成二维码",
+    "url": "https://api.yuafeng.cn/API/ly/qrcode.php",
+    "type": "image",
+    "params": {
+      "text": "https://space.bilibili.com/496733846"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "生成二维码"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "竖屏动漫壁纸",
+    "url": "https://api.lolimi.cn/API/dmtx/sp.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "竖屏动漫壁纸"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "搜表情",
+    "url": "https://api.tangdouz.com/a/biaoq.php",
+    "type": "image",
+    "params": {
+      "nr": "",
+      "return": "text"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "搜表情"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "搜菜谱",
+    "url": "https://api.tangdouz.com/dtss.php",
+    "type": "image",
+    "params": {
+      "nr": "",
+      "f": "1",
+      "return": "json"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "搜菜谱"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "搜图",
+    "url": "https://api.tangdouz.com/sgst.php",
+    "type": "image",
+    "params": {
+      "nr": ""
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "搜图"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "随机上色",
+    "url": "https://free.wqwlkj.cn/wqwlapi/zsytw.php",
+    "type": "image",
+    "params": {
+      "msg": "",
+      "font_size": "20",
+      "type": "",
+      "line": "/n"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "随机上色"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "挑战古诗词",
+    "url": "https://free.wqwlkj.cn/wqwlapi/tzgsc.php",
+    "type": "text",
+    "params": {
+      "msg": "1"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "挑战古诗词"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "王者语音",
+    "url": "https://free.wqwlkj.cn/wqwlapi/wzheroyy.php",
+    "type": "audio",
+    "params": {
+      "hero": "孙悟空"
+    },
+    "parse": "data[].voice",
+    "scope": [],
+    "keywords": [
+      "王者语音"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "显卡排行榜",
+    "url": "https://api.tangdouz.com/a/gpu.php",
+    "type": "text",
+    "params": {
+      "f": "desktop"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "显卡排行榜"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "香烟价格",
+    "url": "https://api.lolimi.cn/API/xyan/api.php",
+    "type": "text",
+    "params": {
+      "msg": "雪莲"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "香烟价格"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "潇潇",
+    "url": "http://api.317ak.cn/api/sp/xxxl",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "潇潇"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "刑法",
+    "url": "https://api.tangdouz.com/xf.php",
+    "type": "text",
+    "params": {
+      "nr": ""
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "刑法"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "硬气卡点",
+    "url": "http://api.317ak.cn/api/sp/yqkd",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "硬气卡点"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "又纯又欲",
+    "url": "http://api.317ak.cn/api/sp/ycyy",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "又纯又欲"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "御姐撒娇",
+    "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
+    "type": "audio",
+    "params": {},
+    "parse": "audiopath",
+    "scope": [],
+    "keywords": [
+      "御姐撒娇"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "原神",
+    "url": "https://api.xingzhige.com/API/yshl/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "原神"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "原神黄历",
+    "url": "https://api.xingzhige.com/API/yshl/",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "原神黄历"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "中草药",
+    "url": "https://api.tangdouz.com/a/zcy.php",
+    "type": "text",
+    "params": {
+      "nr": "当归"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "中草药"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "周清欢",
+    "url": "http://api.317ak.cn/api/sp/zqhx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "周清欢"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "周扬青",
+    "url": "http://api.317ak.cn/api/sp/zyqx",
+    "type": "video",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "周扬青"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "B站更新",
+    "url": "https://api.lolimi.cn/API/B_Update_Days/api.php",
+    "type": "text",
+    "params": {
+      "num": 3
+    },
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "B站更新"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "bing图",
+    "url": "https://free.wqwlkj.cn/wqwlapi/bing.php",
+    "type": "image",
+    "params": {},
+    "parse": "img",
+    "scope": [],
+    "keywords": [
+      "bing图"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "KFC",
+    "url": "http://api.317ak.cn/api/wz/KFC",
+    "type": "text",
+    "params": {
+      "type": "text"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "KFC",
+      "kfc",
+      "疯狂星期四",
+      "肯德基",
+      "v我50"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "Linux命令",
+    "url": "https://api.pearktrue.cn/api/linux/",
+    "type": "text",
+    "params": {
+      "keyword": ""
+    },
+    "parse": "data.content",
+    "scope": [],
+    "keywords": [
+      "Linux命令"
+    ],
+    "cron": ""
+  },
+  {
+    "name": "QQ签名",
+    "url": "http://api.317ak.cn/api/wz/QQqm",
+    "type": "text",
+    "params": {
+      "type": "text"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "QQ签名"
+    ],
+    "cron": ""
+  }
+]
