@@ -176,6 +176,7 @@ class APIPlugin(Star):
         if not entries:
             return
 
+        handled = False
         for entry in entries:
             entry.updated_params = await self._build_params(event, entry, args)
             try:
@@ -195,7 +196,12 @@ class APIPlugin(Star):
                 logger.error(f"data processing failed: {exc}")
                 continue
 
-            yield event.chain_result([comp])
+            if not handled:
+                # Ensure this message is exclusively handled by this plugin.
+                event.should_call_llm(True)
+                event.stop_event()
+                handled = True
+            await event.send(MessageChain([comp]))
 
             if not self.config["save_data"]:
                 data.unlink()
