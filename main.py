@@ -29,6 +29,7 @@ class APIPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         self.config = config
+        self.context = context
         self.admin_ids = self.context.get_config().get("admins_id", [])
         self.data_dir = Path(get_astrbot_plugin_data_path()) / self._plugin_name
         self.plugin_dir = Path(get_astrbot_plugin_path()) / self._plugin_name
@@ -176,6 +177,7 @@ class APIPlugin(Star):
         if not entries:
             return
 
+        event.should_call_llm(True)
         for entry in entries:
             entry.updated_params = await self._build_params(event, entry, args)
             try:

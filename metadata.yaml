@@ -2,6 +2,6 @@ name: astrbot_plugin_apis
 display_name: API聚合
 desc: API聚合插件, 海量免费API动态添加, 支持用面板管理
 help: 略
-version: v3.0.2
+version: v3.0.3
 author: Zhalslar
 repo: https://github.com/Zhalslar/astrbot_plugin_apis
