@@ -1,0 +1,65 @@
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="name">Name</span>
+    <span class="field-note" data-editor-i18n="api_name_note">Unique API name for identification and search</span>
+  </div>
+  <input id="apiName" class="text-input">
+</label>
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="url">URL</span>
+    <span class="field-note" data-editor-i18n="api_url_note">Full request URL with protocol</span>
+  </div>
+  <input id="apiUrl" class="text-input">
+</label>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="params" data-add-action="pair" data-add-target="apiParams" role="button" tabindex="0">Params</span>
+    <span class="field-note" data-editor-i18n="api_params_note">Request parameters, one key-value per row</span>
+  </div>
+  <div class="field-value">
+    <div id="apiParams" class="collection-box"></div>
+  </div>
+</div>
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="type">Type</span>
+    <span class="field-note" data-editor-i18n="api_type_note">Expected data type returned by this API</span>
+  </div>
+  <select id="apiType" class="select-input">
+    <option value="text">text</option>
+    <option value="image">image</option>
+    <option value="video">video</option>
+    <option value="audio">audio</option>
+  </select>
+</label>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="parse" data-add-action="list" data-add-target="apiParseList" role="button" tabindex="0">Parse</span>
+    <span class="field-note" data-editor-i18n="api_parse_note">Parsing path or extraction expression, one item per row</span>
+  </div>
+  <div class="field-value">
+    <div id="apiParseList" class="collection-box"></div>
+  </div>
+</div>
+<div class="field field-wide">
+  <div class="field-divider" aria-hidden="true"></div>
+</div>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="scope" data-add-action="list" data-add-target="apiScopeList" role="button" tabindex="0">Scope</span>
+    <span class="field-note" data-editor-i18n="api_scope_note">Allowed identities for activation, such as user/group/session/admin</span>
+  </div>
+  <div class="field-value">
+    <div id="apiScopeList" class="collection-box"></div>
+  </div>
+</div>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="keywords" data-add-action="list" data-add-target="apiKeywordsList" role="button" tabindex="0">Keywords</span>
+    <span class="field-note" data-editor-i18n="api_keywords_note">Regex trigger patterns, one pattern per row</span>
+  </div>
+  <div class="field-value">
+    <div id="apiKeywordsList" class="collection-box"></div>
+  </div>
+</div>

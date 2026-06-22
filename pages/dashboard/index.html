@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="page_title">API Aggregator</title>
+  <link rel="stylesheet" href="./assets/css/page.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="running-tasks-fab" id="runningTasksFab">
+      <button
+        id="runningTasksToggle"
+        class="running-tasks-toggle"
+        type="button"
+        onclick="onToggleRunningTasksPanel()"
+        title="Running Tasks"
+        aria-label="Running Tasks"
+      >
+        <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 5A2 2 0 0 1 5 3H11A2 2 0 0 1 13 5V11A2 2 0 0 1 11 13H5A2 2 0 0 1 3 11V5M5 5V11H11V5H5M14 5A2 2 0 0 1 16 3H19A2 2 0 0 1 21 5V8A2 2 0 0 1 19 10H16A2 2 0 0 1 14 8V5M16 5V8H19V5H16M14 16A2 2 0 0 1 16 14H19A2 2 0 0 1 21 16V19A2 2 0 0 1 19 21H16A2 2 0 0 1 14 19V16M16 16V19H19V16H16M3 16A2 2 0 0 1 5 14H11A2 2 0 0 1 13 16V19A2 2 0 0 1 11 21H5A2 2 0 0 1 3 19V16M5 16V19H11V16H5Z" />
+        </svg>
+        <span class="running-tasks-count" id="runningTasksCount">0</span>
+      </button>
+      <div class="running-tasks-bar" id="runningTasksBar"></div>
+    </div>
+
+    <div class="dashboard-shell">
+      <aside class="panel-sidebar">
+        <div class="sidebar-brand">
+          <img class="sidebar-logo" src="./assets/images/logo.png" alt="API Aggregator Logo">
+        </div>
+        <div class="panel-tabs">
+          <button id="tabBtnSite" class="panel-tab is-active" onclick="switchMainTab('site')">
+            <span class="tab-icon" aria-hidden="true">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M4.06 11H8.08A16.78 16.78 0 0 0 8.84 6.73A8.03 8.03 0 0 0 4.06 11M4.06 13A8.03 8.03 0 0 0 8.84 17.27A16.78 16.78 0 0 0 8.08 13H4.06M11 4.06A7.98 7.98 0 0 0 9.92 5.44A14.83 14.83 0 0 0 10.08 11H13.92A14.83 14.83 0 0 0 14.08 5.44A7.98 7.98 0 0 0 13 4.06V4H11V4.06M13 19.94A7.98 7.98 0 0 0 14.08 18.56A14.83 14.83 0 0 0 13.92 13H10.08A14.83 14.83 0 0 0 9.92 18.56A7.98 7.98 0 0 0 11 19.94V20H13V19.94M15.16 6.73A16.78 16.78 0 0 1 15.92 11H19.94A8.03 8.03 0 0 0 15.16 6.73M15.92 13A16.78 16.78 0 0 1 15.16 17.27A8.03 8.03 0 0 0 19.94 13H15.92Z" /></svg>
+            </span>
+            <span id="tabBtnSiteLabel" class="tab-label" data-i18n="site_pool">Site Pool</span>
+          </button>
+          <button id="tabBtnApi" class="panel-tab" onclick="switchMainTab('api')">
+            <span class="tab-icon" aria-hidden="true">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M8 17L3 12L8 7L9.41 8.41L5.83 12L9.41 15.59L8 17M16 17L14.59 15.59L18.17 12L14.59 8.41L16 7L21 12L16 17Z" /></svg>
+            </span>
+            <span id="tabBtnApiLabel" class="tab-label" data-i18n="api_pool">API Pool</span>
+          </button>
+          <button id="tabBtnLocal" class="panel-tab" onclick="switchMainTab('local')">
+            <span class="tab-icon" aria-hidden="true">
+              <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3C7.03 3 3 4.79 3 7V17C3 19.21 7.03 21 12 21C16.97 21 21 19.21 21 17V7C21 4.79 16.97 3 12 3M12 5C16.42 5 19 6.57 19 7C19 7.43 16.42 9 12 9C7.58 9 5 7.43 5 7C5 6.57 7.58 5 12 5M12 19C7.58 19 5 17.43 5 17V14.5C6.64 15.47 9.12 16 12 16C14.88 16 17.36 15.47 19 14.5V17C19 17.43 16.42 19 12 19M12 14C7.58 14 5 12.43 5 12V9.5C6.64 10.47 9.12 11 12 11C14.88 11 17.36 10.47 19 9.5V12C19 12.43 16.42 14 12 14Z" /></svg>
+            </span>
+            <span id="tabBtnLocalLabel" class="tab-label" data-i18n="local_data_pool">Local Data</span>
+          </button>
+        </div>
+        <div class="sidebar-footer">
+          <div class="sidebar-meta-item">
+            <span class="sidebar-meta-label" data-i18n="sidebar_author_label">Author</span>
+            <a class="sidebar-meta-link" href="https://github.com/Zhalslar" target="_blank" rel="noreferrer noopener" data-i18n="sidebar_author_value">Zhalslar</a>
+          </div>
+          <div class="sidebar-meta-item">
+            <span class="sidebar-meta-label" data-i18n="sidebar_license_label">License</span>
+            <a class="sidebar-meta-link" href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noreferrer noopener" data-i18n="sidebar_license_value">AGPL-3.0</a>
+          </div>
+          <div class="sidebar-meta-item sidebar-meta-item-full">
+            <span class="sidebar-meta-label" data-i18n="sidebar_repository_label">Repository</span>
+            <a class="sidebar-meta-link" href="https://github.com/Zhalslar/astrbot_plugin_apis" target="_blank" rel="noreferrer noopener" data-i18n="sidebar_repository_value">GitHub Repository</a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel-stage">
+        <div id="panelSite" class="main-panel is-active">
+          <div class="card">
+            <div class="card-header">
+              <strong data-i18n="site_pool">Site Pool</strong>
+              <div class="card-actions">
+                <span class="status" id="siteCount">0 items</span>
+                <input
+                  id="siteSearch"
+                  class="select-input pool-search-input"
+                  type="text"
+                  placeholder="Search Site"
+                  oninput="onSiteSearchChange(this.value)"
+                >
+                <select id="sitePageSize" class="select-input pager-size-select" onchange="onSitePageSizeChange(this.value)">
+                  <option value="all" selected>ALL</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                <div id="sitePagerTop" class="pager"></div>
+                <button class="site-add-btn" id="btnAddSite" onclick="openEditor('site')">Add Site</button>
+                <div class="pool-io-menu" id="sitePoolIoMenu">
+                  <button
+                    id="sitePoolIoMenuBtn"
+                    class="pool-io-trigger icon-link-btn"
+                    type="button"
+                    onclick="togglePoolIoMenu(event, 'site')"
+                    title="Import / Export"
+                    aria-label="Import / Export"
+                  >
+                    <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 10L12 15L17 10H7Z" />
+                    </svg>
+                  </button>
+                  <div class="pool-io-dropdown">
+                    <button type="button" onclick="openPoolIoModal('site', 'import')" data-i18n="import_file">Import File</button>
+                    <button type="button" onclick="openPoolIoModal('site', 'export')" data-i18n="export_file">Export File</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-scroll">
+              <table id="siteTable"></table>
+            </div>
+          </div>
+        </div>
+
+        <div id="panelApi" class="main-panel">
+          <div class="card">
+            <div class="card-header">
+              <strong data-i18n="api_pool">API Pool</strong>
+              <div class="card-actions">
+                <span class="status" id="apiCount">0 items</span>
+                <input id="apiSearch" class="select-input pool-search-input" type="text" placeholder="Search API" oninput="onApiSearchChange(this.value)">
+                <div class="site-filter" id="apiSiteFilterWrap">
+                  <button
+                    type="button"
+                    id="apiSiteFilterBtn"
+                    class="select-input site-filter-btn"
+                    onclick="toggleApiSiteFilterDropdown(event)"
+                  >
+                    Sites (0/0)
+                  </button>
+                  <div class="site-filter-dropdown" id="apiSiteFilterDropdown">
+                    <label class="site-filter-option">
+                      <input type="checkbox" id="apiSiteFilterToggleAll" onchange="onApiSiteFilterToggleAll(this.checked)">
+                      <span data-i18n="all_sites">All</span>
+                    </label>
+                    <div class="site-filter-options" id="apiSiteFilterOptions"></div>
+                  </div>
+                </div>
+                <div class="site-filter" id="apiTypeFilterWrap">
+                  <button
+                    type="button"
+                    id="apiTypeFilterBtn"
+                    class="select-input site-filter-btn"
+                    onclick="toggleApiTypeFilterDropdown(event)"
+                  >
+                    Types (0/0)
+                  </button>
+                  <div class="site-filter-dropdown" id="apiTypeFilterDropdown">
+                    <label class="site-filter-option">
+                      <input type="checkbox" id="apiTypeFilterToggleAll" onchange="onApiTypeFilterToggleAll(this.checked)">
+                      <span data-i18n="all_types">All</span>
+                    </label>
+                    <div class="site-filter-options" id="apiTypeFilterOptions"></div>
+                  </div>
+                </div>
+                <select id="apiPageSize" class="select-input pager-size-select" onchange="onApiPageSizeChange(this.value)">
+                  <option value="all" selected>ALL</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                <div id="apiPagerTop" class="pager"></div>
+                <button class="warn" id="btnTestAll" onclick="onTestAllClick(this)">Test All APIs</button>
+                <button class="api-add-btn" id="btnAddApi" onclick="openEditor('api')">Add API</button>
+                <div class="pool-io-menu" id="apiPoolIoMenu">
+                  <button
+                    id="apiPoolIoMenuBtn"
+                    class="pool-io-trigger icon-link-btn"
+                    type="button"
+                    onclick="togglePoolIoMenu(event, 'api')"
+                    title="Import / Export"
+                    aria-label="Import / Export"
+                  >
+                    <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M7 10L12 15L17 10H7Z" />
+                    </svg>
+                  </button>
+                  <div class="pool-io-dropdown">
+                    <button type="button" onclick="openPoolIoModal('api', 'import')" data-i18n="import_file">Import File</button>
+                    <button type="button" onclick="openPoolIoModal('api', 'export')" data-i18n="export_file">Export File</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-scroll">
+              <table id="apiTable"></table>
+            </div>
+          </div>
+        </div>
+
+        <div id="panelLocal" class="main-panel">
+          <div class="card">
+            <div class="card-header">
+              <strong data-i18n="local_data_pool">Local Data</strong>
+              <div class="card-actions">
+                <span class="status" id="localDataCount">0 items</span>
+                <input
+                  id="localSearch"
+                  class="select-input pool-search-input"
+                  type="text"
+                  placeholder="Search Local Data"
+                  oninput="onLocalSearchChange(this.value)"
+                >
+                <div class="site-filter" id="localTypeFilterWrap">
+                  <button
+                    type="button"
+                    id="localTypeFilterBtn"
+                    class="select-input site-filter-btn"
+                    onclick="toggleLocalTypeFilterDropdown(event)"
+                  >
+                    Types (0/0)
+                  </button>
+                  <div class="site-filter-dropdown" id="localTypeFilterDropdown">
+                    <label class="site-filter-option">
+                      <input type="checkbox" id="localTypeFilterToggleAll" onchange="onLocalTypeFilterToggleAll(this.checked)">
+                      <span data-i18n="all_types">All</span>
+                    </label>
+                    <div class="site-filter-options" id="localTypeFilterOptions"></div>
+                  </div>
+                </div>
+                <select id="localPageSize" class="select-input pager-size-select" onchange="onLocalPageSizeChange(this.value)">
+                  <option value="all" selected>ALL</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                <div id="localPagerTop" class="pager"></div>
+                <button id="btnRefreshLocalData" onclick="onRefreshLocalDataClick(this)">Refresh</button>
+              </div>
+            </div>
+            <div class="panel-scroll">
+              <table id="localDataTable"></table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="modal" id="editorModal">
+    <div class="dialog">
+      <div class="row row-gap-bottom">
+        <strong id="editorTitle">Edit</strong>
+        <span class="status" id="editorHint">Structured form</span>
+      </div>
+      <div id="editorForm" class="form-grid"></div>
+      <div class="row row-gap-top modal-actions">
+        <button class="warn" id="btnTestEditor" onclick="onEditorTestClick(this)">Test</button>
+        <button class="primary" id="btnSave" onclick="onSaveClick(this)">Save</button>
+        <button id="btnCancel" onclick="closeEditor()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="testModal">
+    <div class="dialog test-dialog">
+      <div class="row row-gap-bottom">
+        <strong id="testModalTitle" data-i18n="test_all_title">Batch API Test</strong>
+        <span class="status" id="testProgressText"></span>
+      </div>
+      <div class="test-progress-track" aria-hidden="true">
+        <div class="test-progress-fill" id="testProgressFill"></div>
+      </div>
+      <div class="test-summary" id="testSummary" data-i18n="test_waiting">Waiting to start...</div>
+      <div class="test-log" id="testLog"></div>
+      <div class="row row-gap-top modal-actions test-modal-actions">
+        <div class="test-repeat-controls" id="singleTestRepeatControls">
+          <div class="single-test-param-controls" id="singleTestParamControls">
+            <button
+              type="button"
+              id="singleTestParamToggle"
+              class="single-test-param-toggle"
+              onclick="onToggleSingleTestParamSheetClick()"
+              aria-expanded="false"
+            >
+              <span id="singleTestParamToggleText" data-i18n="test_params">Test Params</span>
+              <span class="single-test-param-toggle-icon" aria-hidden="true"></span>
+            </button>
+            <div class="single-test-param-body" id="singleTestParamBody">
+              <div class="single-test-param-rows" id="singleTestParamsRows"></div>
+            </div>
+          </div>
+          <label for="singleTestInterval" class="test-repeat-label" data-i18n="test_repeat_interval">Interval (s)</label>
+          <input
+            id="singleTestInterval"
+            class="text-input test-repeat-input"
+            type="number"
+            min="0"
+            step="0.1"
+            value="3"
+          >
+          <label for="singleTestTimes" class="test-repeat-label" data-i18n="test_repeat_times">Times</label>
+          <input
+            id="singleTestTimes"
+            class="text-input test-repeat-input"
+            type="number"
+            min="1"
+            step="1"
+            value="1"
+          >
+          <button id="btnSingleTestRepeat" type="button" onclick="onToggleSingleRepeatClick(this)" data-i18n="test_repeat_start">Repeat Test</button>
+          <button id="btnSingleTestPause" class="test-repeat-pause-btn" type="button" onclick="onToggleSingleRepeatPauseClick(this)" data-i18n="test_repeat_pause">Pause</button>
+        </div>
+        <div class="test-batch-controls" id="batchTestControls">
+          <button id="btnBatchTestPause" type="button" onclick="onToggleBatchPauseClick()" data-i18n="test_repeat_pause">Pause</button>
+          <button class="danger" id="btnBatchTestStop" type="button" onclick="onStopBatchTestClick()" data-i18n="test_repeat_stop">Stop</button>
+        </div>
+        <button id="btnCloseTestModal" onclick="closeTestModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="localDataModal">
+    <div class="dialog test-dialog" id="localDataDialog">
+      <div class="row row-gap-bottom">
+        <strong id="localDataModalTitle">Local Data</strong>
+        <span class="status" id="localDataModalHint"></span>
+      </div>
+      <div class="test-log" id="localDataItems"></div>
+      <div class="row row-gap-top modal-actions">
+        <button class="danger" id="btnConfirmLocalDataDelete" onclick="onConfirmLocalDataDeleteClick(this)" data-i18n="confirm_delete">Confirm Delete</button>
+        <button id="btnCloseLocalDataModal" onclick="closeLocalDataModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="noticeModal">
+    <div class="dialog notice-dialog">
+      <div class="row row-gap-bottom">
+        <strong id="noticeModalTitle" data-i18n="notice_title">Message</strong>
+      </div>
+      <div class="test-summary restart-status" id="noticeModalMessage"></div>
+      <div class="row row-gap-top modal-actions">
+        <button id="btnNoticeClose" onclick="closeNoticeModal()" data-i18n="close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="poolIoModal">
+    <div class="dialog pool-io-dialog">
+      <div class="row row-gap-bottom">
+        <strong id="poolIoModalTitle" data-i18n="pool_file_modal_title">File Operation</strong>
+        <span class="status" id="poolIoExportCount"></span>
+      </div>
+      <p class="pool-io-meta" id="poolIoModalMessage"></p>
+
+      <div id="poolIoFileWrap" class="pool-io-file-wrap">
+        <p class="pool-io-dir-path" id="poolIoDirPath"></p>
+        <div class="pool-io-default-list" id="poolIoDefaultList"></div>
+        <input
+          id="poolIoDirInput"
+          type="file"
+          accept=".json,application/json"
+          multiple
+          style="display: none"
+          onchange="onPoolIoDirChange(this)"
+        >
+      </div>
+
+      <div class="pool-io-progress-wrap" id="poolIoProgressWrap">
+        <div class="test-progress-track" aria-hidden="true">
+          <div class="test-progress-fill" id="poolIoProgressFill"></div>
+        </div>
+        <div class="pool-io-progress-text" id="poolIoProgressText"></div>
+      </div>
+
+      <div id="poolIoPathWrap" class="pool-io-path-wrap">
+        <label class="pool-io-field">
+          <span class="pool-io-field-label" data-i18n="export_path_label">Directory</span>
+          <input id="poolIoExportPath" class="text-input" type="text" data-i18n-placeholder="export_path_placeholder">
+        </label>
+        <label class="pool-io-field">
+          <span class="pool-io-field-label" data-i18n="export_name_label">File Name</span>
+          <input id="poolIoExportName" class="text-input" type="text" data-i18n-placeholder="export_name_placeholder">
+        </label>
+      </div>
+
+      <div class="row row-gap-top modal-actions">
+        <button
+          type="button"
+          id="btnPoolIoPickDir"
+          class="pool-io-pick-dir-left"
+          onclick="onPoolIoPickDirClick()"
+          data-i18n="import_pick_other_dir"
+        >Import Other Directory</button>
+        <button type="button" class="danger" id="btnPoolIoDelete" onclick="onPoolIoDeleteClick(this)" data-i18n="delete_file">Delete File</button>
+        <button class="primary" id="btnPoolIoConfirm" onclick="onPoolIoConfirmClick(this)" data-i18n="export_file">Export File</button>
+        <button id="btnPoolIoCancel" onclick="closePoolIoModal()" data-i18n="cancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="undo-bar delete-confirm-bar" id="deleteConfirmBar">
+    <div class="delete-confirm-main">
+      <span id="deleteConfirmText"></span>
+      <span id="deleteConfirmList"></span>
+    </div>
+    <button class="danger" id="btnPendingDeleteConfirm" onclick="onConfirmPendingDeleteClick(this)" data-i18n="confirm_delete">Confirm Delete</button>
+    <button id="btnPendingDeleteClear" onclick="clearPendingDeleteSelection()" data-i18n="cancel">Cancel</button>
+  </div>
+
+  <script src="./assets/js/i18n.js"></script>
+  <script src="./assets/js/shared/utils.js"></script>
+  <script src="./assets/js/shared/http.js"></script>
+  <script src="./assets/js/shared/page_helpers.js"></script>
+  <script src="./assets/js/shared/notice_manager.js"></script>
+  <script src="./assets/js/shared/editor_form_manager.js"></script>
+  <script src="./assets/js/shared/editor_manager.js"></script>
+  <script src="./assets/js/shared/test_manager.js"></script>
+  <script src="./assets/js/shared/local_data_manager.js"></script>
+  <script src="./assets/js/shared/pool_actions_manager.js"></script>
+  <script src="./assets/js/shared/pool_io_manager.js"></script>
+  <script src="./assets/js/shared/ui_state_manager.js"></script>
+  <script src="./assets/js/shared/running_tasks_manager.js"></script>
+  <script src="./assets/js/page.js"></script>
+</body>
+
+</html>

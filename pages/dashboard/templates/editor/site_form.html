@@ -1,0 +1,39 @@
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="name">Name</span>
+    <span class="field-note" data-editor-i18n="site_name_note">Unique name for this site</span>
+  </div>
+  <input id="siteName" class="text-input">
+</label>
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="url">URL</span>
+    <span class="field-note" data-editor-i18n="site_url_note">Base site URL with protocol</span>
+  </div>
+  <input id="siteUrl" class="text-input">
+</label>
+<label class="field">
+  <div class="field-label">
+    <span data-editor-i18n="timeout">Timeout</span>
+    <span class="field-note" data-editor-i18n="site_timeout_note">Request timeout in seconds, must be greater than 0</span>
+  </div>
+  <input id="siteTimeout" type="number" min="1" step="1" class="text-input">
+</label>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="headers" data-add-action="pair" data-add-target="siteHeaders" role="button" tabindex="0">Headers</span>
+    <span class="field-note" data-editor-i18n="site_headers_note">Optional request headers, one key-value per row</span>
+  </div>
+  <div class="field-value">
+    <div id="siteHeaders" class="collection-box"></div>
+  </div>
+</div>
+<div class="field field-wide">
+  <div class="field-label">
+    <span data-editor-i18n="keys" data-add-action="pair" data-add-target="siteKeys" role="button" tabindex="0">Keys</span>
+    <span class="field-note" data-editor-i18n="site_keys_note">Custom keys used by this site, one key-value per row</span>
+  </div>
+  <div class="field-value">
+    <div id="siteKeys" class="collection-box"></div>
+  </div>
+</div>
