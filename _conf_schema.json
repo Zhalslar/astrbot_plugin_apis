@@ -3,7 +3,7 @@
     "description": "前缀触发",
     "hint": "启用后, 需要在触发词前加上前缀或者@bot才能触发api",
     "type": "bool",
-    "default": false
+    "default": true
   },
   "save_data": {
     "description": "保存API响应数据",

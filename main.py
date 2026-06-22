@@ -15,7 +15,6 @@ from .utils import get_nickname, get_reply_text
 
 
 class APIPlugin(Star):
-    _plugin_name = "astrbot_plugin_apis"
 
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
