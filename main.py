@@ -1,44 +1,28 @@
 import base64
-from pathlib import Path
 from typing import Any
-
-from api_aggregator import APICoreApp, APIEntry, DataResource
 
 import astrbot.core.message.components as Comp
 from astrbot.api import logger
 from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.api.star import Context, Star
 from astrbot.core.config.astrbot_config import AstrBotConfig
-from astrbot.core.message.message_event_result import MessageChain
 from astrbot.core.star.filter.event_message_type import EventMessageType
-from astrbot.core.utils.astrbot_path import (
-    get_astrbot_plugin_data_path,
-    get_astrbot_plugin_path,
-)
 
-from .utils import get_nickname, get_reply_text, resolve_cron_target_sessions
+from .api_aggregator import APICoreApp, APIEntry, DataResource
+from .config import PluginConfig
+from .page_controller import APIPageController
+from .utils import get_nickname, get_reply_text
 
 
 class APIPlugin(Star):
-    """
-    API插件
-    """
-
     _plugin_name = "astrbot_plugin_apis"
 
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
-        self.config = config
-        self.context = context
-        self.admin_ids = self.context.get_config().get("admins_id", [])
-        self.data_dir = Path(get_astrbot_plugin_data_path()) / self._plugin_name
-        self.plugin_dir = Path(get_astrbot_plugin_path()) / self._plugin_name
-        self.presets_dir = self.plugin_dir / "presets"
-        self.api_pool_file = self.presets_dir / "api_pool_default.json"
-        self.site_pool_file = self.presets_dir / "site_pool_default.json"
-
-        self.core = APICoreApp(data_dir=self.data_dir)
-        self.core.set_cron_entry_handler(self.on_entry_cron_trigger)
+        self.cfg = PluginConfig(config, context)
+        self.core = APICoreApp(self.cfg)
+        self.page_controller = APIPageController(context, self.core)
+        self.page_controller.register_routes()
 
     async def initialize(self):
         await self.core.start()
@@ -48,14 +32,13 @@ class APIPlugin(Star):
         await self.core.stop()
 
     def _load_presets(self):
-        if self.config["load_presets"]:
-            try:
-                self.core.load_api_pool_from_file(self.api_pool_file)
-                self.core.load_site_pool_from_file(self.site_pool_file)
-                self.config["load_presets"] = False
-                self.config.save_config()
-            except Exception as e:
-                logger.error(f"加载预设失败: {e}")
+        try:
+            if not self.core.site_mgr.entries:
+                self.core.load_site_pool_from_file(self.cfg.site_pool_file)
+            if not self.core.api_mgr.entries:
+                self.core.load_api_pool_from_file(self.cfg.api_pool_file)
+        except Exception as e:
+            logger.error(f"加载预设失败: {e}")
 
     @staticmethod
     async def data_to_comp(data: DataResource) -> Comp.BaseMessageComponent:
@@ -144,7 +127,7 @@ class APIPlugin(Star):
 
     # ================ API commands =================
 
-    @filter.command("查看api")
+    @filter.command("查看api", aliases=["查看api列表", "api列表"])
     async def api_detail(self, event: AstrMessageEvent, api_name: str | None = None):
         if api_name:
             entry = self.core.api_mgr.get_entry(api_name)
@@ -156,7 +139,7 @@ class APIPlugin(Star):
 
     @filter.event_message_type(EventMessageType.ALL)
     async def on_message(self, event: AstrMessageEvent):
-        if self.config["need_prefix"] and not event.is_at_or_wake_command:
+        if self.cfg.need_prefix and not event.is_at_or_wake_command:
             return
 
         msg = event.message_str
@@ -183,7 +166,7 @@ class APIPlugin(Star):
             try:
                 data = await self.core.data_service.fetch(
                     entry,
-                    use_local=self.config["use_local"],
+                    use_local=self.cfg.use_local,
                 )
             except Exception as exc:
                 logger.error(f"data processing failed for {entry.name}: {exc}")
@@ -199,45 +182,5 @@ class APIPlugin(Star):
 
             yield event.chain_result([comp])
 
-            if not self.config["save_data"]:
-                data.unlink()
-
-    async def on_entry_cron_trigger(self, entry: APIEntry) -> None:
-        data = await self.core.fetch_cron_data(
-            entry, use_local=self.config["use_local"]
-        )
-        if data is None:
-            return
-
-        try:
-            platform_insts = self.context.platform_manager.platform_insts
-            default_platform_id = (
-                platform_insts[0].meta().id if platform_insts else None
-            )
-            sessions = resolve_cron_target_sessions(
-                entry.scope,
-                default_platform_id=default_platform_id,
-                admin_ids=self.admin_ids,
-            )
-            if not sessions:
-                logger.warning(
-                    f"[cron] entry {entry.name} has no valid target in scope"
-                )
-                return
-
-            comp = await self.data_to_comp(data)
-            sent_count = 0
-            for session in sessions:
-                try:
-                    await self.context.send_message(session, MessageChain([comp]))
-                    sent_count += 1
-                except Exception as exc:
-                    logger.error(
-                        f"[cron] send failed for {entry.name} -> {session}: {exc}"
-                    )
-            logger.debug(
-                f"[cron] send done: entry={entry.name}, targets={len(sessions)}, sent={sent_count}"
-            )
-        finally:
-            if not self.config["save_data"]:
+            if not self.cfg.save_data:
                 data.unlink()
