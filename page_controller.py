@@ -116,13 +116,13 @@ class APIPageController:
             (
                 "/page/local-data/batch",
                 self.delete_local_data_batch,
-                ["DELETE"],
+                ["POST", "DELETE"],
                 "Delete local data batch",
             ),
             (
                 "/page/local-data-item/batch",
                 self.delete_local_data_items_batch,
-                ["DELETE"],
+                ["POST", "DELETE"],
                 "Delete local data item batch",
             ),
         ]
@@ -342,6 +342,8 @@ class APIPageController:
             method, payload = await self._read_json_with_method()
             if method == "PUT":
                 return await self.update_sites_batch(payload)
+            if method == "DELETE":
+                return await self.delete_sites_batch(payload)
             if method != "POST":
                 return self._error(f"unsupported method: {method}", status=405)
             items = ItemsBatch.from_raw(payload).items
@@ -370,9 +372,12 @@ class APIPageController:
         except Exception as exc:
             return self._error(str(exc))
 
-    async def delete_sites_batch(self):
+    async def delete_sites_batch(self, payload: dict[str, Any] | None = None):
         try:
-            method, payload = await self._read_json_with_method()
+            if payload is None:
+                method, payload = await self._read_json_with_method()
+            else:
+                method = "DELETE"
             if method != "DELETE":
                 return self._error(f"unsupported method: {method}", status=405)
             names = NamesBatch.from_raw(payload).names
@@ -393,6 +398,8 @@ class APIPageController:
             method, payload = await self._read_json_with_method()
             if method == "PUT":
                 return await self.update_apis_batch(payload)
+            if method == "DELETE":
+                return await self.delete_apis_batch(payload)
             if method != "POST":
                 return self._error(f"unsupported method: {method}", status=405)
             items = ItemsBatch.from_raw(payload).items
@@ -435,9 +442,12 @@ class APIPageController:
         except Exception as exc:
             return self._error(str(exc))
 
-    async def delete_apis_batch(self):
+    async def delete_apis_batch(self, payload: dict[str, Any] | None = None):
         try:
-            method, payload = await self._read_json_with_method()
+            if payload is None:
+                method, payload = await self._read_json_with_method()
+            else:
+                method = "DELETE"
             if method != "DELETE":
                 return self._error(f"unsupported method: {method}", status=405)
             names = NamesBatch.from_raw(payload).names
