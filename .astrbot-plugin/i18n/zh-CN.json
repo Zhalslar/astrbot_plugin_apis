@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "display_name": "API聚合",
+    "desc": "API聚合插件, 海量免费API动态添加, 支持用面板管理"
+  },
+  "pages": {
+    "dashboard": {
+      "title": "API聚合面板",
+      "description": "管理站点池、API池和本地数据",
+      "ui": {
+        "page_title": "API聚合面板"
+      }
+    }
+  }
+}
