@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "display_name": "API Aggregator",
+    "desc": "Aggregate free APIs with dynamic entries and dashboard management."
+  },
+  "pages": {
+    "dashboard": {
+      "title": "API Aggregator Dashboard",
+      "description": "Manage site pools, API pools, and local data",
+      "ui": {
+        "page_title": "API Aggregator Dashboard"
+      }
+    }
+  }
+}
