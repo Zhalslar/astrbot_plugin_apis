@@ -377,8 +377,9 @@ class APIEntryManager:
         entries = self.list_enabled_entries() if only_enabled else self.entries
         if not entries:
             if only_enabled:
-                return "No enabled API entries."
-            return "No API entries registered."
+                return "当前没有已启用的 API。"
+            return "当前没有可用的 API。"
+
         api_types: dict[str, list[APIEntry]] = {t: [] for t in DataType.values()}
         api_types.setdefault("unknown", [])
         for entry in entries:
@@ -386,11 +387,31 @@ class APIEntryManager:
             api_types.setdefault(api_type, [])
             api_types[api_type].append(entry)
 
-        lines = [f"---- total {len(entries)} APIs ----", ""]
+        type_labels = {
+            DataType.TEXT.value: ("📝", "文本"),
+            DataType.IMAGE.value: ("🖼️", "图片"),
+            DataType.VIDEO.value: ("🎬", "视频"),
+            DataType.AUDIO.value: ("🎵", "音频"),
+            "unknown": ("📦", "其他"),
+        }
+        title = "已启用 API" if only_enabled else "API"
+        lines = [f"📚 {title}（共 {len(entries)} 个）"]
+
         for api_type, items in api_types.items():
             if not items:
                 continue
-            lines.append(f"[{api_type}] {len(items)}:")
-            lines.append(" | ".join(item.name for item in items))
+
             lines.append("")
+            icon, label = type_labels.get(api_type, ("📦", api_type))
+            lines.append(f"{icon} {label} · {len(items)} 个")
+            for start in range(0, len(items), 4):
+                names = " · ".join(item.name for item in items[start : start + 4])
+                lines.append(f"  {names}")
+
+        lines.extend(
+            [
+                "",
+                "💡 发送「查看api API名称」可查看详细参数",
+            ]
+        )
         return "\n".join(lines).strip()
