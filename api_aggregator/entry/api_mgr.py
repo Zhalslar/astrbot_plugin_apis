@@ -373,6 +373,33 @@ class APIEntryManager:
         self.db.batch_update_api_pool(upserts=[entry.to_dict()])
         return True
 
+    @staticmethod
+    def display_entry_detail(entry: APIEntry) -> str:
+        lines = [
+            f"📖 {entry.name} · 使用方法",
+            "",
+            "触发词（任选一个发送）：",
+        ]
+        if entry.keywords:
+            lines.extend(f"  • {keyword}" for keyword in entry.keywords)
+        else:
+            lines.append("  暂无可用触发词")
+
+        if entry.params:
+            lines.extend(["", "参数（按以下顺序填写）："])
+            for index, (name, value) in enumerate(entry.params.items(), start=1):
+                if value is None or (isinstance(value, str) and not value.strip()):
+                    description = "请填写"
+                else:
+                    description = f"默认值：{value}"
+                lines.append(f"  {index}. {name}（{description}）")
+
+            param_names = " ".join(f"[{name}]" for name in entry.params)
+            lines.extend(["", "发送格式：", f"  触发词 {param_names}"])
+        else:
+            lines.extend(["", "直接发送任意一个触发词即可，无需额外参数。"])
+        return "\n".join(lines)
+
     def display_entries(self, *, only_enabled: bool = False) -> str:
         entries = self.list_enabled_entries() if only_enabled else self.entries
         if not entries:

@@ -131,9 +131,12 @@ class APIPlugin(Star):
         if api_name:
             entry = self.core.api_mgr.get_entry(api_name)
             if entry:
-                msg = entry.to_dict()
-                yield event.plain_result(str(msg))
+                yield event.plain_result(
+                    self.core.api_mgr.display_entry_detail(entry)
+                )
                 return
+            yield event.plain_result(f"未找到 API「{api_name}」。")
+            return
         yield event.plain_result(
             self.core.api_mgr.display_entries(only_enabled=True)
         )
