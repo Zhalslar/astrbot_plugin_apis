@@ -373,17 +373,20 @@ class APIEntryManager:
         self.db.batch_update_api_pool(upserts=[entry.to_dict()])
         return True
 
-    def display_entries(self) -> str:
-        if not self.entries:
+    def display_entries(self, *, only_enabled: bool = False) -> str:
+        entries = self.list_enabled_entries() if only_enabled else self.entries
+        if not entries:
+            if only_enabled:
+                return "No enabled API entries."
             return "No API entries registered."
         api_types: dict[str, list[APIEntry]] = {t: [] for t in DataType.values()}
         api_types.setdefault("unknown", [])
-        for entry in self.entries:
+        for entry in entries:
             api_type = entry.type or "unknown"
             api_types.setdefault(api_type, [])
             api_types[api_type].append(entry)
 
-        lines = [f"---- total {len(self.entries)} APIs ----", ""]
+        lines = [f"---- total {len(entries)} APIs ----", ""]
         for api_type, items in api_types.items():
             if not items:
                 continue

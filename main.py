@@ -134,7 +134,9 @@ class APIPlugin(Star):
                 msg = entry.to_dict()
                 yield event.plain_result(str(msg))
                 return
-        yield event.plain_result(self.core.api_mgr.display_entries())
+        yield event.plain_result(
+            self.core.api_mgr.display_entries(only_enabled=True)
+        )
 
     @filter.event_message_type(EventMessageType.ALL)
     async def on_message(self, event: AstrMessageEvent):
