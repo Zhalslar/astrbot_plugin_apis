@@ -124,6 +124,19 @@ class APIPlugin(Star):
 
         return updated_params
 
+    @staticmethod
+    def _format_api_entry_summary(entry: APIEntry) -> str:
+        """Build a compact one-line summary for an API entry.
+
+        Args:
+            entry: API entry to summarize.
+
+        Returns:
+            One readable line for list display.
+        """
+        params = ", ".join(entry.params.keys()) if entry.params else "-"
+        return f"{entry.name} | type={entry.type} | params={params}"
+
     # ================ API commands =================
 
     @filter.command("查看api", aliases=["查看api列表", "api列表"])
@@ -135,6 +148,226 @@ class APIPlugin(Star):
                 yield event.plain_result(str(msg))
                 return
         yield event.plain_result(self.core.api_mgr.display_entries())
+
+    @filter.permission_type(filter.PermissionType.ADMIN)
+    @filter.command("启用api")
+    async def enable_api(self, event: AstrMessageEvent, api_name: str | None = None):
+        """启用api <api名称>"""
+        target_name = str(api_name or "").strip()
+        if not target_name:
+            yield event.plain_result("未指定 API 名称")
+            return
+        entry = self.core.api_mgr.get_entry(target_name)
+        if entry is None:
+            yield event.plain_result(f"未找到 API：{target_name}")
+            return
+        if entry.enabled:
+            yield event.plain_result(f"API 已处于启用状态：{target_name}")
+            return
+        self.core.api_mgr.update_entries(
+            [{"name": target_name, "payload": {"enabled": True}}],
+            resolve_site_name=self.core.site_sync_service.resolve_api_site_name,
+        )
+        yield event.plain_result(f"已启用 API：{target_name}")
+
+    @filter.permission_type(filter.PermissionType.ADMIN)
+    @filter.command("禁用api")
+    async def disable_api(self, event: AstrMessageEvent, api_name: str | None = None):
+        """禁用api <api名称>"""
+        target_name = str(api_name or "").strip()
+        if not target_name:
+            yield event.plain_result("未指定 API 名称")
+            return
+        entry = self.core.api_mgr.get_entry(target_name)
+        if entry is None:
+            yield event.plain_result(f"未找到 API：{target_name}")
+            return
+        if not entry.enabled:
+            yield event.plain_result(f"API 已处于禁用状态：{target_name}")
+            return
+        self.core.api_mgr.update_entries(
+            [{"name": target_name, "payload": {"enabled": False}}],
+            resolve_site_name=self.core.site_sync_service.resolve_api_site_name,
+        )
+        yield event.plain_result(f"已禁用 API：{target_name}")
+
+    @filter.llm_tool()
+    async def query_available_apis(
+        self,
+        event: AstrMessageEvent,
+        query: str = "",
+    ) -> str:
+        """List accessible APIs for the current chat, optionally filtered.
+
+        Args:
+            query(string): Optional search text. It matches API name, site, type, params,
+                keywords, and keyword regex activation.
+
+        Returns:
+            A readable API list or detail block for the LLM.
+        """
+        query_text = str(query or "").strip()
+        user_id = event.get_sender_id()
+        group_id = event.get_group_id()
+        session_id = event.unified_msg_origin
+        is_admin = event.is_admin()
+
+        accessible_entries: list[APIEntry] = []
+        for entry in self.core.api_mgr.list_enabled_entries():
+            if entry.scope:
+                allowed = False
+                for scope in entry.scope:
+                    if scope == "admin" and is_admin:
+                        allowed = True
+                        break
+                    if scope == user_id or scope == group_id or scope == session_id:
+                        allowed = True
+                        break
+                if not allowed:
+                    continue
+            accessible_entries.append(entry)
+
+        if not accessible_entries:
+            return "No accessible APIs are available in the current context."
+
+        if query_text:
+            exact_entry = next(
+                (entry for entry in accessible_entries if entry.name == query_text),
+                None,
+            )
+            if exact_entry is not None:
+                params = ", ".join(exact_entry.params.keys()) if exact_entry.params else "-"
+                return "\n".join(
+                    [
+                        f"API: {exact_entry.name}",
+                        f"Type: {exact_entry.type}",
+                        f"Params: {params}",
+                        f"Site: {exact_entry.site or '-'}",
+                    ]
+                )
+
+        filtered_entries: list[APIEntry] = []
+        if query_text:
+            query_lower = query_text.lower()
+            for entry in accessible_entries:
+                params_text = " ".join(entry.params.keys())
+                keywords_text = " ".join(entry.keywords)
+                haystack = " ".join(
+                    [
+                        entry.name,
+                        entry.site,
+                        entry.type,
+                        params_text,
+                        keywords_text,
+                    ]
+                ).lower()
+                if query_lower in haystack or entry.check_activate(
+                    text=query_text,
+                    user_id=user_id,
+                    group_id=group_id,
+                    session_id=session_id,
+                    is_admin=is_admin,
+                ):
+                    filtered_entries.append(entry)
+        else:
+            filtered_entries = accessible_entries
+
+        if not filtered_entries:
+            return f"No accessible API matched query: {query_text}"
+
+        shown_entries = filtered_entries[:30]
+        lines = [f"Accessible APIs: {len(filtered_entries)}"]
+        for entry in shown_entries:
+            lines.append(f"- {self._format_api_entry_summary(entry)}")
+        if len(filtered_entries) > len(shown_entries):
+            lines.append(f"... and {len(filtered_entries) - len(shown_entries)} more.")
+        lines.append("Use the exact API name with call_api_by_name when you want to invoke one.")
+        return "\n".join(lines)
+
+    @filter.llm_tool()
+    async def call_api_by_name(
+        self,
+        event: AstrMessageEvent,
+        api_name: str,
+        args_text: str = "",
+    ) -> str:
+        """Call one API by name and return or send the result.
+
+        Args:
+            api_name(string): Exact API name from query_available_apis.
+            args_text(string): Optional space-separated arguments used to fill API params.
+
+        Returns:
+            Text result for text APIs, or a delivery summary for media APIs.
+        """
+        target_name = str(api_name or "").strip()
+        if not target_name:
+            return "API call failed: api_name is required."
+
+        user_id = event.get_sender_id()
+        group_id = event.get_group_id()
+        session_id = event.unified_msg_origin
+        is_admin = event.is_admin()
+
+        source_entry = self.core.api_mgr.get_entry(target_name)
+        if source_entry is not None:
+            if not source_entry.check_activate(
+                text=source_entry.name,
+                user_id=user_id,
+                group_id=group_id,
+                session_id=session_id,
+                is_admin=is_admin,
+            ):
+                return "API call failed: the API is not accessible in the current context."
+            entry = APIEntry(source_entry.to_dict())
+        else:
+            matched_entries = self.core.api_mgr.match_entries(
+                target_name,
+                user_id=user_id,
+                group_id=group_id,
+                session_id=session_id,
+                is_admin=is_admin,
+            )
+            if not matched_entries:
+                return f"API call failed: API not found or not accessible: {target_name}"
+            if len(matched_entries) > 1:
+                candidate_names = ", ".join(item.name for item in matched_entries[:10])
+                return (
+                    "API call failed: api_name is ambiguous. "
+                    f"Candidates: {candidate_names}"
+                )
+            entry = matched_entries[0]
+
+        args = [item for item in str(args_text or "").split() if item]
+        entry.updated_params = await self._build_params(event, entry, args)
+
+        try:
+            data = await self.core.data_service.fetch(
+                entry,
+                use_local=self.cfg.use_local,
+            )
+        except Exception as exc:
+            logger.error(f"llm api call failed for {entry.name}: {exc}")
+            return f"API call failed: {exc}"
+
+        if data is None:
+            return f"API call failed: no data returned for {entry.name}."
+
+        if data.data_type.is_text and data.final_text:
+            return data.final_text
+
+        try:
+            comp = await self.data_to_comp(data)
+        except Exception as exc:
+            logger.error(f"llm api result conversion failed for {entry.name}: {exc}")
+            return f"API call failed: result conversion failed: {exc}"
+
+        await event.send(event.chain_result([comp]))  # type: ignore[arg-type]
+
+        if not self.cfg.save_data:
+            data.unlink()
+
+        return f"API call succeeded: sent {data.data_type.value} result for {entry.name}."
 
     @filter.event_message_type(EventMessageType.ALL)
     async def on_message(self, event: AstrMessageEvent):
