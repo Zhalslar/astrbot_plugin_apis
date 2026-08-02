@@ -538,6 +538,10 @@ body {
   row-gap: 6px;
 }
 
+.mobile-card-actions-toggle {
+  display: none;
+}
+
 .card-header strong {
   line-height: 1.2;
 }
@@ -1093,11 +1097,12 @@ code.name-code {
 }
 
 .actions-cell {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.actions-cell > * + * {
+  margin-left: 6px;
 }
 
 #siteTable th:last-child,
@@ -2040,32 +2045,37 @@ button.danger.is-pending-delete {
   color: var(--btn-danger-text);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   body {
-    padding: 10px 12px 12px;
+    padding: 8px 10px 10px;
   }
 
   .dashboard-shell {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 8px;
   }
 
   .panel-sidebar {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
     padding-top: 0;
-    gap: 10px;
+    gap: 8px;
   }
 
   .sidebar-brand {
     padding: 0;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .sidebar-logo {
-    width: min(132px, 46vw);
+    width: min(48px, 12vw);
   }
 
   .panel-stage {
     min-height: 0;
+    overflow: hidden;
   }
 
   .running-tasks-fab {
@@ -2080,32 +2090,194 @@ button.danger.is-pending-delete {
 
   .panel-tabs {
     flex-direction: row;
-    gap: 6px;
+    gap: 4px;
     padding: 0;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .panel-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .panel-tab {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    min-height: 40px;
+    padding: 8px 6px;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .panel-tab.is-active {
+    box-shadow: inset 0 -3px 0 color-mix(in oklab, var(--btn-add-border) 72%, transparent);
+  }
+
+  .panel-tab .tab-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .sidebar-footer {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px 12px;
-    padding: 10px 0 0;
-  }
-
-  .sidebar-meta-item-full {
-    grid-column: 1 / -1;
+    display: none;
   }
 
   .card-actions {
+    display: none;
+    grid-column: 1 / -1;
     width: 100%;
-    margin-left: 0;
-    justify-content: flex-end;
+    max-height: min(42vh, 320px);
+    margin: 0;
+    padding: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--panel) 94%, var(--bg) 6%);
+  }
+
+  .card-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 6px;
+  }
+
+  .mobile-card-actions-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 5px 8px;
+    gap: 5px;
+    border-color: var(--line);
+    background: color-mix(in oklab, var(--panel) 88%, var(--bg) 12%);
+  }
+
+  .mobile-card-actions-toggle::after {
+    content: attr(data-label);
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .mobile-card-actions-toggle .icon-svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-card-actions-toggle[aria-expanded="true"] {
+    color: var(--btn-add-text);
+    border-color: var(--btn-add-border);
+    background: var(--btn-add-bg);
+  }
+
+  .card-actions.is-mobile-open {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .card-actions .status {
+    flex: 0 0 auto;
+  }
+
+  .card-actions .pool-search-input {
+    flex: 1 1 180px;
+  }
+
+  .card-actions .site-filter {
+    flex: 1 1 140px;
+  }
+
+  .card-actions .site-filter-btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  .card-actions .site-filter-dropdown {
+    position: static;
+    width: 100%;
+    max-width: none;
+    margin-top: 4px;
+  }
+
+  #siteTable,
+  #apiTable,
+  #localDataTable {
+    min-width: 680px;
+  }
+
+  #siteTable th:last-child,
+  #apiTable th:last-child,
+  #localDataTable th:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 10;
+    background: var(--bg);
+    box-shadow: -8px 0 12px color-mix(in oklab, var(--overlay) 18%, transparent);
+  }
+
+  #siteTable td:last-child,
+  #apiTable td:last-child,
+  #localDataTable td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 9;
+    background: color-mix(in oklab, var(--panel) 96%, var(--bg) 4%);
+    box-shadow: -8px 0 12px color-mix(in oklab, var(--overlay) 18%, transparent);
+  }
+
+  .actions-cell button {
+    min-height: 32px;
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+  .actions-cell .table-switch {
+    width: 44px;
+    height: 26px;
+  }
+
+  .actions-cell .table-switch .switch-slider::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .actions-cell .table-switch input:checked + .switch-slider::before {
+    transform: translateX(18px);
+  }
+
+  .pool-search-input {
+    min-width: 0;
+    width: auto;
+  }
+
+  .pager {
+    min-width: 0;
+    justify-content: flex-start;
+  }
+
+  .pager-range {
+    min-width: auto;
+    white-space: nowrap;
   }
 
   .site-filter {
-    width: 100%;
+    width: auto;
   }
 
   .site-filter-btn {
-    width: 100%;
+    width: auto;
   }
 
   .site-filter-dropdown {
@@ -2168,5 +2340,34 @@ button.danger.is-pending-delete {
 
   #testModal.is-visual .test-saved-media {
     max-height: 46vh;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 6px 8px 8px;
+  }
+
+  .panel-sidebar {
+    display: block;
+  }
+
+  .sidebar-brand {
+    display: none;
+  }
+
+  .panel-tab {
+    padding-inline: 4px;
+  }
+
+  .card-header button,
+  .card-header .select-input {
+    max-width: 100%;
+  }
+
+  th,
+  td {
+    padding: 7px 6px;
+    font-size: 12px;
   }
 }
