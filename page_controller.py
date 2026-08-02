@@ -41,12 +41,21 @@ class APIPageController:
         self.editor_templates_dir = self.dashboard_dir / "templates" / "editor"
 
     def register_routes(self) -> None:
+        def require_auth(handler):
+            async def wrapped():
+                token = request.headers.get("Authorization", "").removeprefix("Bearer ")
+                expected = getattr(self.context.base_config, "dashboard_auth_password", None)
+                if expected and token != expected:
+                    return json_response({"error": "Unauthorized"}, status=401)
+                return await handler()
+            return wrapped
+
         routes = [
             ("/page/pool", self.get_pool, ["GET"], "Get API pool"),
             ("/page/pool/files", self.get_pool_files, ["GET"], "Get pool files"),
             (
                 "/page/pool/files/delete",
-                self.delete_pool_files,
+                require_auth(self.delete_pool_files),
                 ["POST"],
                 "Delete pool files",
             ),
@@ -86,12 +95,12 @@ class APIPageController:
                 ["GET"],
                 "Get api form template",
             ),
-            ("/page/site/batch", self.create_sites_batch, ["POST"], "Create sites"),
-            ("/page/site/batch", self.update_sites_batch, ["PUT"], "Update sites"),
-            ("/page/site/batch", self.delete_sites_batch, ["DELETE"], "Delete sites"),
-            ("/page/api/batch", self.create_apis_batch, ["POST"], "Create apis"),
-            ("/page/api/batch", self.update_apis_batch, ["PUT"], "Update apis"),
-            ("/page/api/batch", self.delete_apis_batch, ["DELETE"], "Delete apis"),
+            ("/page/site/batch", require_auth(self.create_sites_batch), ["POST"], "Create sites"),
+            ("/page/site/batch", require_auth(self.update_sites_batch), ["PUT"], "Update sites"),
+            ("/page/site/batch", require_auth(self.delete_sites_batch), ["DELETE"], "Delete sites"),
+            ("/page/api/batch", require_auth(self.create_apis_batch), ["POST"], "Create apis"),
+            ("/page/api/batch", require_auth(self.update_apis_batch), ["PUT"], "Update apis"),
+            ("/page/api/batch", require_auth(self.delete_apis_batch), ["DELETE"], "Delete apis"),
             ("/page/test/stream", self.test_api_stream, ["GET"], "Test API stream"),
             (
                 "/page/test/preview/batch",
@@ -115,13 +124,13 @@ class APIPageController:
             ),
             (
                 "/page/local-data/batch",
-                self.delete_local_data_batch,
+                require_auth(self.delete_local_data_batch),
                 ["POST", "DELETE"],
                 "Delete local data batch",
             ),
             (
                 "/page/local-data-item/batch",
-                self.delete_local_data_items_batch,
+                require_auth(self.delete_local_data_items_batch),
                 ["POST", "DELETE"],
                 "Delete local data item batch",
             ),
