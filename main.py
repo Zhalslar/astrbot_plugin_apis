@@ -15,7 +15,6 @@ from .utils import get_nickname, get_reply_text
 
 
 class APIPlugin(Star):
-
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         self.cfg = PluginConfig(config, context)
@@ -197,14 +196,15 @@ class APIPlugin(Star):
         event: AstrMessageEvent,
         query: str = "",
     ) -> str:
-        """List accessible APIs for the current chat, optionally filtered.
+        """Use this first when the user wants some API-provided content but has not given an exact API name.(Support: text, picture, video, audio)
+
+        Search by intent, topic, content type, or rough keyword to find candidate APIs, then choose one API name for calling.
 
         Args:
-            query(string): Optional search text. It matches API name, site, type, params,
-                keywords, and keyword regex activation.
+            query(string): Optional search text for narrowing candidates.
 
         Returns:
-            A readable API list or detail block for the LLM.
+            A short candidate list, or compact detail when query is an exact API name.
         """
         query_text = str(query or "").strip()
         user_id = event.get_sender_id()
@@ -236,7 +236,9 @@ class APIPlugin(Star):
                 None,
             )
             if exact_entry is not None:
-                params = ", ".join(exact_entry.params.keys()) if exact_entry.params else "-"
+                params = (
+                    ", ".join(exact_entry.params.keys()) if exact_entry.params else "-"
+                )
                 return "\n".join(
                     [
                         f"API: {exact_entry.name}",
@@ -281,7 +283,9 @@ class APIPlugin(Star):
             lines.append(f"- {self._format_api_entry_summary(entry)}")
         if len(filtered_entries) > len(shown_entries):
             lines.append(f"... and {len(filtered_entries) - len(shown_entries)} more.")
-        lines.append("Use the exact API name with call_api_by_name when you want to invoke one.")
+        lines.append(
+            "Use the exact API name with call_api_by_name when you want to invoke one."
+        )
         return "\n".join(lines)
 
     @filter.llm_tool()
@@ -291,14 +295,16 @@ class APIPlugin(Star):
         api_name: str,
         args_text: str = "",
     ) -> str:
-        """Call one API by name and return or send the result.
+        """Use this when you already know the exact API name and want to execute it now.
+
+        If the user wants API-provided content but no exact API name is known yet, call query_available_apis first.
 
         Args:
-            api_name(string): Exact API name from query_available_apis.
-            args_text(string): Optional space-separated arguments used to fill API params.
+            api_name(string): Exact API name. Query first if you are unsure.
+            args_text(string): Optional plain arguments used to fill params.
 
         Returns:
-            Text result for text APIs, or a delivery summary for media APIs.
+            Text content for text APIs, or a short delivery summary after sending media.
         """
         target_name = str(api_name or "").strip()
         if not target_name:
@@ -318,7 +324,9 @@ class APIPlugin(Star):
                 session_id=session_id,
                 is_admin=is_admin,
             ):
-                return "API call failed: the API is not accessible in the current context."
+                return (
+                    "API call failed: the API is not accessible in the current context."
+                )
             entry = APIEntry(source_entry.to_dict())
         else:
             matched_entries = self.core.api_mgr.match_entries(
@@ -329,7 +337,9 @@ class APIPlugin(Star):
                 is_admin=is_admin,
             )
             if not matched_entries:
-                return f"API call failed: API not found or not accessible: {target_name}"
+                return (
+                    f"API call failed: API not found or not accessible: {target_name}"
+                )
             if len(matched_entries) > 1:
                 candidate_names = ", ".join(item.name for item in matched_entries[:10])
                 return (
@@ -367,7 +377,9 @@ class APIPlugin(Star):
         if not self.cfg.save_data:
             data.unlink()
 
-        return f"API call succeeded: sent {data.data_type.value} result for {entry.name}."
+        return (
+            f"API call succeeded: sent {data.data_type.value} result for {entry.name}."
+        )
 
     @filter.event_message_type(EventMessageType.ALL)
     async def on_message(self, event: AstrMessageEvent):
