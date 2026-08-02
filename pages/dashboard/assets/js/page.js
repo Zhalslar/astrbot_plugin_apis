@@ -866,6 +866,11 @@ function applyI18n() {
       node.textContent = t(key);
     }
   });
+  document.querySelectorAll(".mobile-card-actions-toggle").forEach((button) => {
+    const label = t("actions");
+    button.setAttribute("aria-label", label);
+    button.title = label;
+  });
   setNodeText("btnTestAll", t("test_all_apis"));
   const siteSearch = document.getElementById("siteSearch");
   if (siteSearch) {
@@ -1767,6 +1772,13 @@ function renderPager({ pagerId, page, totalPages, total, start, end, onPageChang
         <button type="button" class="pager-icon-btn" title="${escapeHtml(t("page_next"))}" ${nextDisabled} onclick="${onPageChange}(${nextPage})">&gt;</button>
         <button type="button" class="pager-icon-btn" title="${escapeHtml(t("page_last"))}" ${lastDisabled} onclick="${onPageChange}(${safeTotalPages})">&gt;&gt;</button>
       `;
+}
+
+function toggleMobileCardActions(button) {
+  const actions = button.closest(".card-header")?.querySelector(".card-actions");
+  if (!actions) return;
+  const expanded = actions.classList.toggle("is-mobile-open");
+  button.setAttribute("aria-expanded", String(expanded));
 }
 
 function formatKeywordsCell(keywords) {
