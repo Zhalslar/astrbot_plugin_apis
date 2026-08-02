@@ -867,9 +867,10 @@ function applyI18n() {
     }
   });
   document.querySelectorAll(".mobile-card-actions-toggle").forEach((button) => {
-    const label = t("actions");
-    button.setAttribute("aria-label", label);
-    button.title = label;
+    button.dataset.label = t("actions");
+    const ariaLabel = t("toggle_filters_and_actions");
+    button.setAttribute("aria-label", ariaLabel);
+    button.title = ariaLabel;
   });
   setNodeText("btnTestAll", t("test_all_apis"));
   const siteSearch = document.getElementById("siteSearch");

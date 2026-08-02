@@ -2166,7 +2166,7 @@ button.danger.is-pending-delete {
   }
 
   .mobile-card-actions-toggle::after {
-    content: attr(aria-label);
+    content: attr(data-label);
     font-size: 12px;
     line-height: 1;
   }
