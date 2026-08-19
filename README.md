@@ -109,6 +109,6 @@ API聚合插件，海量免费API动态添加，热门API：看看腿、看看�
 - 倾梦API：<https://api.317ak.cn>， 此站点需注册账号获取ckey密钥！！
 - 桑帛云API：<https://api.lolimi.cn>
 - 糖豆子API：<https://api.tangdouz.com>
-- PearAPI：<https://api.pearktrue.cn>
+- PearAPI：<https://api.pearapi.ai>
 - 问情免费API：<https://free.wqwlkj.cn>
 - 龙珠API: <https://sdkapi.hhlqilongzhu.cn>

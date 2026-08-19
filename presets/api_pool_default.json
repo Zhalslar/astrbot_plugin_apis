@@ -236,7 +236,7 @@
   },
   {
     "name": "高校查询",
-    "url": "https://api.pearktrue.cn/api/college/",
+    "url": "https://api.pearapi.ai/api/college/",
     "type": "text",
     "params": {
       "keyword": "清华"
@@ -284,7 +284,7 @@
   },
   {
     "name": "黄金价格",
-    "url": "https://api.pearktrue.cn/api/goldprice/",
+    "url": "https://api.pearapi.ai/api/goldprice/",
     "type": "text",
     "params": {},
     "parse": "data[]",
@@ -446,7 +446,7 @@
   },
   {
     "name": "今天吃什么",
-    "url": "https://api.pearktrue.cn/api/today/food.php",
+    "url": "https://api.pearapi.ai/api/today/food.php",
     "type": "text",
     "params": {},
     "parse": "food",
@@ -1130,7 +1130,7 @@
   },
   {
     "name": "三坑少女",
-    "url": "https://api.pearktrue.cn/api/beautifulgirl/?type=image",
+    "url": "https://api.pearapi.ai/api/beautifulgirl/?type=image",
     "type": "image",
     "params": {},
     "parse": "",
@@ -1321,7 +1321,7 @@
   },
   {
     "name": "御姐撒娇",
-    "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
+    "url": "https://api.pearapi.ai/api/yujie/?type=mp3",
     "type": "audio",
     "params": {},
     "parse": "audiopath",
@@ -1430,7 +1430,7 @@
   },
   {
     "name": "Linux命令",
-    "url": "https://api.pearktrue.cn/api/linux/",
+    "url": "https://api.pearapi.ai/api/linux/",
     "type": "text",
     "params": {
       "keyword": ""
