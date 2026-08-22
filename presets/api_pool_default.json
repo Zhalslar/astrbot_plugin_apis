@@ -1,16 +1,5 @@
 [
   {
-    "name": "安慕希",
-    "url": "http://api.317ak.cn/api/sp/amxx",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "安慕希"
-    ]
-  },
-  {
     "name": "安慰",
     "url": "http://api.317ak.cn/api/wz/awyl",
     "type": "text",
@@ -24,75 +13,6 @@
     ]
   },
   {
-    "name": "奥运会",
-    "url": "https://api.lolimi.cn/API/ayh/i.php",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "奥运会"
-    ]
-  },
-  {
-    "name": "拜托前辈",
-    "url": "http://api.317ak.cn/api/sp/btqb",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "拜托前辈"
-    ]
-  },
-  {
-    "name": "报时",
-    "url": "https://api.yuafeng.cn/API/ly/baoshi.php",
-    "type": "audio",
-    "params": {
-      "mode": "msw"
-    },
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "报时",
-      "整点报时"
-    ]
-  },
-  {
-    "name": "背影变装",
-    "url": "http://api.317ak.cn/api/sp/bybz",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "背影变装"
-    ]
-  },
-  {
-    "name": "擦玻璃",
-    "url": "http://api.317ak.cn/api/sp/cblx",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "擦玻璃"
-    ]
-  },
-  {
-    "name": "超甜辣妹",
-    "url": "https://api.lolimi.cn/API/xjj/lt.php",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "超甜辣妹"
-    ]
-  },
-  {
     "name": "嘲讽",
     "url": "http://api.317ak.cn/api/wz/cfyl",
     "type": "text",
@@ -103,6 +23,17 @@
     "scope": [],
     "keywords": [
       "嘲讽"
+    ]
+  },
+  {
+    "name": "倒数日",
+    "url": "https://api.pearapi.ai/api/countdownday",
+    "type": "text",
+    "params": {},
+    "parse": "data",
+    "scope": [],
+    "keywords": [
+      "倒数日"
     ]
   },
   {
@@ -130,39 +61,6 @@
     ]
   },
   {
-    "name": "动漫变装",
-    "url": "http://api.317ak.cn/api/sp/dmbz",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "动漫变装"
-    ]
-  },
-  {
-    "name": "动漫一言",
-    "url": "https://api.lolimi.cn/API/dmyiyan/api.php",
-    "type": "text",
-    "params": {},
-    "parse": "text",
-    "scope": [],
-    "keywords": [
-      "动漫一言"
-    ]
-  },
-  {
-    "name": "斗图",
-    "url": "https://api.lolimi.cn/API/dou/api.php",
-    "type": "image",
-    "params": {},
-    "parse": "data.image",
-    "scope": [],
-    "keywords": [
-      "斗图"
-    ]
-  },
-  {
     "name": "毒鸡汤",
     "url": "https://api.yuafeng.cn/API/ly/djt.php",
     "type": "text",
@@ -187,27 +85,16 @@
     ]
   },
   {
-    "name": "蹲下变装",
-    "url": "http://api.317ak.cn/api/sp/dxbz",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "蹲下变装"
-    ]
-  },
-  {
-    "name": "二次元形象",
-    "url": "https://api.lolimi.cn/API/Ser/api.php",
-    "type": "text",
+    "name": "短剧搜索",
+    "url": "https://api-v2.yuafeng.cn/API/baidudanju.php",
+    "type": "image",
     "params": {
       "name": ""
     },
-    "parse": "text",
+    "parse": "",
     "scope": [],
     "keywords": [
-      "二次元形象"
+      "短剧搜索"
     ]
   },
   {
@@ -224,6 +111,17 @@
     ]
   },
   {
+    "name": "风景壁纸",
+    "url": "https://api.tangdouz.com/a/360bza.php",
+    "type": "image",
+    "params": {},
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "风景壁纸"
+    ]
+  },
+  {
     "name": "高清壁纸",
     "url": "https://api.tangdouz.com/abz/bz.php",
     "type": "image",
@@ -235,27 +133,27 @@
     ]
   },
   {
-    "name": "高校查询",
-    "url": "https://api.pearktrue.cn/api/college/",
+    "name": "高铁大屏",
+    "url": "https://115exuq280928.vicp.fun/API/12306.php",
     "type": "text",
     "params": {
-      "keyword": "清华"
+      "station": "深圳"
     },
     "parse": "data",
     "scope": [],
     "keywords": [
-      "高校查询"
+      "高铁大屏"
     ]
   },
   {
-    "name": "光遇日历",
-    "url": "https://api.lolimi.cn/API/gy/ril.php",
-    "type": "image",
+    "name": "哈基米音乐",
+    "url": "https://api.tangdouz.com/zzz/hjm.php",
+    "type": "audio",
     "params": {},
     "parse": "",
     "scope": [],
     "keywords": [
-      "光遇日历"
+      "哈基米音乐"
     ]
   },
   {
@@ -269,39 +167,6 @@
     "scope": [],
     "keywords": [
       "号码归属地"
-    ]
-  },
-  {
-    "name": "黑白双煞",
-    "url": "http://api.317ak.cn/api/sp/hbss",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "黑白双煞"
-    ]
-  },
-  {
-    "name": "黄金价格",
-    "url": "https://api.pearktrue.cn/api/goldprice/",
-    "type": "text",
-    "params": {},
-    "parse": "data[]",
-    "scope": [],
-    "keywords": [
-      "黄金价格"
-    ]
-  },
-  {
-    "name": "火车摇",
-    "url": "http://api.317ak.cn/api/sp/hcyx",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "火车摇"
     ]
   },
   {
@@ -434,6 +299,19 @@
     ]
   },
   {
+    "name": "今日老婆",
+    "url": "https://api.pearapi.ai/api/today_wife?id=10001",
+    "type": "image",
+    "params": {
+      "id": ""
+    },
+    "parse": "data.image_url",
+    "scope": [],
+    "keywords": [
+      "今日老婆"
+    ]
+  },
+  {
     "name": "今日运势",
     "url": "https://api.tangdouz.com/wz/luck.php",
     "type": "image",
@@ -445,165 +323,27 @@
     ]
   },
   {
-    "name": "今天吃什么",
-    "url": "https://api.pearktrue.cn/api/today/food.php",
+    "name": "金铲铲公告",
+    "url": "https://api.tangdouz.com/a/jcc_notice.php",
     "type": "text",
-    "params": {},
-    "parse": "food",
-    "scope": [],
-    "keywords": [
-      "今天吃什么"
-    ]
-  },
-  {
-    "name": "鞠婧祎",
-    "url": "http://api.317ak.cn/api/sp/jjyx",
-    "type": "video",
-    "params": {},
+    "params": {
+      "return": "json"
+    },
     "parse": "",
     "scope": [],
     "keywords": [
-      "鞠婧祎"
-    ]
-  },
-  {
-    "name": "看看穿搭",
-    "url": "http://api.317ak.cn/api/sp/cdxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看穿搭"
-    ]
-  },
-  {
-    "name": "看看吊带",
-    "url": "http://api.317ak.cn/api/sp/ddxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看吊带"
-    ]
-  },
-  {
-    "name": "看看动漫",
-    "url": "https://api.yuafeng.cn/API/ly/dmxl.php",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看动漫"
+      "金铲铲公告"
     ]
   },
   {
     "name": "看看腹肌",
-    "url": "http://api.317ak.cn/api/sp/fjbz",
-    "type": "video",
+    "url": "https://free.wqwlkj.cn/wqwlapi/sgfj.php?type=image",
+    "type": "image",
     "params": {},
     "parse": "",
     "scope": [],
     "keywords": [
       "看看腹肌"
-    ]
-  },
-  {
-    "name": "看看公主",
-    "url": "http://api.317ak.cn/api/sp/gzhy",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看公主"
-    ]
-  },
-  {
-    "name": "看看光剑",
-    "url": "http://api.317ak.cn/api/sp/gjbz",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看光剑"
-    ]
-  },
-  {
-    "name": "看看红鸾",
-    "url": "http://api.317ak.cn/api/sp/hljj",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看红鸾"
-    ]
-  },
-  {
-    "name": "看看黄历",
-    "url": "https://api.lolimi.cn/API/huang/api.php",
-    "type": "text",
-    "params": {},
-    "parse": "text",
-    "scope": [],
-    "keywords": [
-      "看看黄历"
-    ]
-  },
-  {
-    "name": "看看久喵",
-    "url": "http://api.317ak.cn/api/sp/jmxl",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看久喵"
-    ]
-  },
-  {
-    "name": "看看狼宝",
-    "url": "http://api.317ak.cn/api/sp/lbjj",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看狼宝"
-    ]
-  },
-  {
-    "name": "看看萝莉",
-    "url": "http://api.317ak.cn/api/sp/llxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看萝莉"
-    ]
-  },
-  {
-    "name": "看看慢摇",
-    "url": "http://api.317ak.cn/api/sp/myxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看慢摇"
     ]
   },
   {
@@ -615,17 +355,6 @@
     "scope": [],
     "keywords": [
       "看看漫画"
-    ]
-  },
-  {
-    "name": "看看萌娃",
-    "url": "http://api.317ak.cn/api/sp/mwxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看萌娃"
     ]
   },
   {
@@ -651,39 +380,6 @@
     ]
   },
   {
-    "name": "看看女仆",
-    "url": "http://api.317ak.cn/api/sp/npxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看女仆"
-    ]
-  },
-  {
-    "name": "看看清纯",
-    "url": "http://api.317ak.cn/api/sp/qcxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看清纯"
-    ]
-  },
-  {
-    "name": "看看晴天",
-    "url": "http://api.317ak.cn/api/sp/qttj",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看晴天"
-    ]
-  },
-  {
     "name": "看看骚的",
     "url": "https://api.yuafeng.cn/API/ly/sjxl.php",
     "type": "video",
@@ -706,17 +402,6 @@
     ]
   },
   {
-    "name": "看看甩裙",
-    "url": "http://api.317ak.cn/api/sp/sqxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看甩裙"
-    ]
-  },
-  {
     "name": "看看帅哥",
     "url": "https://api.yuafeng.cn/API/ly/sgxl.php",
     "type": "video",
@@ -728,90 +413,46 @@
     ]
   },
   {
-    "name": "看看兔子",
-    "url": "http://api.317ak.cn/api/sp/ttmn",
+    "name": "看看甜妹",
+    "url": "https://115exuq280928.vicp.fun/API/video/",
     "type": "video",
     "params": {
-      "type": "json"
+      "type": "video",
+      "msg": "甜妹"
     },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看兔子"
-    ]
-  },
-  {
-    "name": "看看微胖",
-    "url": "http://api.317ak.cn/api/sp/wpxl",
-    "type": "video",
-    "params": {},
     "parse": "",
     "scope": [],
     "keywords": [
-      "看看微胖"
+      "看看甜妹"
     ]
   },
   {
-    "name": "看看仙桃猫",
-    "url": "http://api.317ak.cn/api/sp/xtmx",
-    "type": "video",
+    "name": "看看腿",
+    "url": "https://115exuq280928.vicp.fun/API/tu_sp.php",
+    "type": "image",
     "params": {
-      "type": "json"
+      "type": "图片",
+      "format": "json",
+      "name": "美腿"
     },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看仙桃猫"
-    ]
-  },
-  {
-    "name": "看看小雪",
-    "url": "http://api.317ak.cn/api/sp/xxmm",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看小雪"
-    ]
-  },
-  {
-    "name": "看看心情",
-    "url": "http://api.317ak.cn/api/sp/xqhh",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看心情"
-    ]
-  },
-  {
-    "name": "看看雪梨",
-    "url": "http://api.317ak.cn/api/sp/xlmn",
-    "type": "video",
-    "params": {
-      "type": "json"
-    },
-    "parse": "data",
-    "scope": [],
-    "keywords": [
-      "看看雪梨"
-    ]
-  },
-  {
-    "name": "看看余震",
-    "url": "http://api.317ak.cn/api/sp/yzxl",
-    "type": "video",
-    "params": {},
     "parse": "",
     "scope": [],
     "keywords": [
-      "看看余震"
+      "看看腿"
+    ]
+  },
+  {
+    "name": "看看小姐姐",
+    "url": "https://115exuq280928.vicp.fun/API/video/",
+    "type": "video",
+    "params": {
+      "type": "video",
+      "msg": "小姐姐"
+    },
+    "parse": "",
+    "scope": [],
+    "keywords": [
+      "看看小姐姐"
     ]
   },
   {
@@ -826,28 +467,6 @@
     ]
   },
   {
-    "name": "看看欲梦",
-    "url": "http://api.317ak.cn/api/sp/ndym",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看欲梦"
-    ]
-  },
-  {
-    "name": "看看原神",
-    "url": "http://api.317ak.cn/api/sp/yssp",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看原神"
-    ]
-  },
-  {
     "name": "看看治愈",
     "url": "https://api.yuafeng.cn/API/ly/zyxl.php",
     "type": "video",
@@ -856,17 +475,6 @@
     "scope": [],
     "keywords": [
       "看看治愈"
-    ]
-  },
-  {
-    "name": "看看COS",
-    "url": "http://api.317ak.cn/api/sp/cosxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "看看COS"
     ]
   },
   {
@@ -902,39 +510,6 @@
     "scope": [],
     "keywords": [
       "垃圾分类"
-    ]
-  },
-  {
-    "name": "来点段子",
-    "url": "https://api.lolimi.cn/API/yiyan/dz.php",
-    "type": "text",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "来点段子"
-    ]
-  },
-  {
-    "name": "来点腹肌",
-    "url": "http://api.317ak.cn/api/tp/fjtp",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "来点腹肌"
-    ]
-  },
-  {
-    "name": "来点帅哥",
-    "url": "https://api.lolimi.cn/API/boy/api.php",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "来点帅哥"
     ]
   },
   {
@@ -1032,25 +607,27 @@
     ]
   },
   {
-    "name": "猫系女友",
-    "url": "http://api.317ak.cn/api/sp/mxny",
-    "type": "video",
-    "params": {},
+    "name": "龙图",
+    "url": "https://api.yuafeng.cn/API/ly/long.php",
+    "type": "image",
+    "params": {
+      "type": "json"
+    },
     "parse": "",
     "scope": [],
     "keywords": [
-      "猫系女友"
+      "龙图"
     ]
   },
   {
-    "name": "每日日报",
-    "url": "https://api.tangdouz.com/a/60/",
-    "type": "image",
+    "name": "绿茶语音",
+    "url": "https://api.pearapi.ai/api/greentea/",
+    "type": "audio",
     "params": {},
-    "parse": "",
+    "parse": "audiopath",
     "scope": [],
     "keywords": [
-      "每日日报"
+      "绿茶语音"
     ]
   },
   {
@@ -1064,17 +641,6 @@
     "scope": [],
     "keywords": [
       "每日听力"
-    ]
-  },
-  {
-    "name": "每日一签",
-    "url": "https://api.lolimi.cn/API/riq/",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "每日一签"
     ]
   },
   {
@@ -1102,20 +668,6 @@
     ]
   },
   {
-    "name": "人品运势",
-    "url": "https://api.lolimi.cn/API/Ren/api.php",
-    "type": "text",
-    "params": {
-      "name": "",
-      "type": "json"
-    },
-    "parse": "text",
-    "scope": [],
-    "keywords": [
-      "人品运势"
-    ]
-  },
-  {
     "name": "日历",
     "url": "https://api.tangdouz.com/htmlimage/rl.php",
     "type": "image",
@@ -1129,14 +681,28 @@
     ]
   },
   {
-    "name": "三坑少女",
-    "url": "https://api.pearktrue.cn/api/beautifulgirl/?type=image",
-    "type": "image",
+    "name": "弱智吧",
+    "url": "https://api.pearapi.ai/api/ruozhiba",
+    "type": "text",
     "params": {},
+    "parse": "data.instruction",
+    "scope": [],
+    "keywords": [
+      "弱智吧"
+    ]
+  },
+  {
+    "name": "三角洲密码",
+    "url": "https://115exuq280928.vicp.fun/API/sjz_password.php",
+    "type": "text",
+    "params": {
+      "xz": "2",
+      "type": "json"
+    },
     "parse": "",
     "scope": [],
     "keywords": [
-      "三坑少女"
+      "三角洲密码"
     ]
   },
   {
@@ -1150,17 +716,6 @@
     "scope": [],
     "keywords": [
       "生成二维码"
-    ]
-  },
-  {
-    "name": "竖屏动漫壁纸",
-    "url": "https://api.lolimi.cn/API/dmtx/sp.php",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "竖屏动漫壁纸"
     ]
   },
   {
@@ -1248,6 +803,21 @@
     ]
   },
   {
+    "name": "五言藏头诗",
+    "url": "https://api.pearapi.ai/api/poem_generate",
+    "type": "text",
+    "params": {
+      "type": "wuyan",
+      "model": "head",
+      "text": ""
+    },
+    "parse": "data.result",
+    "scope": [],
+    "keywords": [
+      "五言藏头诗"
+    ]
+  },
+  {
     "name": "显卡排行榜",
     "url": "https://api.tangdouz.com/a/gpu.php",
     "type": "text",
@@ -1258,30 +828,6 @@
     "scope": [],
     "keywords": [
       "显卡排行榜"
-    ]
-  },
-  {
-    "name": "香烟价格",
-    "url": "https://api.lolimi.cn/API/xyan/api.php",
-    "type": "text",
-    "params": {
-      "msg": "雪莲"
-    },
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "香烟价格"
-    ]
-  },
-  {
-    "name": "潇潇",
-    "url": "http://api.317ak.cn/api/sp/xxxl",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "潇潇"
     ]
   },
   {
@@ -1298,47 +844,15 @@
     ]
   },
   {
-    "name": "硬气卡点",
-    "url": "http://api.317ak.cn/api/sp/yqkd",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "硬气卡点"
-    ]
-  },
-  {
-    "name": "又纯又欲",
-    "url": "http://api.317ak.cn/api/sp/ycyy",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "又纯又欲"
-    ]
-  },
-  {
-    "name": "御姐撒娇",
-    "url": "https://api.pearktrue.cn/api/yujie/?type=mp3",
+    "name": "御姐语音",
+    "url": "https://api.pearapi.ai/api/yujie",
     "type": "audio",
     "params": {},
     "parse": "audiopath",
     "scope": [],
     "keywords": [
-      "御姐撒娇"
-    ]
-  },
-  {
-    "name": "原神",
-    "url": "https://api.xingzhige.com/API/yshl/",
-    "type": "image",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "原神"
+      "御姐撒娇",
+      "御姐语音"
     ]
   },
   {
@@ -1366,38 +880,17 @@
     ]
   },
   {
-    "name": "周清欢",
-    "url": "http://api.317ak.cn/api/sp/zqhx",
-    "type": "video",
+    "name": "AI资讯",
+    "url": "https://api.pearapi.ai/api/latest_ai_consultative",
+    "type": "image",
     "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "周清欢"
-    ]
-  },
-  {
-    "name": "周扬青",
-    "url": "http://api.317ak.cn/api/sp/zyqx",
-    "type": "video",
-    "params": {},
-    "parse": "",
-    "scope": [],
-    "keywords": [
-      "周扬青"
-    ]
-  },
-  {
-    "name": "B站更新",
-    "url": "https://api.lolimi.cn/API/B_Update_Days/api.php",
-    "type": "text",
-    "params": {
-      "num": 3
-    },
     "parse": "data",
     "scope": [],
     "keywords": [
-      "B站更新"
+      "ai资讯",
+      "ai新闻",
+      "AI资讯",
+      "AI新闻"
     ]
   },
   {
@@ -1429,16 +922,19 @@
     ]
   },
   {
-    "name": "Linux命令",
-    "url": "https://api.pearktrue.cn/api/linux/",
+    "name": "qq估价",
+    "url": "https://api.317ak.cn/api/yljk/qqgj",
     "type": "text",
     "params": {
-      "keyword": ""
+      "qq": "",
+      "hh": " | ",
+      "ckey": "YHXZKGRNGM5YVQY53RFU"
     },
-    "parse": "data.content",
+    "parse": "",
     "scope": [],
     "keywords": [
-      "Linux命令"
+      "qq估价",
+      "QQ估价"
     ]
   },
   {

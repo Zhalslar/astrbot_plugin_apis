@@ -1,43 +1,13 @@
 [
   {
-    "name": "星之阁API",
-    "url": "https://api.xingzhige.com",
+    "name": "枫林2代",
+    "url": "https://api-v2.yuafeng.cn",
     "headers": {},
-    "keys": {},
+    "keys": {
+      "apikey": "2cf68142e4b9887195d4df6306bb3b6a79dc96f3285d1d6254c9131e1524efe9"
+    },
     "timeout": 60,
-    "api_count": 2
-  },
-  {
-    "name": "纯净API",
-    "url": "https://api.pearktrue.cn",
-    "headers": {},
-    "keys": {},
-    "timeout": 60,
-    "api_count": 6
-  },
-  {
-    "name": "问情免费API",
-    "url": "https://free.wqwlkj.cn",
-    "headers": {},
-    "keys": {},
-    "timeout": 60,
-    "api_count": 8
-  },
-  {
-    "name": "FAPI",
-    "url": "https://api.lolimi.cn",
-    "headers": {},
-    "keys": {},
-    "timeout": 60,
-    "api_count": 14
-  },
-  {
-    "name": "糖豆子API",
-    "url": "https://api.tangdouz.com",
-    "headers": {},
-    "keys": {},
-    "timeout": 60,
-    "api_count": 17
+    "api_count": 1
   },
   {
     "name": "枫林API",
@@ -45,16 +15,58 @@
     "headers": {},
     "keys": {},
     "timeout": 60,
-    "api_count": 30
+    "api_count": 29
+  },
+  {
+    "name": "浅夏API",
+    "url": "https://115exuq280928.vicp.fun",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 6
   },
   {
     "name": "倾梦API",
     "url": "http://api.317ak.cn",
     "headers": {},
     "keys": {
-      "ckey": ""
+      "ckey": "YHXZKGRNGM5YVQY53RFU"
     },
     "timeout": 60,
-    "api_count": 45
+    "api_count": 4
+  },
+  {
+    "name": "糖豆子API",
+    "url": "https://api.tangdouz.com",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 19
+  },
+  {
+    "name": "问情免费API",
+    "url": "https://free.wqwlkj.cn",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 9
+  },
+  {
+    "name": "星之阁API",
+    "url": "https://api.xingzhige.com",
+    "headers": {},
+    "keys": {},
+    "timeout": 60,
+    "api_count": 1
+  },
+  {
+    "name": "PearAPI",
+    "url": "https://api.pearapi.ai",
+    "headers": {},
+    "keys": {
+      "key": "e30dcedddf6f5f0d"
+    },
+    "timeout": 60,
+    "api_count": 7
   }
 ]
