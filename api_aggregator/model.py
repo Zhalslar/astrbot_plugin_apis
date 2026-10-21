@@ -345,7 +345,10 @@ class DataResource:
 
     @property
     def final_text(self) -> str | None:
-        return self.saved_text or self.text
+        text = self.saved_text or self.text
+        if text and self.data_type.is_text:
+            return text.replace(r"\r\n", "\n").replace(r"\r", "\n").replace(r"\n", "\n")
+        return text
 
     @property
     def final_bytes(self) -> bytes | Path | None:
